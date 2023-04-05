@@ -13,7 +13,7 @@ context = canvas.getContext("2d");
 	
 //Instantiate the Player
 player = new Player();
-wall1 = new Wall();
+wall1 = new funcWall(1,1,1,1);
 	
 //Set the Animation Timer
 timer = setInterval(animate, interval);
@@ -61,7 +61,8 @@ function animate()
             //player.y =0
         }
     }
-   
+    
+    
 
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
@@ -105,9 +106,11 @@ function animate()
     }
     
     
-    wall1.Wall(200,200,10,50);
+   
 
 	player.draw();
     player.move();
+
+    wall1.funcWall(200,200,10,50);
     
 }
