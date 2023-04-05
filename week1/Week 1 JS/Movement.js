@@ -26,7 +26,7 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
-    //collision stat
+    //collision stats
     context.save();
             context.fillStyle = "black";
             context.font = "bold 16px Arial";
@@ -65,7 +65,7 @@ function animate()
     }
     
     
-
+    wall.draw();
 
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
@@ -110,7 +110,7 @@ function animate()
     
     
    
-    wall.createWall();
+    
 	player.draw();
     player.move();
 

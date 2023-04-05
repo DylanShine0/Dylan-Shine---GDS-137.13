@@ -10,11 +10,12 @@ function Wall()
 
 	this.color = "#000000";
 
-	this.createWall = function()
+	this.draw = function()
 	{
 		context.save();
             context.fillStyle = this.color;
-            context.fillRect(this.x, this.y, this.width, this.height);
+            context.beginPath();
+            context.rect(this.x, this.y, this.width, this.height);
             context.fill();
 		context.restore();
 	}	
