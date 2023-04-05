@@ -25,11 +25,7 @@ function Player()
 		context.restore();
 	}	
 
-    //player's velocity or speed on each axis
-	/*
-    var force = 6;
-	this.vx = force;
-    this.vy = force;*/
+   
 	
 	//This changes the player's position
     this.move = function () {
