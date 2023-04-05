@@ -10,10 +10,6 @@ function Player()
 	this.height = 100;
     this.radius = 25;
 
-	//player's velocity or speed on each axis
-	this.vx = 5;
-	this.vy = 5;
-
     //player's color
 	this.color = "#ff0000";
 
@@ -28,10 +24,16 @@ function Player()
             context.fill();
 		context.restore();
 	}	
+
+    //player's velocity or speed on each axis
+    
+    //this.vx = randomRange(speed,-speed);
+    //this.vy = randomRange(speed,-speed);
+    
+	
 	
 	//This changes the player's position
-    this.move = function () 
-	{
+    this.move = function () {
         this.x += this.vx;
         this.y += this.vy;
     }
