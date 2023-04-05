@@ -5,6 +5,8 @@ var timer;
 var interval = 1000/60;
 var player;
 
+var speed = 0.1;
+
 //Set Up the Canvas
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
@@ -15,11 +17,7 @@ player = new Player();
 //Set the Animation Timer
 timer = setInterval(animate, interval);
 
-function speedPlus()
-{
-    player.x++
-    player.y++
-}
+
 
 function animate()
 {
@@ -28,6 +26,24 @@ function animate()
 
     function randomRange(high, low){
         return Math.random() * (high - low) + low;
+    }
+
+    function speedPlus()
+    {
+        
+        player.vx += speed
+        player.vy += speed
+        speed += 0.2
+        
+        if(speed >= 2)
+        {
+            speed = 0.2;
+            player.vx = 20
+            player.vy = 20
+            //player.x = 0
+            //player.y =0
+        }
+        
     }
 
     //bottom of canvas
@@ -41,7 +57,7 @@ function animate()
     if (player.y < 0 + player.radius) {
         player.y = player.radius;
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vy = player.vy * -1;
+        player.vy = player.vy * randomRange(-1.3,-1);
         speedPlus()
     }
     //right side of the canvas
@@ -55,7 +71,7 @@ function animate()
     if (player.x < player.radius) {
         player.x = player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vx = player.vx * -1;
+        player.vx = player.vx * randomRange(-1.3,-1);
         speedPlus()
     }
     
