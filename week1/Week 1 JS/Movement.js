@@ -5,15 +5,19 @@ var timer;
 var interval = 1000/60;
 var player;
 
-	//Set Up the Canvas
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");	
+//Set Up the Canvas
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");	
 	
-	//Instantiate the Player
-	player = new Player();
+//Instantiate the Player
+player = new Player();
 	
-	//Set the Animation Timer
-	timer = setInterval(animate, interval);
+//Set the Animation Timer
+timer = setInterval(animate, interval);
+
+function randomRange(high, low){
+    return Math.random() * (high - low) + low;
+}
 
 function animate()
 {
@@ -45,6 +49,7 @@ function animate()
         player.vx = player.vx * -1
     }
     
-    player.move();
+    
 	player.draw();
+    player.move();
 }
