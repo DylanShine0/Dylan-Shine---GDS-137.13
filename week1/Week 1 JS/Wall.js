@@ -1,11 +1,11 @@
-function Wall(x1, y1, w1, h1)
+function Wall()
 {
-	this.x = x1
-	this.y = y1
+	this.x = canvas.width/2;
+	this.y = canvas.height/2;
 	
 	//wall demensions
-	this.width = w1;
-	this.height = h1;
+	this.width = 10;
+	this.height = 50;
 
 
 	this.color = "#000000";

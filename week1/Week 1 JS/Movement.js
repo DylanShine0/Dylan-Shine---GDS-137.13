@@ -13,6 +13,8 @@ context = canvas.getContext("2d");
 	
 //Instantiate the Player
 player = new Player();
+
+//Instantiate wall
 wall = new Wall();
 	
 //Set the Animation Timer
@@ -62,7 +64,7 @@ function animate()
         }
     }
     
-    wall.Wall(200,200,10,50);
+    
 
 
     //bottom of canvas
@@ -108,7 +110,7 @@ function animate()
     
     
    
-
+    wall.createWall();
 	player.draw();
     player.move();
 
