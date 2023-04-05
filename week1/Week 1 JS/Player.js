@@ -29,10 +29,14 @@ function Player()
 		context.restore();
 	}	
 
-   
+	this.randomRange = function(high, low)
+	{
+		return Math.random() * (high - low) + low;
+	}
 	
 	//This changes the player's position
-    this.move = function () {
+    this.move = function () 
+	{
         this.x += this.vx;
         this.y += this.vy;
     }
