@@ -105,7 +105,7 @@ function animate()
     }
     
     
-    wall1.Wall();
+    wall1.Wall(200,200,10,50);
 
 	player.draw();
     player.move();
