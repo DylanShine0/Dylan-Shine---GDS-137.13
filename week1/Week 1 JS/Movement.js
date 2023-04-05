@@ -4,7 +4,7 @@ var timer;
 var numCollision = 0;
 var interval = 1000/60;
 var player;
-var wall1;
+var wall;
 var speed = 0.10;
 
 //Set Up the Canvas
@@ -13,7 +13,7 @@ context = canvas.getContext("2d");
 	
 //Instantiate the Player
 player = new Player();
-wall1 = new funcWall(1,1,1,1);
+wall = new Wall();
 	
 //Set the Animation Timer
 timer = setInterval(animate, interval);
@@ -62,7 +62,8 @@ function animate()
         }
     }
     
-    
+    wall.Wall(200,200,10,50);
+
 
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
@@ -111,6 +112,5 @@ function animate()
 	player.draw();
     player.move();
 
-    wall1.funcWall(200,200,10,50);
     
 }

@@ -1,4 +1,4 @@
-function funcWall(x1, y1, w1, h1)
+function Wall(x1, y1, w1, h1)
 {
 	this.x = x1
 	this.y = y1
