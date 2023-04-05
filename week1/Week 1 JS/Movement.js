@@ -35,24 +35,28 @@ function animate()
         player.y = canvas.height - player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = -player.vy;
+        speedPlus()
     }
     //top of the canvas
     if (player.y < 0 + player.radius) {
         player.y = player.radius;
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = player.vy * -1;
+        speedPlus()
     }
     //right side of the canvas
     if (player.x > canvas.width - player.radius) {
         player.x = canvas.width - player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vx = -player.vx
+        player.vx = -player.vx;
+        speedPlus()
     }
     //left side of the canvas
     if (player.x < player.radius) {
         player.x = player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vx = player.vx * -1
+        player.vx = player.vx * -1;
+        speedPlus()
     }
     
     
