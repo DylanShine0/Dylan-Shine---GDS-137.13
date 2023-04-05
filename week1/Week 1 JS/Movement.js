@@ -1,12 +1,9 @@
-//Declare my variables
-
 var canvas;
 var context;
 var timer;
-//1000 ms or 1 second / FPS
+
 var interval = 1000/60;
 var player;
-
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -23,8 +20,6 @@ function animate()
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
 
-
-
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
         player.y = canvas.height - player.radius
@@ -40,7 +35,7 @@ function animate()
         player.x = canvas.width - player.radius
         player.vx = -player.vx
     }
-    //left of the canvas
+    //left side of the canvas
     if (player.x < player.radius) {
         player.x = player.radius
         player.vx = player.vx * -1
