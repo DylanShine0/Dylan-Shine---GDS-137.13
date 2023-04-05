@@ -50,7 +50,7 @@ function animate()
     }
     
     
-	
+	player.draw();
     player.move();
-    player.draw();
+    
 }

@@ -11,9 +11,9 @@ function Player()
     this.radius = 25;
 
 	//player's velocity or speed on each axis
-	this.vx = 0;
-	this.vy = 0;
-	
+	//this.vx = 0;
+	//this.vy = 0;
+
     //player's color
 	this.color = "#ff0000";
 
