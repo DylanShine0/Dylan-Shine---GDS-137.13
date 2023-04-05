@@ -28,6 +28,8 @@ function Player()
             context.fill();
 		context.restore();
 	}	
+
+	
 	
 	//This changes the player's position
     this.move = function () 

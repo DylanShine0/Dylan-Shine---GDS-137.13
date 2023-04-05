@@ -1,7 +1,7 @@
 var canvas;
 var context;
 var timer;
-
+var numCollision;
 var interval = 1000/60;
 var player;
 
@@ -18,7 +18,6 @@ player = new Player();
 timer = setInterval(animate, interval);
 
 
-
 function animate()
 {
 	//Erase the Screen
@@ -30,7 +29,6 @@ function animate()
 
     function speedPlus()
     {
-        
         player.vx += speed
         player.vy += speed
         speed += 0.2
@@ -38,12 +36,18 @@ function animate()
         if(speed >= 2)
         {
             speed = 0.2;
-            player.vx = 20
-            player.vy = 20
+            player.vx = 10
+            player.vy = 10
             //player.x = 0
             //player.y =0
         }
-        
+    }
+    function stats()
+    {
+        numCollision++;
+        context.save();
+			context.fillText("Collisions: " + numCollision, 600, 20, 50)
+		context.restore();
     }
 
     //bottom of canvas
@@ -52,6 +56,7 @@ function animate()
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = -player.vy;
         speedPlus()
+        stats()
     }
     //top of the canvas
     if (player.y < 0 + player.radius) {
@@ -59,6 +64,7 @@ function animate()
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = player.vy * randomRange(-1.3,-1);
         speedPlus()
+        stats()
     }
     //right side of the canvas
     if (player.x > canvas.width - player.radius) {
@@ -66,6 +72,7 @@ function animate()
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vx = -player.vx;
         speedPlus()
+        stats()
     }
     //left side of the canvas
     if (player.x < player.radius) {
@@ -73,6 +80,7 @@ function animate()
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vx = player.vx * randomRange(-1.3,-1);
         speedPlus()
+        stats()
     }
     
     
