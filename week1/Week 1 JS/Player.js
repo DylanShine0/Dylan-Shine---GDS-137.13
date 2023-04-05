@@ -8,6 +8,8 @@ function Player()
 	//player's dimensions
 	this.width = 100;
 	this.height = 100;
+
+    this.radius = 25;
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;
@@ -20,11 +22,12 @@ function Player()
 	this.draw = function()
 	{
 		context.save();
-			context.fillStyle = this.color;
-			context.translate(this.x, this.y);
-			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
+            context.fillStyle = this.color;
+            context.beginPath();
+            context.arc(this.x,this.y,this.radius,0,360*Math.PI/180,true)
+            context.closePath();
+            context.fill();
 		context.restore();
-		
 	}	
 	
 	//This changes the player's position
