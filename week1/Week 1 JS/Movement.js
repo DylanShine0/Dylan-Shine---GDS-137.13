@@ -6,8 +6,7 @@ var timer;
 //1000 ms or 1 second / FPS
 var interval = 1000/60;
 var player;
-var xDir = 7;
-var yDir = 0;
+
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
@@ -23,31 +22,30 @@ function animate()
 {
 	//Erase the Screen
 	context.clearRect(0,0,canvas.width, canvas.height);	
-	
-	//Move the Player
-	player.x += xDir;
-	player.y += yDir;
 
-	//collision
-	//left
-	if(player.x < player.width/2)
-	{
-		player.vx = player.vx * 1;
-		xDir = 7;
-		yDir = -20;
-	}
-	//right
-	if(player.x > canvas.width - player.width/2)
-	{
-		player.vx = player.vx * -1;
-		xDir = -7;
-		yDir = -20;
-	}
-    //top
-    if(player.y > canvas.height - player.height/2)
-    {
-        
+
+
+    //bottom of canvas
+    if (player.y > canvas.height - player.radius) {
+        player.y = canvas.height - player.radius
+        player.vy = -player.vy;
     }
-
+    //top of the canvas
+    if (player.y < 0 + player.radius) {
+        player.y = player.radius;
+        player.vy = player.vy * -1;
+    }
+    //right side of the canvas
+    if (player.x > canvas.width - player.radius) {
+        player.x = canvas.width - player.radius
+        player.vx = -player.vx
+    }
+    //left of the canvas
+    if (player.x < player.radius) {
+        player.x = player.radius
+        player.vx = player.vx * -1
+    }
+    
+    player.move();
 	player.draw();
 }
