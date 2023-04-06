@@ -4,7 +4,8 @@ var timer;
 var numCollision = 0;
 var interval = 1000/60;
 var player;
-var wall;
+var wall1;
+var wall2;
 var speed = 0.10;
 
 //Set Up the Canvas
@@ -15,7 +16,8 @@ context = canvas.getContext("2d");
 player = new Player();
 
 //Instantiate wall
-wall = new Wall();
+wall1 = new Wall();
+wall2 = new Wall();
 	
 //Set the Animation Timer
 timer = setInterval(animate, interval);
@@ -68,15 +70,15 @@ function animate()
     
 
     function circleRectOverlap(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight) {
-        // Calculate the distance between the center of the circle and the center of the rectangle.
+        // circle center // rect center
         var distX = Math.abs(circleX - rectX - rectWidth / 2);
         var distY = Math.abs(circleY - rectY - rectHeight / 2);
       
-        // If the distance is greater than the sum of the radius of the circle and the half of the diagonal of the rectangle, then the circle and the rectangle do not overlap.
+        // checking if not overlaping
         if (distX > (rectWidth / 2 + circleRadius)) { return false; }
         if (distY > (rectHeight / 2 + circleRadius)) { return false; }
       
-        // If the distance is less than or equal to the sum of the radius of the circle and the half of the diagonal of the rectangle, then the circle and the rectangle overlap.
+        // checking if its overlaping
         if (distX <= (rectWidth / 2)) { console.log("width overlaped") }
         if (distY <= (rectHeight / 2)) { console.log("height overlaped") }
       
@@ -137,13 +139,13 @@ function animate()
     
     
     
-    wall.draw1();
-    wall.draw2();
+    wall1.draw1();
+    wall2.draw2();
 
 	player.draw();
     player.move();
 
-    circleRectOverlap(player.x, player.y, player.radius, wall.x, wall.y, wall.width, wall.height);
-
+    circleRectOverlap(player.x, player.y, player.radius, wall1.x=300, wall1.y=200, wall1.width, wall1.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall2.x=700, wall2.y=200, wall2.width, wall2.height);
     
 }
