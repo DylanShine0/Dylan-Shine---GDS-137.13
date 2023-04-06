@@ -4,7 +4,7 @@ function Wall()
 	this.x = 0;
 	this.y = 0;
 	//wall demensions
-	this.width = 50;
+	this.width = 5;
 	this.height = 400;
 	
 
@@ -15,7 +15,7 @@ function Wall()
 		context.save();
             context.fillStyle = this.color;
             context.beginPath();
-            context.rect(this.x,this.y,50,400);
+            context.rect(this.x,this.y,5,400);
             context.fill();
 		context.restore();
 	}	
@@ -25,7 +25,7 @@ function Wall()
 		context.save();
             context.fillStyle = this.color;
             context.beginPath();
-            context.rect(this.x,this.y,50,400);
+            context.rect(this.x,this.y,5,400);
             context.fill();
 		context.restore();
 	}	
