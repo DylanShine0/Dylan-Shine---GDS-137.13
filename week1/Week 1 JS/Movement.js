@@ -81,25 +81,23 @@ function animate()
         if (distY > (rectHeight / 2 + circleRadius)) { return false; }
       
         // checking if its overlaping
-        if (distX <= (rectWidth / 2)) 
-        { 
-            console.log("width overlaped") 
-            player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
+        if (distX <= (rectWidth / 2)) {
+            console.log("width overlaped")
 
-            
-            stats()
+
         }
         if (distY <= (rectHeight / 2)) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
-        { 
-            console.log("height overlaped") 
+        {
+            console.log("height overlaped")
+
             player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
 
             player.vy = player.vy * -1
             player.vx = player.vx * -1
 
-            
             stats()
         }
+
         /*
         var dx = distX - rectWidth / 2;
         var dy = distY - rectHeight / 2;
@@ -162,7 +160,7 @@ function animate()
 	player.draw();
     player.move();
 
-    circleRectOverlap(player.x, player.y, player.radius, wall1.x=0, wall1.y=200, wall1.width, wall1.height);
-    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1019, wall2.y=200, wall2.width, wall2.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall1.x=5, wall1.y=200, wall1.width, wall1.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1014, wall2.y=200, wall2.width, wall2.height);
     
 }
