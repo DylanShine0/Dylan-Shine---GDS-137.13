@@ -165,9 +165,9 @@ function animate()
     player.move();
 
     //x =5
-    circleRectOverlap(player.x, player.y, player.width/2, wall1.x=5, wall1.y=200, wall1.width, wall1.height);
+    circleRectOverlap(player.x, player.y, player.width/2, wall1.x=0, wall1.y=200, wall1.width, wall1.height);
 
     //x =1014
-    circleRectOverlap(player.x, player.y, player.width/2, wall2.x=1014, wall2.y=200, wall2.width, wall2.height);
+    circleRectOverlap(player.x, player.y, player.width/2, wall2.x=1019, wall2.y=200, wall2.width, wall2.height);
     
 }
