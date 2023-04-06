@@ -1,6 +1,17 @@
 // JavaScript Document
-function Player()
+function GameObject(x,y,w,h,r,color) //PLAYER BALL
 {
+
+	//Default Values
+	if(x == undefined){this.x = canvas.width/2;}else{this.x = x;}
+	if(y == undefined){this.y = canvas.height/2;}else{this.y = y;}
+	if(w == undefined){this.width = 100;}else{this.width = w;}
+	if(h == undefined){this.height = 100;}else{this.height = h;}
+	if(r == undefined){this.radius = 25;}else{this.radius = r;} 
+	if(color == undefined){this.color = "#ff0000";}else{this.color = color;}
+	
+
+
 	//player's location
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;

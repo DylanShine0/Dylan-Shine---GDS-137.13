@@ -15,7 +15,7 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 	
 //Instantiate the Player
-player = new Player();
+player = new GameObject(canvas.height/2, canvas.width/2, 100, 100, 25, "#ff0000");
 
 //Instantiate wall
 wall1 = new Wall();
