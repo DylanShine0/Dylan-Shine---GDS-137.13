@@ -83,7 +83,7 @@ function animate()
         // checking if its overlaping
         if (distX <= (rectWidth / 2)) {
             console.log("width overlaped")
-
+            player.vx = player.vx * -1
 
         }
         if (distY <= (rectHeight / 2)) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
@@ -92,8 +92,9 @@ function animate()
 
             player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
 
+            
             player.vy = player.vy * -1
-            player.vx = player.vx * -1
+            
 
             stats()
         }
@@ -109,7 +110,7 @@ function animate()
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
         player.y = canvas.height - player.radius
-        player.vy = -player.vy;
+        player.vy = player.vy * -1;
         
         speedPlus()
         stats()
@@ -131,7 +132,7 @@ function animate()
     //right side of the canvas
     if (player.x > canvas.width - player.radius) {
         player.x = canvas.width - player.radius
-        player.vx = -player.vx;
+        player.vx = player.vx * -1;
         
         speedPlus()
         stats()
