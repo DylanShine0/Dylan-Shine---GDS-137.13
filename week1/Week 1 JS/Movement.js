@@ -91,7 +91,6 @@ function animate()
             player.vy = player.vy * 1
             
             player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-
             stats()
         }
 
