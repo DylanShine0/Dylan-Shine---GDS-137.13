@@ -91,6 +91,9 @@ function animate()
             console.log("height overlaped") 
             player.vy = player.vy * -1
             player.vx = player.vx * -1
+
+            speedPlus()
+            stats()
         }
       
         var dx = distX - rectWidth / 2;
