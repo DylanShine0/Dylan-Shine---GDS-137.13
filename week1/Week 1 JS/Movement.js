@@ -84,11 +84,16 @@ function animate()
         if (distX <= (rectWidth / 2)) 
         { 
             console.log("width overlaped") 
-            
+            player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
+
+            speedPlus()
+            stats()
         }
         if (distY <= (rectHeight / 2)) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
         { 
             console.log("height overlaped") 
+            player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
+
             player.vy = player.vy * -1
             player.vx = player.vx * -1
 
@@ -113,7 +118,6 @@ function animate()
     //bottom of canvas
     if (player.y > canvas.height - player.radius) {
         player.y = canvas.height - player.radius
-        player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = -player.vy;
         
         speedPlus()
@@ -125,7 +129,6 @@ function animate()
     //top of the canvas
     if (player.y < 0 + player.radius) {
         player.y = player.radius;
-        player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vy = player.vy * randomRange(-1.1,-1);
         
         speedPlus()
@@ -135,9 +138,8 @@ function animate()
     }
 
     //right side of the canvas
-    if (player.x > canvas.width - player.radius) {
+    if (player.x > canvas.width - player.radius +10) {
         player.x = canvas.width - player.radius
-        player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vx = -player.vx;
         
         speedPlus()
@@ -147,9 +149,8 @@ function animate()
     }
 
     //left side of the canvas
-    if (player.x < 0 + player.radius) {
+    if (player.x < 0 + player.radius -10) {
         player.x = player.radius
-        player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vx = player.vx * randomRange(-1.1,-1);
         
         speedPlus()
