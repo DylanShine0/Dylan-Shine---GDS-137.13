@@ -48,10 +48,10 @@ function animate()
     {
         numCollision++;
     }
-    function changeSize()
-    {
-        player.radius = randomRange(35,25)//25 default
-    }
+    //function changeSize()
+    //{
+    //    player.radius = randomRange(35,25)//25 default
+    //}
 
     function speedPlus()
     {
@@ -116,7 +116,7 @@ function animate()
         speedPlus()
         stats()
 
-        changeSize();
+        //changeSize();
     }
 
     //top of the canvas
@@ -128,7 +128,7 @@ function animate()
         speedPlus()
         stats()
         
-        changeSize();
+        //changeSize();
     }
 
     //right side of the canvas
@@ -140,7 +140,7 @@ function animate()
         speedPlus()
         stats()
         
-        changeSize();
+        //changeSize();
     }
 
     //left side of the canvas
@@ -152,7 +152,7 @@ function animate()
         speedPlus()
         stats()
         
-        changeSize();
+        //changeSize();
     }
 
     
