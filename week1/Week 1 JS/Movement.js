@@ -15,8 +15,9 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 	
 //Instantiate the Player
-player = new GameObject(canvas.height/2, canvas.width/2, 100, 100, 25, "#ff0000");
+player = new GameObject(canvas.height/2, canvas.width/2, 100, 25, "#ff0000");
 
+player.width = 25;
 //Instantiate wall
 wall1 = new Wall();
 wall2 = new Wall();
@@ -50,7 +51,7 @@ function animate()
     }
     //function changeSize()
     //{
-    //    player.radius = randomRange(35,25)//25 default
+    //    player.width = randomRange(35,25)//25 default
     //}
 
     function speedPlus()
@@ -81,19 +82,21 @@ function animate()
         if (distY > (rectHeight / 2 + circleRadius)) { return false; }
       
         // checking if its overlaping
-        if (distX <= (rectWidth / 2)) {
+        if (distX <= (rectWidth / 2) +player.width) 
+        {
             console.log("width overlaped")
+
             player.vx = player.vx * -1
 
         }
-        if (distY <= (rectHeight / 2)) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
+        if (distY <= (rectHeight / 2) + player.width) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
         {
             console.log("height overlaped")
 
             player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
 
             
-            player.vy = player.vy * -1
+            player.vy = player.vy * 1
             
 
             stats()
@@ -108,8 +111,8 @@ function animate()
 
 
     //bottom of canvas
-    if (player.y > canvas.height - player.radius) {
-        player.y = canvas.height - player.radius
+    if (player.y > canvas.height - player.width/2) {
+        player.y = canvas.height - player.width/2
         player.vy = player.vy * -1;
         
         speedPlus()
@@ -119,8 +122,8 @@ function animate()
     }
 
     //top of the canvas
-    if (player.y < 0 + player.radius) {
-        player.y = player.radius;
+    if (player.y <= player.width/2) {
+        player.y = player.width/2;
         player.vy = player.vy * -1;
         
         speedPlus()
@@ -130,8 +133,8 @@ function animate()
     }
 
     //right side of the canvas
-    if (player.x > canvas.width - player.radius) {
-        player.x = canvas.width - player.radius
+    if (player.x > canvas.width - player.width/2) {
+        player.x = canvas.width - player.width/2
         player.vx = player.vx * -1;
         
         speedPlus()
@@ -141,8 +144,8 @@ function animate()
     }
 
     //left side of the canvas
-    if (player.x < 0 + player.radius) {
-        player.x = player.radius
+    if (player.x < 0 + player.width/2) {
+        player.x = 0 + player.width/2
         player.vx = player.vx * -1;
         
         speedPlus()
@@ -161,7 +164,10 @@ function animate()
 	player.draw();
     player.move();
 
-    circleRectOverlap(player.x, player.y, player.radius, wall1.x=5, wall1.y=200, wall1.width, wall1.height);
-    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1014, wall2.y=200, wall2.width, wall2.height);
+    //x =5
+    circleRectOverlap(player.x, player.y, player.width/2, wall1.x=5, wall1.y=200, wall1.width, wall1.height);
+
+    //x =1014
+    circleRectOverlap(player.x, player.y, player.width/2, wall2.x=1014, wall2.y=200, wall2.width, wall2.height);
     
 }
