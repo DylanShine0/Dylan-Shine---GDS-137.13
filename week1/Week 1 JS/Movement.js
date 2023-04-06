@@ -4,7 +4,7 @@ var timer;
 var numCollision = 0;
 var interval = 1000/60;
 var player;
-var wallVAR;
+var wall;
 var speed = 0.10;
 
 //Set Up the Canvas
@@ -15,7 +15,7 @@ context = canvas.getContext("2d");
 player = new Player();
 
 //Instantiate wall
-wallVAR = new Wall();
+wall = new Wall();
 	
 //Set the Animation Timer
 timer = setInterval(animate, interval);
@@ -66,6 +66,32 @@ function animate()
     }
     
     
+
+    function circleRectOverlap(circleX, circleY, circleRadius, rectX, rectY, rectWidth, rectHeight) {
+        // Calculate the distance between the center of the circle and the center of the rectangle.
+        var distX = Math.abs(circleX - rectX - rectWidth / 2);
+        var distY = Math.abs(circleY - rectY - rectHeight / 2);
+      
+        // If the distance is greater than the sum of the radius of the circle and the half of the diagonal of the rectangle, then the circle and the rectangle do not overlap.
+        if (distX > (rectWidth / 2 + circleRadius)) { return false; }
+        if (distY > (rectHeight / 2 + circleRadius)) { return false; }
+      
+        // If the distance is less than or equal to the sum of the radius of the circle and the half of the diagonal of the rectangle, then the circle and the rectangle overlap.
+        if (distX <= (rectWidth / 2)) { console.log("width overlaped") }
+        if (distY <= (rectHeight / 2)) { console.log("height overlaped") }
+      
+        var dx = distX - rectWidth / 2;
+        var dy = distY - rectHeight / 2;
+        return (dx * dx + dy * dy <= (circleRadius * circleRadius));
+      }
+
+
+
+
+
+
+
+
     
 
     //bottom of canvas
@@ -110,10 +136,14 @@ function animate()
     }
     
     
-    wallVAR.draw();
     
+    wall.draw1();
+    wall.draw2();
+
 	player.draw();
     player.move();
+
+    circleRectOverlap(player.x, player.y, player.radius, wall.x, wall.y, wall.width, wall.height);
 
     
 }
