@@ -48,7 +48,7 @@ function animate()
     }
     function changeSize()
     {
-        player.radius = randomRange(50,20)//25 default
+        player.radius = randomRange(30,25)//25 default
     }
 
     function speedPlus()
@@ -79,8 +79,19 @@ function animate()
         if (distY > (rectHeight / 2 + circleRadius)) { return false; }
       
         // checking if its overlaping
-        if (distX <= (rectWidth / 2)) { console.log("width overlaped") }
-        if (distY <= (rectHeight / 2)) { console.log("height overlaped") }
+        if (distX <= (rectWidth / 2)) 
+        { 
+            console.log("width overlaped") 
+            player.vx = player.vx * -1
+            
+
+        }
+        if (distY <= (rectHeight / 2)) 
+        { 
+            console.log("height overlaped") 
+            player.vy = player.vy * -1
+
+        }
       
         var dx = distX - rectWidth / 2;
         var dy = distY - rectHeight / 2;
@@ -110,7 +121,7 @@ function animate()
     if (player.y < 0 + player.radius) {
         player.y = player.radius;
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vy = player.vy * randomRange(-1.2,-1);
+        player.vy = player.vy * randomRange(-1.1,-1);
         
         speedPlus()
         stats()
@@ -130,7 +141,7 @@ function animate()
     if (player.x < player.radius) {
         player.x = player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-        player.vx = player.vx * randomRange(-1.2,-1);
+        player.vx = player.vx * randomRange(-1.1,-1);
         
         speedPlus()
         stats()
@@ -145,7 +156,7 @@ function animate()
 	player.draw();
     player.move();
 
-    circleRectOverlap(player.x, player.y, player.radius, wall1.x=300, wall1.y=200, wall1.width, wall1.height);
-    circleRectOverlap(player.x, player.y, player.radius, wall2.x=700, wall2.y=200, wall2.width, wall2.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall1.x=-30, wall1.y=200, wall1.width, wall1.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1004, wall2.y=200, wall2.width, wall2.height);
     
 }
