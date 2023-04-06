@@ -8,6 +8,8 @@ var wall1;
 var wall2;
 var speed = 0.10;
 
+var colliding = false;
+
 //Set Up the Canvas
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
@@ -48,7 +50,7 @@ function animate()
     }
     function changeSize()
     {
-        player.radius = randomRange(30,25)//25 default
+        player.radius = randomRange(35,25)//25 default
     }
 
     function speedPlus()
@@ -82,21 +84,19 @@ function animate()
         if (distX <= (rectWidth / 2)) 
         { 
             console.log("width overlaped") 
-            player.vx = player.vx * -1
             
-
         }
-        if (distY <= (rectHeight / 2)) 
+        if (distY <= (rectHeight / 2)) //this IF statement gets detected 100% of the time in the current circumstance on where both walls are
         { 
             console.log("height overlaped") 
             player.vy = player.vy * -1
-
+            player.vx = player.vx * -1
         }
       
         var dx = distX - rectWidth / 2;
         var dy = distY - rectHeight / 2;
         return (dx * dx + dy * dy <= (circleRadius * circleRadius));
-      }
+    }
 
 
 
@@ -115,8 +115,10 @@ function animate()
         
         speedPlus()
         stats()
-        changeSize()
+
+        changeSize();
     }
+
     //top of the canvas
     if (player.y < 0 + player.radius) {
         player.y = player.radius;
@@ -125,8 +127,10 @@ function animate()
         
         speedPlus()
         stats()
-        changeSize()
+        
+        changeSize();
     }
+
     //right side of the canvas
     if (player.x > canvas.width - player.radius) {
         player.x = canvas.width - player.radius
@@ -135,18 +139,23 @@ function animate()
         
         speedPlus()
         stats()
-        changeSize()
+        
+        changeSize();
     }
+
     //left side of the canvas
-    if (player.x < player.radius) {
+    if (player.x < 0 + player.radius) {
         player.x = player.radius
         player.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
         player.vx = player.vx * randomRange(-1.1,-1);
         
         speedPlus()
         stats()
-        changeSize()
+        
+        changeSize();
     }
+
+    
     
     
     
@@ -156,7 +165,7 @@ function animate()
 	player.draw();
     player.move();
 
-    circleRectOverlap(player.x, player.y, player.radius, wall1.x=-30, wall1.y=200, wall1.width, wall1.height);
-    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1004, wall2.y=200, wall2.width, wall2.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall1.x=-40, wall1.y=200, wall1.width, wall1.height);
+    circleRectOverlap(player.x, player.y, player.radius, wall2.x=1014, wall2.y=200, wall2.width, wall2.height);
     
 }
