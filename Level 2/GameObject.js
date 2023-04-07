@@ -14,7 +14,7 @@ function GameObject(x,y,w,h,color)
 	this.vx = 0;
 	this.vy = 0;
 	
-
+	//this.color = "#ff0000";
 	
 	//This draws the player to the screen
 	this.drawRect = function()
@@ -31,10 +31,11 @@ function GameObject(x,y,w,h,color)
 	{
 		context.save();
 			context.fillStyle = this.color;
-			context.beginPath();
+			
 			context.translate(this.x, this.y);
+			context.beginPath();
 			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
-			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
+			
 			context.closePath();
 			context.fill();
 		context.restore();

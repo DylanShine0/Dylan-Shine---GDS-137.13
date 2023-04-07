@@ -17,7 +17,7 @@ function GameObject(x,y,w,h,color) //PLAYER BALL
 	this.y = canvas.height/2;
 	
 	//player's dimensions
-	this.width =100;
+	this.width = 100;
 	this.height = 100;
     
 
