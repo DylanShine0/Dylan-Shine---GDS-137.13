@@ -31,18 +31,18 @@ function animate()
         console.log("Moving Down");
         player1.y += 2;
     }
-    /*
-	if(a)
-	{
-		console.log("Moving Left");
-		player.x += -2;
-	}
-    if(d)
-	{
-		console.log("Moving Right");
-		player.x += 2;
-	}
-    */
+
+
+    
+
+    //top of the canvas
+    if (player1.y <= player1.height/2) {
+        player1.y = player1.height/2;
+    }
+    //bottom of canvas
+    if (player1.y > canvas.height - player1.height/2) {
+        player1.y = canvas.height - player1.height/2
+    }
 
     player1.drawRect();
 
