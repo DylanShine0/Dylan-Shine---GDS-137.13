@@ -14,7 +14,7 @@ var ball = new GameObject(canvas.height/2, canvas.width/2, 100, 25, "#ff0000");
 ball.width = 25;
 
 ball.vx = -5
-ball.vy = 0 //-5
+ball.vy = -5 //-5
 
 lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
 lBlock2 = new GameObject(canvas.width - 550, canvas.height/2+75, 100, 100,"#00ff00");
@@ -35,12 +35,12 @@ function animate()
     if(w)
     {
         console.log("Moving Up");
-        paddle1.y += -3;
+        paddle1.y += -4;
     }
     if(s)
     {
         console.log("Moving Down");
-        paddle1.y += 3;
+        paddle1.y += 4;
     }
 
 
@@ -94,11 +94,39 @@ function animate()
         ball.vx = ball.vx * -1;
         ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
     }
+
+    var points = [5,-5,5,-5,5,-5];
+
+    var randArray = randomRange(points[0],points[5])
+
+
     //left side of the canvas
-    if (ball.x < 0 + ball.width/2) {
-        ball.x = 0 + ball.width/2
-        ball.vx = ball.vx * -1;
-        ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
+    if (ball.x < 0 - ball.width/2) {
+        ball.x = 0 - ball.width/2
+
+        //sets the lose condition
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
+
+
+        ball.vx = randomRange(5,-5)
+        ball.vy = randomRange(5,-5)
+
+        var dirX = (randArray/Math.abs(ball.vx));
+        var dirY = (randArray/Math.abs(ball.vy));
+
+        ball.vx = ball.vy * dirX;
+        ball.vy = ball.vx * dirY;
+        /*
+        if(ball.vx <= 3 && ball.vx >=-3 )
+        {
+           
+            
+        }
+        */
+        
+
+        
     }
 
 
