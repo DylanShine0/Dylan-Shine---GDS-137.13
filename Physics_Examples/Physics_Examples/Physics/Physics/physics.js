@@ -32,7 +32,7 @@ function animate()
 	//showFriction();
 	showGravity();
 	//showPixelLock();
-	//showBounce();
+	showBounce();
 	
 	player.drawRect();
 }
@@ -189,7 +189,7 @@ function showBounce()
 		player.y = canvas.height - player.height/2;
 		//the decimal is how bouncy you want the object to be
 		//It should be a number between 0 and 2;
-		player.vy = -player.vy * .99;
+		player.vy = -player.vy * .4;
 	}
 	
 	//-----------------------------------------------------------------------------------------

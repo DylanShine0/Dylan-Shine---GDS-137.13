@@ -60,17 +60,19 @@ function animate()
         ball.x = paddle1.x + paddle1.width/2 + ball.width/2;
         ball.vx = ball.vx * -1;
         
-        if(ball.y > paddle1.y)
+        if(ball.y > paddle1.y +10)//+10for middle
         {
             ball.vy = 5
+            console.log("Bottom Paddle Hit")
         }
-        if(ball.y < paddle1.y)
+        if(ball.y < paddle1.y -10)//-10for middle
         {
             ball.vy = -5
+            console.log("Top Paddle Hit");
         }
 
 
-        console.log("PADDLE1 HITTING BALL");
+        
     }
 
 
