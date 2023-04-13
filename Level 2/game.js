@@ -99,6 +99,7 @@ function animate()
 
     var randArray = randomRange(points[0],points[5])
 
+    
 
     //left side of the canvas
     if (ball.x < 0 - ball.width/2) {
@@ -112,8 +113,8 @@ function animate()
         ball.vx = randomRange(5,-5)
         ball.vy = randomRange(5,-5)
 
-        var dirX = (randArray/Math.abs(ball.vx));
-        var dirY = (randArray/Math.abs(ball.vy));
+        var dirX = (ball.vx/Math.abs(ball.vx));
+        //var dirY = (ball.vy/Math.abs(ball.vy));
 
         ball.vx = ball.vy * dirX;
         ball.vy = ball.vx * dirY;
