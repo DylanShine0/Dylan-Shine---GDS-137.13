@@ -95,10 +95,6 @@ function animate()
         ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
     }
 
-    var points = [5,-5,5,-5,5,-5];
-
-    var randArray = randomRange(points[0],points[5])
-
     
 
     //left side of the canvas
@@ -110,21 +106,24 @@ function animate()
         ball.y = canvas.height/2;
 
 
-        ball.vx = randomRange(5,-5)
-        ball.vy = randomRange(5,-5)
+        ball.vx = ball.vx += randomRange(3,-3)
+        ball.vy = ball.vy += randomRange(3,-3)
 
         var dirX = (ball.vx/Math.abs(ball.vx));
-        //var dirY = (ball.vy/Math.abs(ball.vy));
+        var dirY = (ball.vy/Math.abs(ball.vy));
 
         ball.vx = ball.vy * dirX;
         ball.vy = ball.vx * dirY;
-        /*
-        if(ball.vx <= 3 && ball.vx >=-3 )
+        
+        if(ball.vx >= 15 || ball.vx <= 4)
         {
-           
-            
+            ball.vx = -5
+        
         }
-        */
+        if(ball.vy >= 15 || ball.vy <= 4)
+        {
+            ball.vy = -5
+        }
         
 
         
