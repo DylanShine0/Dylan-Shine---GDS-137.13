@@ -9,10 +9,11 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
 var paddle1 = new GameObject(10, 400, 10, 100, "red");
+var paddle2 = new GameObject(390, 400, 10, 100, "blue");
 
 var ball = new GameObject(canvas.height/2, canvas.width/2, 100, 25, "#ff0000");
-ball.width = 25;
 
+ball.width = 25;
 ball.vx = -5
 ball.vy = -5 //-5
 
@@ -32,19 +33,34 @@ function animate()
         return Math.random() * (high - low) + low;
     }
 
+    //paddle1 movement 
     if(w)
     {
-        console.log("Moving Up");
+        console.log("Paddle1: Moving Up");
         paddle1.y += -4;
     }
     if(s)
     {
-        console.log("Moving Down");
+        console.log("Paddle1: Moving Down");
         paddle1.y += 4;
     }
 
+    //paddle2 movement
+    if(arrowT)
+    {
+        console.log("Paddle1: Moving Up");
+        paddle2.y += -4;
+    }
+    if(arrowS)
+    {
+        console.log("Paddle1: Moving Down");
+        paddle2.y += 4;
+    }
 
-    //PADDLE COLLISION      screen boundary
+
+
+
+    //PADDLE1 COLLISION      screen boundary
     //top of the canvas
     if (paddle1.y <= paddle1.height/2) {
         paddle1.y = paddle1.height/2;
@@ -53,6 +69,20 @@ function animate()
     if (paddle1.y > canvas.height - paddle1.height/2) {
         paddle1.y = canvas.height - paddle1.height/2
     }
+
+    
+    //PADDLE2 COLLISION      screen boundary
+    //top of the canvas
+    if (paddle2.y <= paddle2.height/2) {
+        paddle2.y = paddle2.height/2;
+    }
+    //bottom of canvas
+    if (paddle2.y > canvas.height - paddle2.height/2) {
+        paddle2.y = canvas.height - paddle2.height/2
+    }
+
+
+
 
     //PADDLE 1 + BALL COLLISION
     if(paddle1.hitTestObject(ball))
