@@ -138,60 +138,60 @@ function animate()
         ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
     }
 
-    
-    //right side of the canvas
-    if (ball.x > canvas.width - ball.width/2) {
-        ball.x = canvas.width - ball.width/2
 
-        //sets the lose condition
+    //right side of the canvas
+    if (ball.x > canvas.width + ball.width/2) {
+        
+        //sets the lose condition //resets position
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
 
-        //sets new direction
-        ball.vx = ball.vx += randomRange(-3,3)
-        ball.vy = ball.vy += randomRange(-3,3)
+        //sets new VELOCITY
+        ball.vx = ball.vx += randomRange(-2,2)
+        ball.vy = ball.vy += randomRange(-2,2)
 
-        var dirX = (ball.vx/Math.abs(ball.vx));
-        var dirY = (ball.vy/Math.abs(ball.vy));
+        //sets new DIRECTION
+        var dirX1 = (ball.vx/Math.abs(ball.vx));
+        var dirY1 = (ball.vy/Math.abs(ball.vy));
 
-        ball.vx = ball.vy * dirX;
-        ball.vy = ball.vx * dirY;
+        ball.vx = ball.vy * -dirX1;
+        ball.vy = ball.vx * -dirY1;
         
-        if(ball.vx >= 15 || ball.vx <= 4)
+        if(ball.vx >= 10 || ball.vx <= 4)
         {
-            ball.vx = -5
+            ball.vx = 5
         
         }
-        if(ball.vy >= 15 || ball.vy <= 4)
+        if(ball.vy >= 10 || ball.vy <= 4)
         {
-            ball.vy = -5
+            ball.vy = 5
         }
     }
 
     //left side of the canvas
     if (ball.x < 0 - ball.width/2) {
-        ball.x = 0 - ball.width/2
-
-        //sets the lose condition
+        
+        //sets the lose condition  //resets position
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
 
-        //sets new direction
-        ball.vx = ball.vx += randomRange(3,-3)
-        ball.vy = ball.vy += randomRange(3,-3)
+        //sets new VELOCITY
+        ball.vx = ball.vx += randomRange(2,-2)
+        ball.vy = ball.vy += randomRange(2,-2)
 
-        var dirX = (ball.vx/Math.abs(ball.vx));
-        var dirY = (ball.vy/Math.abs(ball.vy));
+        //sets new DIRECTION
+        var dirX2 = (ball.vx/Math.abs(ball.vx));
+        var dirY2 = (ball.vy/Math.abs(ball.vy));
 
-        ball.vx = ball.vy * dirX;
-        ball.vy = ball.vx * dirY;
+        ball.vx = ball.vy * dirX2;
+        ball.vy = ball.vx * dirY2;
         
-        if(ball.vx >= 15 || ball.vx <= 4)
+        if(ball.vx >= 10 || ball.vx <= 4)
         {
             ball.vx = -5
         
         }
-        if(ball.vy >= 15 || ball.vy <= 4)
+        if(ball.vy >= 10 || ball.vy <= 4)
         {
             ball.vy = -5
         }
