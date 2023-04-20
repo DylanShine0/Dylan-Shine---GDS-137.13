@@ -1,4 +1,8 @@
-
+body{
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
 #container{
     height:800px; 
     padding: 5px; 
@@ -21,10 +25,7 @@ h3{
     height:fit-content;
     margin: 0px;
 }
-body{
-    margin: 5px;
-    padding: 5px;
-}
+
 .bottom-container{
     
     height:50px;
