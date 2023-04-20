@@ -25,15 +25,34 @@ body{
     margin: 5px;
     padding: 5px;
 }
-.footer{
-    margin: 5px;
+.bottom-container{
+    
+    height:50px;
+
     padding: 5px;
+    margin: 5px;
+}
+
+.footer-span{
+    position: relative;
+    top: calc(35%);
+    left: calc(36%);
+
+    width: fit-content;
+    height:fit-content;
+
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px;
 }
 
 
 
+
+
+/* Below is for the inline elements to a row*/
 .parent {
-    
     height:40px; 
     width: 600px;
     padding: 5px;
