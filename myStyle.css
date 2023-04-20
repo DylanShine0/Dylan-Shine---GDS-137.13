@@ -4,7 +4,8 @@ body{
     padding: 5px;
 }
 #container{
-    height:800px; 
+    height:87vh; 
+    width: 97vw;
     padding: 5px; 
     margin: 5px;
 }
@@ -14,7 +15,6 @@ h1{
 }
 
 a{
-    
     height:fit-content;
     margin: 2px;
 }
