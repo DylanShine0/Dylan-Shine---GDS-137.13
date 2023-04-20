@@ -70,7 +70,7 @@ function animate()
         paddle1.y = canvas.height - paddle1.height/2
     }
 
-    
+
     //PADDLE2 COLLISION      screen boundary
     //top of the canvas
     if (paddle2.y <= paddle2.height/2) {
@@ -101,11 +101,25 @@ function animate()
             ball.vy = 5
             console.log("Bottom Paddle Hit")
         }
+    }
 
+    //PADDLE 2 + BALL COLLISION
+    if(paddle2.hitTestObject(ball))
+    {
+        ball.x = paddle2.x + paddle2.width/2 + ball.width/2;
+        ball.vx = ball.vx * -1;
+
+        if(ball.y < paddle2.y - paddle2.height/6)
+        {
+            ball.vy = -5
+            console.log("Top Paddle Hit");
+        }
         
-
-
-        
+        if(ball.y > paddle2.y + paddle2.height/6)
+        {
+            ball.vy = 5
+            console.log("Bottom Paddle Hit")
+        }
     }
 
 
@@ -168,6 +182,7 @@ function animate()
 
     //PADDLE
     paddle1.drawRect();
+    paddle2.drawRect();
 
     //BALL
     ball.move();
