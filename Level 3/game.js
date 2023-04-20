@@ -9,7 +9,7 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
 var paddle1 = new GameObject(10, 400, 10, 100, "red");
-var paddle2 = new GameObject(390, 400, 10, 100, "blue");
+var paddle2 = new GameObject(1014, 400, 10, 100, "blue");
 
 var ball = new GameObject(canvas.height/2, canvas.width/2, 100, 25, "#ff0000");
 
@@ -106,18 +106,18 @@ function animate()
     //PADDLE 2 + BALL COLLISION
     if(paddle2.hitTestObject(ball))
     {
-        ball.x = paddle2.x + paddle2.width/2 + ball.width/2;
+        ball.x = paddle2.x - paddle2.width/2 - ball.width/2;
         ball.vx = ball.vx * -1;
 
         if(ball.y < paddle2.y - paddle2.height/6)
         {
-            ball.vy = -5
+            ball.vy = 5
             console.log("Top Paddle Hit");
         }
         
         if(ball.y > paddle2.y + paddle2.height/6)
         {
-            ball.vy = 5
+            ball.vy = -5
             console.log("Bottom Paddle Hit")
         }
     }
@@ -137,14 +137,36 @@ function animate()
         ball.vy = ball.vy * -1;
         ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
     }
+
+    
     //right side of the canvas
     if (ball.x > canvas.width - ball.width/2) {
         ball.x = canvas.width - ball.width/2
-        ball.vx = ball.vx * -1;
-        ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
-    }
 
-    
+        //sets the lose condition
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
+
+        //sets new direction
+        ball.vx = ball.vx += randomRange(-3,3)
+        ball.vy = ball.vy += randomRange(-3,3)
+
+        var dirX = (ball.vx/Math.abs(ball.vx));
+        var dirY = (ball.vy/Math.abs(ball.vy));
+
+        ball.vx = ball.vy * dirX;
+        ball.vy = ball.vx * dirY;
+        
+        if(ball.vx >= 15 || ball.vx <= 4)
+        {
+            ball.vx = -5
+        
+        }
+        if(ball.vy >= 15 || ball.vy <= 4)
+        {
+            ball.vy = -5
+        }
+    }
 
     //left side of the canvas
     if (ball.x < 0 - ball.width/2) {
@@ -154,7 +176,7 @@ function animate()
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
 
-
+        //sets new direction
         ball.vx = ball.vx += randomRange(3,-3)
         ball.vy = ball.vy += randomRange(3,-3)
 
@@ -173,12 +195,7 @@ function animate()
         {
             ball.vy = -5
         }
-        
-
-        
     }
-
-
 
     //PADDLE
     paddle1.drawRect();
