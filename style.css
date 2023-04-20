@@ -1,10 +1,10 @@
 .parent {
-    background: mediumpurple;
-    padding: 1rem;
+    
+    padding: 5px;
   }
 .child {
-    border: 1px solid indigo;
-    padding: 1rem;
+    
+    padding: 10px;
 }
 .float-left-child {
     float: left;
