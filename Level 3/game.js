@@ -37,7 +37,7 @@ function animate()
     //*********LINE DIVIDER
 
     context.save();
-    context.strokeStyle = "Yellow";
+    context.strokeStyle = "lightgrey";
     context.beginPath();
     context.moveTo(canvas.width/2, 0);
     context.lineTo(canvas.width/2, canvas.height);
@@ -237,11 +237,11 @@ function animate()
     //Player Names*
     context.fillText("Player 1 | Player 2", canvas.width/2-73, 20)
     //Paddle 1 score
-    context.fillText(score1, canvas.width/2-20, 40)
+    context.fillText(score1, canvas.width/2-40, 40)
     //dash
-    context.fillText('-', canvas.width/2-2, 40)
+    context.fillText('-', canvas.width/2-4, 40)
     //paddle 2 score
-    context.fillText(score2, canvas.width/2+10, 40)
+    context.fillText(score2, canvas.width/2+30, 40)
 
     //********END OF SCOREBOARD********
 
