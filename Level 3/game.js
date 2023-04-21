@@ -229,13 +229,13 @@ function animate()
     
 
     //Player Names*
-    context.fillText("Player 1 | Player 2", canvas.width/2-50, 20)
+    context.fillText("Player 1 | Player 2", canvas.width/2-73, 20)
     //Paddle 1 score
-    context.fillText(score1, canvas.width/2+7, 40)
+    context.fillText(score1, canvas.width/2-20, 40)
     //dash
-    context.fillText('-', canvas.width/2+21, 40)
+    context.fillText('-', canvas.width/2-2, 40)
     //paddle 2 score
-    context.fillText(score2, canvas.width/2+30, 40)
+    context.fillText(score2, canvas.width/2+10, 40)
 
     //********END OF SCOREBOARD********
 
