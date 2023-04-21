@@ -222,7 +222,7 @@ function animate()
         }
     }
 
-    //SCOREBOARD
+    //*********SCOREBOARD************
     
     context.font = "18px Arial"
     context.fillStyle = "#000000";
