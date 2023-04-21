@@ -18,6 +18,8 @@ ball.width = 25;
 ball.vx = -5
 ball.vy = -5 //-5
 
+
+
 lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
 lBlock2 = new GameObject(canvas.width - 550, canvas.height/2+75, 100, 100,"#00ff00");
 rBlock1 = new GameObject((canvas.width-350), canvas.height/2, 100, 100, "orange");
