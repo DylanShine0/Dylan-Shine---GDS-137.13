@@ -1,6 +1,14 @@
 #canvas
 {
-    border:1px solid black;
-    width: vw;
-    height: vh;
+    position: relative;
+    border:3px solid rgb(255, 255, 255);
+    background-color: black;
+    width: 1000px;
+    height: 950px;
+    left: calc(23%);
+}
+
+html
+{
+    background-color: lightgray;
 }
