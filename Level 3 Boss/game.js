@@ -14,13 +14,6 @@ context = canvas.getContext("2d");
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 10, 100, "red");
 
 
-
-
-lBlock1 = new GameObject(canvas.width - 750, canvas.height/2+75, 100, 100,"#00ff00");
-lBlock2 = new GameObject(canvas.width - 550, canvas.height/2+75, 100, 100,"#00ff00");
-rBlock1 = new GameObject((canvas.width-350), canvas.height/2, 100, 100, "orange");
-rBlock2 = new GameObject((canvas.width-50), canvas.height/2, 100, 100, "blue");
-
 timer = setInterval(animate, interval);
 
 function animate()
@@ -29,15 +22,21 @@ function animate()
 
     
 
-
+/*
     function randomRange(high, low)
     {
         return Math.random() * (high - low) + low;
     }
-
+*/
     //Player1 movement 
-    if(w){Player1.y += -4;}  //up
-    if(s){Player1.y += 4;}  //down
+    if(w)//up
+    {
+        Player1.y += -4;
+    }  
+    if(s)//down
+    {
+        Player1.y += 4;
+    } 
 
     
 

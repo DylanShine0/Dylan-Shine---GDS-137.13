@@ -9,7 +9,7 @@ function press(e)
 	if(e.keyCode == 65){a = true;}
 	if(e.keyCode == 68){d = true;}
 
-    if(e.keyCode == 32){space = true;}
+    //if(e.keyCode == 32){Space = true;}
 
 }
 
@@ -22,6 +22,6 @@ function release(e)
 	if(e.keyCode == 83){s = false;}
 	if(e.keyCode == 65){a = false;}
 	if(e.keyCode == 68){d = false;}
-    if(e.keyCode == 32){space = false;}
+    //if(e.keyCode == 32){Space = false;}
 
 }
