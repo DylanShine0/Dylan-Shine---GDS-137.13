@@ -13,6 +13,8 @@ context = canvas.getContext("2d");
 
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
 
+Player1.vx = 0;
+Player1.vy = 0;
 
 timer = setInterval(animate, interval);
 
@@ -28,15 +30,29 @@ function animate()
         return Math.random() * (high - low) + low;
     }
 */
+
+
+
     //Player1 movement 
     if(w)//up
     {
+        console.log("Moving Up");
         Player1.y += -4;
     }  
     if(s)//down
     {
+        console.log("Moving Down");
         Player1.y += 4;
     } 
+
+    if(d)
+    {
+        Player1.vx = 5;
+    }
+    if(a)
+    {
+        Player1.vx = -5;
+    }
 
     
 
