@@ -1,3 +1,11 @@
+//Define Booleans for each key
+var w = false; //87
+var s = false; //83
+var a = false; //65
+var d = false; //68
+var space = false; //32
+
+
 //Event Functions
 function press(e)
 {
@@ -8,8 +16,7 @@ function press(e)
 	if(e.keyCode == 83){s = true;}
 	if(e.keyCode == 65){a = true;}
 	if(e.keyCode == 68){d = true;}
-
-    //if(e.keyCode == 32){Space = true;}
+    if(e.keyCode == 32){space = true;}
 
 }
 
@@ -22,6 +29,6 @@ function release(e)
 	if(e.keyCode == 83){s = false;}
 	if(e.keyCode == 65){a = false;}
 	if(e.keyCode == 68){d = false;}
-    //if(e.keyCode == 32){Space = false;}
+    if(e.keyCode == 32){space = false;}
 
 }

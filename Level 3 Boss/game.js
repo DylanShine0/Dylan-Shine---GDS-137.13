@@ -11,7 +11,7 @@ context = canvas.getContext("2d");
 
 //var img = document.getElementById("ric"); //going to be used later for ship
 
-var Player1 = new GameObject(canvas.width/2, canvas.height/2, 10, 100, "red");
+var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
 
 
 timer = setInterval(animate, interval);
@@ -65,8 +65,9 @@ function animate()
         Player1.x = canvas.width - Player1.width/2;
     }
 
-    Player1.move();
 
+
+    Player1.move();
     Player1.drawCircle();
 
 }
