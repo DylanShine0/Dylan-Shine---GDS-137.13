@@ -6,6 +6,10 @@ var d = false; //68
 var space = false; //32
 
 
+//Add Event Listeners
+document.addEventListener("keydown", press);
+document.addEventListener("keyup", release);
+
 //Event Functions
 function press(e)
 {
