@@ -15,26 +15,15 @@ body
 
 
 
-
-
-
-
-.parent
-{
-    position: relative;
-    left: calc(23%);
-    width: 938px;   
-    margin: 5px;
-}
-
-
-
 #canvas
 {
   
-    margin: 1px;
+    position: relative;
+    left: calc(23%);
+    margin: 5px;
     
 }
+
 
 html
 {
