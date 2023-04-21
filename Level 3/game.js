@@ -34,22 +34,6 @@ function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
 
-    //*********LINE DIVIDER
-
-    context.save();
-    context.strokeStyle = "lightgrey";
-    context.beginPath();
-    context.moveTo(canvas.width/2, 0);
-    context.lineTo(canvas.width/2, canvas.height);
-    context.closePath();
-    context.lineWidth = 5;
-    context.stroke();
-    context.restore();
-
-    //***********END OF LINE DIVIDER**********
-
-
-    //BALL IMAGE
     
 
 
@@ -227,6 +211,20 @@ function animate()
             ball.vy = -5
         }
     }
+
+    //*********LINE DIVIDER
+
+    context.save();
+    context.strokeStyle = "lightgrey";
+    context.beginPath();
+    context.moveTo(canvas.width/2, 0);
+    context.lineTo(canvas.width/2, canvas.height);
+    context.closePath();
+    context.lineWidth = 5;
+    context.stroke();
+    context.restore();
+
+    //***********END OF LINE DIVIDER**********
 
     //*********SCOREBOARD************
     
