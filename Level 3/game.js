@@ -9,6 +9,9 @@ var score2 = 0;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
+var img = document.getElementById("ric");
+
+
 var paddle1 = new GameObject(10, 400, 10, 100, "red");
 var paddle2 = new GameObject(1014, 400, 10, 100, "blue");
 
@@ -46,7 +49,8 @@ function animate()
     //***********END OF LINE DIVIDER**********
 
 
-
+    //BALL IMAGE
+    
 
 
     function randomRange(high, low)
@@ -110,7 +114,6 @@ function animate()
     {
         ball.x = paddle1.x + paddle1.width/2 + ball.width/2;
         ball.vx = ball.vx * -1;
-        score1++;
 
         if(ball.y < paddle1.y - paddle1.height/6)
         {
@@ -132,7 +135,6 @@ function animate()
     {
         ball.x = paddle2.x - paddle2.width/2 - ball.width/2;
         ball.vx = ball.vx * -1;
-        score2++;
 
         if(ball.y < paddle2.y - paddle2.height/6)
         {
@@ -169,6 +171,7 @@ function animate()
     //RIGHT side of the canvas
     if (ball.x > canvas.width + ball.width/2) {
         
+        score1++;
         //sets the lose condition //resets position
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
@@ -198,6 +201,7 @@ function animate()
     //LEFT side of the canvas
     if (ball.x < 0 - ball.width/2) {
         
+        score2++;
         //sets the lose condition  //resets position
         ball.x = canvas.width/2;
         ball.y = canvas.height/2;
@@ -247,9 +251,17 @@ function animate()
     paddle2.drawRect();
 
     //BALL
+    
     ball.move();
     ball.drawCircle();
+
+    context.save();
+    context.drawImage(ric, ball.x-20, ball.y-20, ball.width*1.5, ball.height*1.5);
+    context.restore();
+
     
+    
+
 
     //Test Elements
     /*
