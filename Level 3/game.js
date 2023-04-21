@@ -18,8 +18,8 @@ var paddle2 = new GameObject(1014, 400, 10, 100, "blue");
 var ball = new GameObject(canvas.height/2, canvas.width/2, 100, 25, "#ff0000");
 
 ball.width = 25;
-ball.vx = -5
-ball.vy = -5 //-5
+ball.vx = 5
+ball.vy = 0 //-5
 
 
 
@@ -123,14 +123,14 @@ function animate()
         if(ball.y < paddle2.y - paddle2.height/6)
         {
             
-            ball.vy = 5
+            ball.vy = -5
             console.log("Top Paddle Hit");
         }
         
         if(ball.y > paddle2.y + paddle2.height/6)
         {
             
-            ball.vy = -5
+            ball.vy = 5
             console.log("Bottom Paddle Hit")
         }
     }
