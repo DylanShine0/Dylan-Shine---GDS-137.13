@@ -9,7 +9,7 @@ var score1 = 0;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
-var img = document.getElementById("ric"); //going to be used later for ship
+//var img = document.getElementById("ric"); //going to be used later for ship
 
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 10, 100, "red");
 
@@ -46,7 +46,7 @@ function animate()
 
     //Player1 COLLISION      screen boundary
     //top of the canvas
-    if (Player1.y <= Player1.height/2) 
+    if (Player1.y < 0 + Player1.height/2) 
     {
         Player1.y = Player1.height/2;
     }
