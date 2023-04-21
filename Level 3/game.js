@@ -3,7 +3,8 @@ var context;
 var timer;
 var interval = 1000/60;
 
-
+var score1 = 0;
+var score2 = 0;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
@@ -27,6 +28,24 @@ timer = setInterval(animate, interval);
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
+
+    //*********LINE DIVIDER
+
+    context.save();
+    context.strokeStyle = "Yellow";
+    context.beginPath();
+    context.moveTo(canvas.width/2, 0);
+    context.lineTo(canvas.width/2, canvas.height);
+    context.closePath();
+    context.lineWidth = 5;
+    context.stroke();
+    context.restore();
+
+    //***********END OF LINE DIVIDER**********
+
+
+
+
 
     function randomRange(high, low)
     {
@@ -89,15 +108,18 @@ function animate()
     {
         ball.x = paddle1.x + paddle1.width/2 + ball.width/2;
         ball.vx = ball.vx * -1;
+        score1++;
 
         if(ball.y < paddle1.y - paddle1.height/6)
         {
+            
             ball.vy = -5
             console.log("Top Paddle Hit");
         }
         
         if(ball.y > paddle1.y + paddle1.height/6)
         {
+            
             ball.vy = 5
             console.log("Bottom Paddle Hit")
         }
@@ -108,15 +130,18 @@ function animate()
     {
         ball.x = paddle2.x - paddle2.width/2 - ball.width/2;
         ball.vx = ball.vx * -1;
+        score2++;
 
         if(ball.y < paddle2.y - paddle2.height/6)
         {
+            
             ball.vy = 5
             console.log("Top Paddle Hit");
         }
         
         if(ball.y > paddle2.y + paddle2.height/6)
         {
+            
             ball.vy = -5
             console.log("Bottom Paddle Hit")
         }
@@ -125,13 +150,13 @@ function animate()
 
 
     //BALL COLLISION       screen boundary
-    //bottom of canvas
+    //BOTTOM of canvas
     if (ball.y > canvas.height - ball.width/2) {
         ball.y = canvas.height - ball.width/2
         ball.vy = ball.vy * -1;
         ball.color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`
     }
-    //top of the canvas
+    //TOP of the canvas
     if (ball.y <= ball.width/2) {
         ball.y = ball.width/2;
         ball.vy = ball.vy * -1;
@@ -139,7 +164,7 @@ function animate()
     }
 
 
-    //right side of the canvas
+    //RIGHT side of the canvas
     if (ball.x > canvas.width + ball.width/2) {
         
         //sets the lose condition //resets position
@@ -168,7 +193,7 @@ function animate()
         }
     }
 
-    //left side of the canvas
+    //LEFT side of the canvas
     if (ball.x < 0 - ball.width/2) {
         
         //sets the lose condition  //resets position
@@ -196,6 +221,24 @@ function animate()
             ball.vy = -5
         }
     }
+
+    //SCOREBOARD
+    
+    context.font = "18px Arial"
+    context.fillStyle = "#000000";
+    
+
+    //Player Names*
+    context.fillText("Player 1 | Player 2", canvas.width/2-50, 20)
+    //Paddle 1 score
+    context.fillText(score1, canvas.width/2+7, 40)
+    //dash
+    context.fillText('-', canvas.width/2+21, 40)
+    //paddle 2 score
+    context.fillText(score2, canvas.width/2+30, 40)
+
+    //********END OF SCOREBOARD********
+
 
     //PADDLE
     paddle1.drawRect();
