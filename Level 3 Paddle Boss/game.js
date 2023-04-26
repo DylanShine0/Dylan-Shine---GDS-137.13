@@ -12,11 +12,18 @@ var score = 0;
 var paddle = new GameObject(canvas.width/2, canvas.height-50, 250, 40, "cyan");
 var ball = new GameObject(canvas.width/2, canvas.height/2, 80, 80, "#ff00ff");
 
+ball.force = 2;
+var frictionX = 0.9;	
+var frictionY = 0.9;
+var gravity = 1;
+
 paddle.vx = 0;
 paddle.vy = 0;
 
 ball.vx = 0;
 ball.vy = 0;
+
+
 
 timer = setInterval(animate, interval);
 
@@ -30,8 +37,9 @@ function animate()
     context.fillText("Score: " + score, 20, 38);
     //END OF SCORE UI
 
-    //ball gravity
-    ball.vy = 9.81;
+    
+    ball.vy = 1;
+    
 
     //CONTROLS
     if(d)
@@ -69,7 +77,7 @@ function animate()
     //top of the canvas
     if (ball.y < 0 + ball.width/2) {ball.y = 0 + ball.width/2;}
     //bottom of canvas
-    if (ball.y > canvas.height - ball.width/2) {ball.y = canvas.height - ball.width/2}
+    if (ball.y >= canvas.height - ball.width/2) {ball.y = canvas.height - ball.width/2}
     //left of canvas
     if(ball.x < 0 + ball.width/2) {ball.x = 0 + ball.width/2;}
     //right of canvas
@@ -82,11 +90,15 @@ function animate()
 
     // ***** PADDLE BALL COLLISION *****
 
-    //PADDLE 2 + BALL COLLISION
     if(paddle.hitTestObject(ball))
     {
-        ball.y = paddle.y - paddle.height/2 - ball.width/2;
+        console.log("Ball Hit Paddle!");
         
+        //--------Bounce the Ball---------------------------------------------------------------
+		ball.y = canvas.height - ball.height/2;
+		//the decimal is how bouncy you want the object to be
+		//It should be a number between 0 and 2;
+		ball.vy = -ball.vy * 2;
     }
 
     
@@ -96,6 +108,10 @@ function animate()
 
     ball.move();
     ball.drawCircle();
+
+
+    //showBounce();
+    //showGravity();
 
     //PADDLE LINE 
     context.save();
@@ -110,3 +126,4 @@ function animate()
     //PADDLE LINE
 
 }
+
