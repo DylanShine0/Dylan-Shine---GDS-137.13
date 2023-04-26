@@ -7,7 +7,7 @@ document.addEventListener("keyup", release);
 function press(e)
 {
 	
-	//console.log("Pressed" + e.keyCode);
+	console.log("Pressed" + e.keyCode);
 
 	if(e.keyCode == 65){
         a = true;
@@ -20,7 +20,7 @@ function press(e)
 function release(e)
 {
 	
-	//console.log("Released" + e.keyCode);
+	console.log("Released" + e.keyCode);
 	
 	if(e.keyCode == 65)
     {
