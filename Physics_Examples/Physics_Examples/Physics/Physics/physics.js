@@ -164,14 +164,7 @@ function showBounce()
 	{
 		player.vx += player.ax * -player.force;
 	}
-	if(w)
-	{	
-		player.vy += player.ay * -player.force;
-	}
-	if(s)
-	{
-		player.vy += player.ay * player.force;
-	}
+
 	
 	player.vy *= frictionY;
 	player.vx *= frictionX;

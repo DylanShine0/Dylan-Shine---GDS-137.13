@@ -42,8 +42,14 @@ function GameObject(x,y,w,h,color)
 	//This changes the paddle's position
 	this.move = function()
 	{
+
+        
+
 		this.x += this.vx;
 		this.y += this.vy;
+
+        
+
 	}
 	
 	this.left = function() {return this.x - this.width/2;}
