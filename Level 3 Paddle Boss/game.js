@@ -9,7 +9,7 @@ context = canvas.getContext("2d");
 
 var score = 0;
 
-var paddle = new GameObject(canvas.width/2, canvas.height - 50, 250, 40, "00ffff");
+var paddle = new GameObject(canvas.width/2, canvas.height/2, 250, 40, "00ffff");
 
 paddle.vx = 0;
 paddle.vy = 0;
@@ -21,8 +21,26 @@ function animate()
     context.clearRect(0,0,canvas.width, canvas.height);	
 
 
-    if(d){paddle.vx = 5; paddle.vy = 0;}//right
-    if(a){paddle.vx = -5; paddle.vy = 0;}//left
+    if(d == true)
+    {
+        paddle.vx = 5;
+    }
+
+    if(a == true)
+    {
+        paddle.vx = -5;
+    }
+
+
+    if(d == false)
+    {
+        paddle.vx = 0;
+    }
+
+    if(a == false)
+    {
+        paddle.vx = 0;
+    }
 
 
 
