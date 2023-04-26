@@ -30,7 +30,7 @@ function animate()
     context.fillText("Score: " + score, 20, 38);
     //END OF SCORE UI
 
-
+    //ball gravity
     ball.vy = 10;
 
     //CONTROLS
