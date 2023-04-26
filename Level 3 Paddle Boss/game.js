@@ -31,7 +31,7 @@ function animate()
     //END OF SCORE UI
 
     //ball gravity
-    ball.vy = 10;
+    ball.vy = 9.81;
 
     //CONTROLS
     if(d)
@@ -79,6 +79,15 @@ function animate()
 
 
     // ***** WALL COLLISION *****
+
+    // ***** PADDLE BALL COLLISION *****
+
+    //PADDLE 2 + BALL COLLISION
+    if(ball.hitTestObject(paddle))
+    {
+        ball.x = paddle.x - paddle.width/2 - ball.width/2;
+        
+    }
 
     
 
