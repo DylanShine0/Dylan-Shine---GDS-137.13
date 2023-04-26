@@ -83,9 +83,9 @@ function animate()
     // ***** PADDLE BALL COLLISION *****
 
     //PADDLE 2 + BALL COLLISION
-    if(ball.hitTestObject(paddle))
+    if(paddle.hitTestObject(ball))
     {
-        ball.x = paddle.x - paddle.width/2 - ball.width/2;
+        ball.y = paddle.y - paddle.height/2 - ball.width/2;
         
     }
 
