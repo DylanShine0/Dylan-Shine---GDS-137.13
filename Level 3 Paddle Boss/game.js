@@ -30,17 +30,7 @@ function animate()
     {
         paddle.vx = -5;
     }
-
-
-    if(d == false)
-    {
-        paddle.vx = 0;
-    }
-
-    if(a == false)
-    {
-        paddle.vx = 0;
-    }
+    paddle.vx = 0;
 
 
 

@@ -1,8 +1,8 @@
 var a = false; //65
 var d = false; //68
 
-document.addEventListener("onkeydown", press);
-document.addEventListener("onkeyup", release);
+document.addEventListener("keydown", press);
+document.addEventListener("keyup", release);
 
 function press(e)
 {
