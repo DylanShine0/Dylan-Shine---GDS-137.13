@@ -10,12 +10,12 @@ context = canvas.getContext("2d");
 var score = 0;
 
 var paddle = new GameObject(canvas.width/2, canvas.height-50, 250, 40, "cyan");
-var ball = new GameObject(canvas.width/2, canvas.height/2, 80, 80, "#ff00ff");
+var ball = new GameObject(canvas.width/2, canvas.height/5, 80, 80, "#ff00ff");
 
 ball.force = 2;
-//ball.gravity = 1;
-var frictionX = 0.9;	
-var frictionY = 0.9;
+ball.gravity = 1;
+var frictionX = 0.8;	
+var frictionY = 0.8;
 var gravity = 1;
 
 paddle.vx = 0;
@@ -94,7 +94,7 @@ function animate()
         console.log("Ball Hit Paddle!");
         ball.vy = -5;
 
-        ball.vy = ball.vy + ball.gravity/10;
+        ball.vy = ball.vy + ball.gravity/2;
 
         ball.x = ball.x + ball.vx;
         ball.y = ball.y + ball.vy;
