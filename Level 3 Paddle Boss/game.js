@@ -14,8 +14,8 @@ var ball = new GameObject(canvas.width/2, canvas.height/5, 80, 80, "#ff00ff");
 
 ball.force = 2;
 ball.gravity = 1;
-var frictionX = 0.8;	
-var frictionY = 0.8;
+var frictionX = 0.95;	
+var frictionY = 0.95;
 var gravity = 1;
 
 paddle.vx = 0;
@@ -43,20 +43,24 @@ function animate()
     //CONTROLS
     if(d)
     {
-        paddle.vx = 5;
+        
+        paddle.vx = paddle.vx +0.3;
     }
 
     if(a)
     {
-        paddle.vx = -5;
+        
+        paddle.vx = paddle.vx -0.3;
     }
-    if(!a && !d)
-    {
-        paddle.vx = 0;
-    }
-    //CONTROLS
+    
+    
 
+    //GRAVITY
+    
+    ball.vy += gravity; 
 
+    paddle.move();
+    ball.move();
 
 
     // ***** WALL COLLISION *****
@@ -64,25 +68,19 @@ function animate()
     if(paddle.x < 0 + paddle.width/2)
     {
         paddle.x = 0 + paddle.width/2;
+        paddle.vx = 0;
     }
     //PADDLE right of canvas
     if(paddle.x > canvas.width - paddle.width/2)
     {
         paddle.x = canvas.width - paddle.width/2;
+        paddle.vx = 0;
     }
 
 
-    //BALL COLLISION WALL  -----   SCREEN BOUNDARY
-    //top of the canvas
-    if (ball.y < 0 + ball.width/2) {ball.y = 0 + ball.width/2;}
-    //bottom of canvas
-    if (ball.y >= canvas.height - ball.width/2) {ball.y = canvas.height - ball.width/2}
-    //left of canvas
-    if(ball.x < 0 + ball.width/2) {ball.x = 0 + ball.width/2;}
-    //right of canvas
-    if(ball.x > canvas.width - ball.width/2) {ball.x = canvas.width - ball.width/2;}
+    
 
-
+    
 
 
     // ***** WALL COLLISION *****
@@ -92,26 +90,86 @@ function animate()
     if(ball.hitTestObject(paddle))
     {
         console.log("Ball Hit Paddle!");
-        ball.vy = -5;
+   
+        ball.y = paddle.y - paddle.height/2 - ball.width/2;
 
-        ball.vy = ball.vy + ball.gravity/2;
 
-        ball.x = ball.x + ball.vx;
-        ball.y = ball.y + ball.vy;
+        if(ball.x < paddle.x - paddle.width/6)
+        {
+            
+            ball.vx = -3
+            console.log("Left Paddle Hit");
+        }
+        
+        if(ball.x > paddle.x + paddle.height/6)
+        {
+            
+            ball.vx = 3
+            console.log("Right Paddle Hit")
+        }
+        
+        showBounceFriction();
+
+        score +=1;
+
     }
-
+    
+    
+    if(score < 0)
+    {
+        score = 0;
+    }
+        
     
 
-    paddle.move();
-    paddle.drawRect();
 
-    ball.move();
+    //BALL COLLISION WALL  -----   SCREEN BOUNDARY
+    //top of the canvas
+    if (ball.y < 0 + ball.width/2) {ball.y = 0 + ball.width/2;}
+    //bottom of canvas
+    if (ball.y >= canvas.height - ball.width/2) 
+    {
+        ball.y = canvas.height - ball.width/2
+        gravity = 0.05;
+        score -= 1;
+    }
+    //left of canvas
+    if(ball.x < 0 + ball.width/2) 
+    {
+        ball.x = 0 + ball.width/2;
+        ball.vx = 5
+    }
+    //right of canvas
+    if(ball.x > canvas.width - ball.width/2) 
+    {
+        ball.x = canvas.width - ball.width/2;
+        ball.vx = -5;
+    }
+        
+    
+
+    paddle.drawRect();
     ball.drawCircle();
 
 
-    //showBounce();
-    //showGravity();
+    showPaddleLine();
 
+    
+    
+    
+}
+
+function showBounceFriction()
+{
+    gravity = 0
+    ball.vy = -ball.vy * frictionY; //bounce and friction
+    gravity = 1
+}
+
+
+
+function showPaddleLine()
+{
     //PADDLE LINE 
     context.save();
     context.strokeStyle = "black";
@@ -119,11 +177,10 @@ function animate()
     context.moveTo(ball.x, ball.y);
     context.lineTo(paddle.x, paddle.y);
     context.closePath();
-    context.lineWidth = 5;
+    context.lineWidth = 2;
     context.stroke();
     context.restore();
     //PADDLE LINE
-
 }
 
 
