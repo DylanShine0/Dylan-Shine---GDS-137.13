@@ -20,7 +20,9 @@ body
   
     position: relative;
     left: calc(23%);
+    top: calc(23%);
     margin: 5px;
+    
     
 }
 
