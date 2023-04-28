@@ -12,10 +12,9 @@ var score = 0;
 var paddle = new GameObject(canvas.width/2, canvas.height-50, 250, 40, "cyan");
 var ball = new GameObject(canvas.width/2, canvas.height/5, 80, 80, "#ff00ff");
 
-ball.force = 2;
-ball.gravity = 1;
-var frictionX = 0.95;	
-var frictionY = 0.95;
+ball.force = 1
+var frictionX = 0.67;	
+var frictionY = 0.67;
 var gravity = 1;
 
 paddle.vx = 0;
@@ -93,22 +92,46 @@ function animate()
    
         ball.y = paddle.y - paddle.height/2 - ball.width/2;
 
+        showBounceFriction();
 
+        //center
+
+        ball.vy = -35
+        
+        //inners
+
+        if(ball.x < paddle.x - paddle.width/3)
+        {
+            
+            ball.vy = -35
+            ball.vx = -ball.force;   
+            console.log("inner Left Paddle Hit");
+        }
+        
+        if(ball.x > paddle.x + paddle.width/3)
+        {
+            ball.vy = -35
+            ball.vx = ball.force;   
+            console.log("inner Right Paddle Hit")
+        }
+
+        //outers
         if(ball.x < paddle.x - paddle.width/6)
         {
             
-            ball.vx = -3
-            console.log("Left Paddle Hit");
+            ball.vy = -35
+            ball.vx = -ball.force * 5;   
+            console.log("outer Left Paddle Hit");
         }
         
-        if(ball.x > paddle.x + paddle.height/6)
+        if(ball.x > paddle.x + paddle.width/6)
         {
-            
-            ball.vx = 3
-            console.log("Right Paddle Hit")
+            ball.vy = -35
+            ball.vx = ball.force * 5;   
+            console.log("outer Right Paddle Hit")
         }
         
-        showBounceFriction();
+        
 
         score +=1;
 
