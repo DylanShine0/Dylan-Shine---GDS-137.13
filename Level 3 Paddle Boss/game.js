@@ -13,8 +13,8 @@ var paddle = new GameObject(canvas.width/2, canvas.height-50, 250, 40, "cyan");
 var ball = new GameObject(canvas.width/2, canvas.height/5, 80, 80, "#ff00ff");
 
 ball.force = 1
-var frictionX = 0.67;	
-var frictionY = 0.67;
+var frictionX = 0.97;	
+var frictionY = 0.97;
 var gravity = 1;
 
 paddle.vx = 0;
@@ -58,6 +58,18 @@ function animate()
     
     ball.vy += gravity; 
 
+    //Friction
+
+    paddle.vx *= frictionX;
+
+    //pixel lock
+
+    //ball.y += Math.round(ball.vy);
+	//ball.x += Math.round(ball.vx);
+
+
+
+
     paddle.move();
     ball.move();
 
@@ -98,49 +110,47 @@ function animate()
 
         ball.vy = -35
         
-        //inners
 
+        //outers
         if(ball.x < paddle.x - paddle.width/3)
         {
-            
+             
             ball.vy = -35
             ball.vx = -ball.force;   
-            console.log("inner Left Paddle Hit");
+            console.log("outer Left Paddle Hit");
         }
-        
+         
         if(ball.x > paddle.x + paddle.width/3)
         {
             ball.vy = -35
             ball.vx = ball.force;   
-            console.log("inner Right Paddle Hit")
+            console.log("outer Right Paddle Hit")
         }
 
-        //outers
+
+        //inners
+
         if(ball.x < paddle.x - paddle.width/6)
         {
             
             ball.vy = -35
             ball.vx = -ball.force * 5;   
-            console.log("outer Left Paddle Hit");
+            console.log("inner Left Paddle Hit");
         }
         
         if(ball.x > paddle.x + paddle.width/6)
         {
             ball.vy = -35
             ball.vx = ball.force * 5;   
-            console.log("outer Right Paddle Hit")
+            console.log("inner Right Paddle Hit")
         }
+
+       
         
         
 
         score +=1;
 
-    }
-    
-    
-    if(score < 0)
-    {
-        score = 0;
     }
         
     
@@ -148,13 +158,19 @@ function animate()
 
     //BALL COLLISION WALL  -----   SCREEN BOUNDARY
     //top of the canvas
-    if (ball.y < 0 + ball.width/2) {ball.y = 0 + ball.width/2;}
+    if (ball.y < 0 + ball.width/2) 
+    {
+        console.log("Hit top of the ceiling")
+        ball.y = 0 + ball.width/2;
+        ball.vy = 0
+    }
     //bottom of canvas
-    if (ball.y >= canvas.height - ball.width/2) 
+    if (ball.y > canvas.height - ball.width/2) 
     {
         ball.y = canvas.height - ball.width/2
-        gravity = 0.05;
-        score -= 1;
+        ball.vy = -ball.vy * .67;
+
+        score = 0;
     }
     //left of canvas
     if(ball.x < 0 + ball.width/2) 
@@ -184,9 +200,9 @@ function animate()
 
 function showBounceFriction()
 {
-    gravity = 0
-    ball.vy = -ball.vy * frictionY; //bounce and friction
-    gravity = 1
+    
+    ball.vy = -ball.vy * gravity; //bounce
+    
 }
 
 
