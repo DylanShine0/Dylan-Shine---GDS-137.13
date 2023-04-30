@@ -185,7 +185,7 @@ function animate()
         ball.vx = -5;
     }
         
-    
+    console.log("VX: ", ball.vx, "VY: ", ball.vy)
 
     paddle.drawRect();
     ball.drawCircle();
