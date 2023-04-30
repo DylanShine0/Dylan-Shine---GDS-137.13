@@ -112,7 +112,16 @@ function animate()
 				You simply need to change the values of the x and y properties of the object literals listed below to find the solution.
 	*/
 
-	//center
+	//bottom center PLATFORM 0
+	while(platform0.hitTestPoint({x:player.x, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("Bottom Center Collided")
+	}
+
+	//bottom center PLATFORM 1
 	while(platform1.hitTestPoint({x:player.x, y:player.y+player.height/2}) && player.vy >=0)
 	{
 		player.y--;
@@ -120,6 +129,7 @@ function animate()
 		player.canJump = true;
 		console.log("Bottom Center Collided")
 	}
+
 	
 	
 	//Bottom Right         PLATFORM 0
