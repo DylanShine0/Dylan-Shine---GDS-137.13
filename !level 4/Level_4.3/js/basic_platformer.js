@@ -10,7 +10,7 @@ var player;
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
-	player = new GameObject({x:150});
+	player = new GameObject({x:150,y:canvas.height/2});
 
 	platform0 = new GameObject();
 		platform0.width = 150;
@@ -23,7 +23,7 @@ var player;
 		platform1.width = 575;
 		platform1.x = platform0.x;
 		platform1.y = platform0.y - 200;
-		platform1.color = "#66ff33";
+		platform1.color = "#555555";
 		
 	
 	goal = new GameObject({width:24, height:50, x:platform1.x, y:platform1.y-250, color:"#00ffff"});
@@ -92,14 +92,38 @@ function animate()
 	
 	//---------Objective: Get the blue pearl----------------------------------------------------------------------------------------------------
 	//---------Jump through and land on the block without changin the physics
-	
-	
 
-	while(platform1.hitTestPoint(player.top()) && player.vy <=0)
+	var touchingTop = false;
+	
+	
+	while(platform1.hitTestPoint(player.bottom()) && player.vy <=0)
+	{
+		player.vy = 0;
+		touchingTop = true;
+		console.log("player top touching platform 1")
+
+		if(w && touchingTop == true)
+		{
+			player.y--;
+
+		}else{
+			player.y++;
+		}
+		
+	}
+
+	/*
+	while(platform1.hitTestPoint(player.bottom()) && player.vy <=0)
 	{
 		player.y++;
 		player.vy = 0;
+		console.log("player bottom touching platform 1")
+
+		
 	}
+	*/
+	
+	
 	
 	
 
