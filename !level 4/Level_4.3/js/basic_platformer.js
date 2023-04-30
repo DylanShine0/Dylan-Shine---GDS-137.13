@@ -93,22 +93,16 @@ function animate()
 	//---------Objective: Get the blue pearl----------------------------------------------------------------------------------------------------
 	//---------Jump through and land on the block without changin the physics
 
-	var touchingTop = false;
 	
-	
-	while(platform1.hitTestPoint(player.bottom()) && player.vy <=0)
+	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
+
+		player.y--;
 		player.vy = 0;
-		touchingTop = true;
-		console.log("player top touching platform 1")
-
-		if(w && touchingTop == true)
-		{
-			player.y--;
-
-		}else{
-			player.y++;
-		}
+		player.canJump = true;
+		console.log("player Bottom touching platform 1")
+		
+	
 		
 	}
 
