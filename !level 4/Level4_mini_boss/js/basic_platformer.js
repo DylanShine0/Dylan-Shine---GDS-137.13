@@ -145,20 +145,18 @@ function animate()
 
 
 	//Bottom Right         PLATFORM 0
-	while(platform1.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	while(platform0.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom right collided")
 	}
 	//Bottom Left         PLATFORM 0
-	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	while(platform0.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom left collided")
 	}
 
 	//Bottom Right         PLATFORM 1
@@ -167,7 +165,6 @@ function animate()
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom right collided")
 	}
 	//Bottom Left         PLATFORM 1
 	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
@@ -175,24 +172,21 @@ function animate()
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom left collided")
 	}
 
 	//Bottom Right         PLATFORM 2
-	while(platform1.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	while(platform2.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom right collided")
 	}
 	//Bottom Left         PLATFORM 2
-	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	while(platform2.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
 	{
 		player.y--;
 		player.vy = 0;
 		player.canJump = true;
-		console.log("bottom left collided")
 	}
 	
 	
