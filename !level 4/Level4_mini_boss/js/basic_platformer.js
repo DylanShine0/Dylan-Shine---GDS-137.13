@@ -5,7 +5,8 @@ var context;
 var timer;
 var interval;
 var player;
-
+var won1 = false;
+console.log("Won Variable: ", won1)
 
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
@@ -46,6 +47,8 @@ function animate()
 {
 	
 	context.clearRect(0,0,canvas.width, canvas.height);	
+
+	
 
 	if(w && player.canJump && player.vy ==0)
 	{
@@ -199,10 +202,21 @@ function animate()
 		
 	if(player.hitTestObject(goal))
 	{
+		
 		goal.y = 10000;
-		context.textAlign = "center";
-		context.drawText("You Win!!!", canvas.width/2, canvas.height/2);
+		won1 = true;
+		console.log("player", "Won: ", won1)
+		
 	}
+	if(won1 == true){
+		
+		context.textAlign = "center";
+		context.fillStyle = "#555555"
+		context.font = "20px Arial"
+		context.fillText("You Win!!!", canvas.width/2, canvas.height/3);
+	}
+	
+	
 	
 	
 	platform0.drawRect();
