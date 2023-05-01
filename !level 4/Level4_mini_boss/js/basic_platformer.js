@@ -17,6 +17,19 @@ var player;
 		platform0.x = platform0.width/2;
 		platform0.y = canvas.height - platform0.height/2;
 		platform0.color = "#66ff33";
+
+
+	platform1 = new GameObject();
+		platform1.width = 200;
+		platform1.x = canvas.width/2.2;
+		platform1.y = canvas.height - 200;
+		platform1.color = "#66ff33";
+
+	platform2 = new GameObject();
+		platform2.width = 200;
+		platform2.x = canvas.width/1.3;
+		platform2.y = canvas.height - 400;
+		platform2.color = "#66ff33";
 		
 	goal = new GameObject({width:24, height:50, x:canvas.width-50, y:100, color:"#00ffff"});
 	
@@ -57,7 +70,7 @@ function animate()
 	player.x += Math.round(player.vx);
 	player.y += Math.round(player.vy);
 	
-
+	//PLATFORM 0
 	while(platform0.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
 		player.y--;
@@ -79,6 +92,108 @@ function animate()
 		player.y++;
 		player.vy = 0;
 	}
+
+
+	//PLATFORM ONE
+	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform1.hitTestPoint(player.left()) && player.vx <=0)
+	{
+		player.x++;
+		player.vx = 0;
+	}
+	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
+	{
+		player.x--;
+		player.vx = 0;
+	}
+	while(platform1.hitTestPoint(player.top()) && player.vy <=0)
+	{
+		player.y++;
+		player.vy = 0;
+	}
+
+	//PLATFORM TWO
+	while(platform2.hitTestPoint(player.bottom()) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+	}
+	while(platform2.hitTestPoint(player.left()) && player.vx <=0)
+	{
+		player.x++;
+		player.vx = 0;
+	}
+	while(platform2.hitTestPoint(player.right()) && player.vx >=0)
+	{
+		player.x--;
+		player.vx = 0;
+	}
+	while(platform2.hitTestPoint(player.top()) && player.vy <=0)
+	{
+		player.y++;
+		player.vy = 0;
+	}
+
+
+	//****************************************** BOTTOM RIGHT AND LEFT player **********************************************************
+
+
+	//Bottom Right         PLATFORM 0
+	while(platform1.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom right collided")
+	}
+	//Bottom Left         PLATFORM 0
+	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom left collided")
+	}
+
+	//Bottom Right         PLATFORM 1
+	while(platform1.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom right collided")
+	}
+	//Bottom Left         PLATFORM 1
+	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom left collided")
+	}
+
+	//Bottom Right         PLATFORM 2
+	while(platform1.hitTestPoint({x:player.x+player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom right collided")
+	}
+	//Bottom Left         PLATFORM 2
+	while(platform1.hitTestPoint({x:player.x-player.width/2, y:player.y+player.height/2}) && player.vy >=0)
+	{
+		player.y--;
+		player.vy = 0;
+		player.canJump = true;
+		console.log("bottom left collided")
+	}
 	
 	
 	//---------Objective: Treasure!!!!!!!---------------------------------------------------------------------------------------------------- 
@@ -97,9 +212,12 @@ function animate()
 	
 	
 	platform0.drawRect();
+	platform1.drawRect();
+	platform2.drawRect();
 
 	//Show hit points
 	player.drawRect();
+	player.drawDebug();
 	goal.drawCircle();
 }
 
