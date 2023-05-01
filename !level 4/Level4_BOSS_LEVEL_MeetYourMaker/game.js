@@ -11,7 +11,7 @@ var frictionY = .97;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
-//FIX THE ORDER OF CODE CALLS LIKE FOR THE PADDLE BALL BOSS LEVEL*****************************
+//FIX THE ORDER OF CODE CALLS LIKE FOR THE PADDLE BALL BOSS LEVEL***************************** hint move and draw functions
 
 var Player1 = new GameObject(200, 200, 50, 50, "red");
 
