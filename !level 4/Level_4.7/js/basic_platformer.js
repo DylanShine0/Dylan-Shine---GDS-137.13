@@ -133,8 +133,10 @@ function animate()
 	}
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
+		console.log("player colliding with platform1  OPENING DOOR")
 		player.x--;
 		player.vx = 0;
+		platform1.x = 10000
 	}
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
@@ -147,10 +149,10 @@ function animate()
 	//---------Write a condition so that the player opens the yellow door to get the pearl-----------------------------------------
 
 	
-	
 
 	if(player.hitTestObject(goal))
 	{
+		console.log("obtained the pearl")
 		goal.y = 10000;
 	}
 	
