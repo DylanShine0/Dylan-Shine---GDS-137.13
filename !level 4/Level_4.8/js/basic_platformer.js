@@ -144,8 +144,18 @@ function animate()
 	//---------Get the pearl to open the door--------------------------------------------------------------------------------------------
 	//---------Hint: you'll need a new variable to keep track of the key-----------------------------------------------------------------
 	
+	var gotPearl = false;
+
+	if(gotPearl == true)
+
+
+
+
+
+
 	if(player.hitTestObject(goal))
 	{
+		console.log("Obtained the pearl")
 		goal.y = 10000;
 	}
 	
