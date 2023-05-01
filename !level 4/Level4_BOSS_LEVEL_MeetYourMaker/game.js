@@ -6,12 +6,12 @@ var interval = 1000/60;
 var score1 = 0;
 
 var frictionX = 0.4;	
-//var frictionY = .97;
+var frictionY = .97;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
-//var img = document.getElementById("ric"); //going to be used later for ship
+//FIX THE ORDER OF CODE CALLS LIKE FOR THE PADDLE BALL BOSS LEVEL*****************************
 
 var Player1 = new GameObject(200, 200, 50, 50, "red");
 
