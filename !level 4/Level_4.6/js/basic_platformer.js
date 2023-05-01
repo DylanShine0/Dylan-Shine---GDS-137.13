@@ -123,22 +123,9 @@ function animate()
 
 	while(platform1.hitTestPoint(player.left()))
 	{
-		player.x++;
+		platform1.x--;
+		platform0.vx = 0;
 	}
-	
-	
-
-	
-	
-
-
-
-	
-
-	
-	
-	
-	
 	
 	platform0.drawRect();
 	platform2.drawRect();
