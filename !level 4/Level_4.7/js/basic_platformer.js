@@ -134,9 +134,10 @@ function animate()
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
 		console.log("player colliding with platform1  OPENING DOOR")
+		platform1.x = 10000
 		player.x--;
 		player.vx = 0;
-		platform1.x = 10000
+		
 	}
 	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
 	{
