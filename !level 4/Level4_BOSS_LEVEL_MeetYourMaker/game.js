@@ -41,8 +41,6 @@ function animate()
     if(d){Player1.vx = 5; Player1.vy = 0;}//right
     if(a){Player1.vx = -5; Player1.vy = 0;}//left
 
-    
-
     //up  && right
     if(w && d)
     {
@@ -68,10 +66,6 @@ function animate()
         Player1.vx = 5;
     }
     
-    
-    
-
-
 
     //Player1 COLLISION      screen boundary
     //top of the canvas
@@ -102,7 +96,7 @@ function animate()
     //showFriction();
 
 }
-
+/*
 function showFriction()
 {
 	if(d)
@@ -127,3 +121,4 @@ function showFriction()
 	//---------------------------------------------------------------------------------------
 	//Player1.x += Player1.vx;
 }
+*/
