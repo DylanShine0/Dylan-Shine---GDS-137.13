@@ -97,9 +97,17 @@ function animate()
 
 	while(platform1.hitTestPoint(player.bottom()) && player.vy >=0 )
 	{
-		player.canJump = true;
-		player.y--;
-		player.vy = 0;
+		if(s == true)
+		{
+			player.canJump = false;
+			player.y++;
+			console.log("Player now cant jump while going DOWN")
+		}else{
+			player.y--;
+			//player.vy = 0;
+		}
+		
+		
 	}
 	
 	
