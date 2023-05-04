@@ -1,15 +1,23 @@
 {
 	"folders": [
 		{
+			"name": "Dylan-Shine---GDS-137.13",
 			"path": "."
 		},
 		{
+			"name": "trig_examples",
+			"path": "../../../../Downloads/trig_examples"
+		},
+		{
+			"name": "Week 2",
 			"path": "../../../../Downloads/Week 2/Week 2"
 		},
 		{
+			"name": "Week 4 Basic_Platformer_Logic",
 			"path": "../../../../Downloads/Week 4 Basic_Platformer_Logic/Week 4 Basic_Platformer_Logic"
 		},
 		{
+			"name": "week5_Arrays",
 			"path": "../../../../Downloads/week5_Arrays/week5_Arrays"
 		}
 	],
