@@ -11,9 +11,8 @@ var frictionY = .97;
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
-//FIX THE ORDER OF CODE CALLS LIKE FOR THE PADDLE BALL BOSS LEVEL***************************** hint move and draw functions
-
 var Player1 = new GameObject(200, 200, 50, 50, "red");
+var bullet = new GameObject(200, 50, 10, 10, "#39FF14");
 
 Player1.vx = 0;
 Player1.vy = 0;
@@ -32,11 +31,18 @@ function animate()
         return Math.random() * (high - low) + low;
     }
 */
+    Player1.move();
+    bullet.move();
 
-
+    //Shoot key
+    if(space){bullet.vx = 0; bullet.vy = -5;}
 
     //Player1 movement 
-    if(w){Player1.vx = 0; Player1.vy = -5;}//up  
+    if(w)
+    {
+        Player1.vx = 0; 
+        Player1.vy = -5;
+    }//up  
     if(s){Player1.vx = 0; Player1.vy = 5;}//down
     if(d){Player1.vx = 5; Player1.vy = 0;}//right
     if(a){Player1.vx = -5; Player1.vy = 0;}//left
@@ -91,8 +97,9 @@ function animate()
 
 
 
-    Player1.move();
+    
     Player1.drawCircle();
+    bullet.drawCircle();
     //showFriction();
 
 }
