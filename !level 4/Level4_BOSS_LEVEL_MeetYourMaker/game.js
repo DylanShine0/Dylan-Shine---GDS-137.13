@@ -3,32 +3,54 @@ var context;
 var timer;
 var interval = 1000/60;
 
-var score1 = 0;
-
-var frictionX = 0.4;	
-var frictionY = .97;
+//var score1 = 0;
+var hit = false
+//var frictionX = 0.4;	
+//var frictionY = .97;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
-var Player1 = new GameObject(200, 200, 50, 50, "red");
+var img = document.getElementById("spider");
+
+var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
 var bullet = new GameObject(0, 0, 10, 10, "#39FF14");
-var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15)
+var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
+
+var bits = [
+
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`)
+
+]
 
 Player1.vx = 0;
 Player1.vy = 0;
 
+enemy1.vx = 0;
+enemy1.vy = 0;
+
 timer = setInterval(animate, interval);
 
-/*
+//misc
 function wait(ms) {
     console.log("waiting...");
     setTimeout(function() { console.log('End'); }, ms); 
 }
   
-wait(10000);
-*/
 
+function randomRange(high, low)
+{
+    return Math.random() * (high - low) + low;
+}
+//misc
 
 
 function animate()
@@ -36,15 +58,17 @@ function animate()
     context.clearRect(0,0,canvas.width, canvas.height);	
 
     
+    
+    
+    
 
-/*
-    function randomRange(high, low)
-    {
-        return Math.random() * (high - low) + low;
-    }
-*/
+    
+
     Player1.move();
     bullet.move();
+    enemy1.move();
+    
+    
 
 
     //Player1 movement 
@@ -147,29 +171,74 @@ function animate()
             space = false;
         }
     }
-    
 
-    //SHOOTING 
-    
+    if(bullet.hitTestObject(enemy1))
+    {
+        
+        bullet.vx = 0; bullet.vy = 0;    // stop bullet
+        bullet.x = -20; bullet.y = -20;  //send it back
+        enemy1.color = "red";
+        hit = true;
+        console.log("enemy hit", hit)         //Alert the console
 
+        for(var x = 0; x < bits.length; x++) //BITS dispersion
+        {
+            bits[x].vx = randomRange(-10, 10);
+            bits[x].vy = randomRange(-10, 10);
+        }
+        
+    }
+    else
+    {
+        enemy1.color = "black"
+    }
+
+    for(var j = 0; i < bits.length; i++)//start INITIALIZATION
+    {
+        bits[j].width = 3;
+        bits[j].height = 3;
+        bits[j].x = Player1.x + randomRange(5,20);
+        bits[j].y = Player1.y + randomRange(5,20);
+
+       
+    
+        bits[j].color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`;
+        bits[j].vx = 0;
+        bits[j].vy = 0;
+
+        console.log("drawing bits")
+    }
+
+    for(var i = 0; i < bits.length; i++)//MOVE + DRAW
+    {  
+        bits[i].move()
+        
+        bits[i].drawCircle();
+
+        //console.log("for loop i running" , i)
+    }    
+    
+   
+        
+    
+    
+    
+    
     
     playerWallCollision();
     bulletWallCollision();
 
-
-    
+    //drawing
     Player1.drawCircle();
     PlayerDirection();
-
+    
     enemy1.drawCircle();
 
-    context.save();//wrap over circle for enemy 
-    context.drawImage(spider, enemy1.x-20, enemy1.y-20, enemy1.width*1.5, enemy1.height*1.5);
-    context.restore();
-
+    context.drawImage(spider, enemy1.x-23, enemy1.y-10, enemy1.width*1.4, enemy1.height*1.4);
     
     bullet.drawCircle();
-    //showFriction();
+    
+
 
 }
 
@@ -197,7 +266,6 @@ function playerWallCollision()
         Player1.x = canvas.width - Player1.width/2;
     }
 }
-
 function bulletWallCollision()
 {
     //bullet COLLISION      screen boundary
@@ -242,3 +310,4 @@ function PlayerDirection()//PROBLEM LINE WONT ROTATE WITH MOVEMENT DIRECTION
         context.closePath();
     context.restore();
 }
+
