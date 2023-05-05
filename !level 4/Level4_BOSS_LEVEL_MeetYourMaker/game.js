@@ -157,8 +157,10 @@ function animate()
     bulletWallCollision();
 
     
-    Player1.drawCirclePlayer();
-    bullet.drawCircleBullet();
+    Player1.drawCircle();
+    PlayerDirection();
+    
+    bullet.drawCircle();
     //showFriction();
 
 }
@@ -215,4 +217,16 @@ function bulletWallCollision()
         bullet.x = canvas.width - bullet.width/2;
         bullet.vx = 0; bullet.vy = 0; //stop bullet
     }
+}
+function PlayerDirection()
+{
+    context.save();
+        context.strokeStyle = "white";
+        context.beginPath()
+	    context.moveTo(Player1.x, Player1.y + 24);
+        context.lineTo(Player1.x, Player1.y -24);
+	    context.lineWidth = 3;
+	    context.stroke();
+        context.closePath();
+    context.restore();
 }
