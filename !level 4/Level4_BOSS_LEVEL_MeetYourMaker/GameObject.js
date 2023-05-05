@@ -15,7 +15,27 @@ function GameObject(x,y,w,h,color)
 	
 	//draws the player to the screen
 	
-	this.drawCircle = function()
+	this.drawCirclePlayer = function()
+	{
+		context.save();
+			context.fillStyle = this.color;
+			context.translate(this.x, this.y);
+			context.beginPath();
+			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
+			context.closePath();
+			context.fill();
+
+
+			context.strokeStyle = "white";
+    		context.beginPath();
+    		context.moveTo(this.x, this.y + this.height/2);
+    		context.lineTo(this.x, this.y - this.height/2);
+    		context.closePath();
+    		context.lineWidth = 3;
+    		context.stroke();
+		context.restore();
+	}	
+	this.drawCircleBullet = function()
 	{
 		context.save();
 			context.fillStyle = this.color;

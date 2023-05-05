@@ -10,6 +10,22 @@ var space = false; //32
 document.addEventListener("keydown", press);
 document.addEventListener("keyup", release);
 
+document.addEventListener("keydown", press1);
+
+//shoot event function
+
+function press1(e)
+{
+    if(e.keyCode == 32)
+    {
+        space = true;
+    }
+    else
+    {
+        space = false;
+    }
+}
+
 //Event Functions
 function press(e)
 {
@@ -30,10 +46,6 @@ function press(e)
 	if(e.keyCode == 68){
         d = true;
     }
-    if(e.keyCode == 32){
-        space = true;
-    }
-
 }
 
 function release(e)
@@ -57,9 +69,4 @@ function release(e)
     {
         d = false;
     }
-    if(e.keyCode == 32)
-    {
-        space = false;
-    }
-
 }

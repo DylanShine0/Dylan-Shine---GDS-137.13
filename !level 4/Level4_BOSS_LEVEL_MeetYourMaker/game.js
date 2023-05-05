@@ -19,6 +19,17 @@ Player1.vy = 0;
 
 timer = setInterval(animate, interval);
 
+/*
+function wait(ms) {
+    console.log("waiting...");
+    setTimeout(function() { console.log('End'); }, ms); 
+}
+  
+wait(10000);
+*/
+
+
+
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
@@ -34,46 +45,127 @@ function animate()
     Player1.move();
     bullet.move();
 
-    //Shoot key
-    if(space){bullet.vx = 0; bullet.vy = -5;}
 
     //Player1 movement 
-    if(w)
+    if(w)//up
     {
-        Player1.vx = 0; 
-        Player1.vy = -5;
-    }//up  
-    if(s){Player1.vx = 0; Player1.vy = 5;}//down
-    if(d){Player1.vx = 5; Player1.vy = 0;}//right
-    if(a){Player1.vx = -5; Player1.vy = 0;}//left
+        Player1.vx = 0; Player1.vy = -5;
+    }
+    if(s)//down
+    {
+        Player1.vx = 0; Player1.vy = 5;
+    }
+    if(d)//right
+    {
+        Player1.vx = 5; Player1.vy = 0;
+    }
+    if(a)//left
+    {
+        Player1.vx = -5; Player1.vy = 0;
+    }
 
     //up  && right
     if(w && d)
     {
-        Player1.vy = -5;
         Player1.vx = 5;
+        Player1.vy = -5;
+        
     }
     //up && left
     if(w && a)
     {
-        Player1.vy = -5;
         Player1.vx = -5;
+        Player1.vy = -5;
+        
     }
     //down && left
     if(s && a)
     {
-        Player1.vy = 5;
         Player1.vx = -5;
+        Player1.vy = 5;
+        
     }
     //down && right
     if(s && d)
     {
-        Player1.vy = 5;
         Player1.vx = 5;
+        Player1.vy = 5;
+        
+    }
+
+
+   
+
+    //SHOOTING
+    if(space == true)
+    {   
+        console.log("space pressed")
+        bullet.x = Player1.x; bullet.y = Player1.y;
+
+        //Horizontal + Vertical Movement
+        if(Player1.vx == 0 && Player1.vy == -5)
+        {
+            bullet.vx = 0; bullet.vy = -15;
+            space = false;
+        }
+        if(Player1.vx == 0 && Player1.vy == 5)
+        {     
+            bullet.vx = 0; bullet.vy = 15;
+            space = false;
+        }
+        if(Player1.vx == 5 && Player1.vy == 0)
+        {    
+            bullet.vx = 15; bullet.vy = 0;
+            space = false;
+        }
+        if(Player1.vx == -5 && Player1.vy == 0)
+        {  
+            bullet.vx = -15; bullet.vy = 0;
+            space = false;
+        }
+
+
+        //DIAGONALS
+        if(Player1.vx == 5 && Player1.vy == -5) //up right
+        { 
+            bullet.vx = 15; bullet.vy = -15;
+            space = false;
+        }
+        if(Player1.vx == -5 && Player1.vy == -5) //up left
+        {  
+            bullet.vx = -15; bullet.vy = -15;
+            space = false;
+        }
+        if(Player1.vx == -5 && Player1.vy == 5) //down left
+        {
+            bullet.vx = -15; bullet.vy = 15;
+            space = false;
+        }
+        if(Player1.vx == 5 && Player1.vy == 5) //down right
+        {
+            bullet.vx = 15; bullet.vy = 15;
+            space = false;
+        }
     }
     
 
-    //Player1 COLLISION      screen boundary
+    //SHOOTING 
+    
+
+    
+    playerWallCollision();
+    bulletWallCollision();
+
+    
+    Player1.drawCirclePlayer();
+    bullet.drawCircleBullet();
+    //showFriction();
+
+}
+
+function playerWallCollision()
+{   
+	//Player1 COLLISION      screen boundary
     //top of the canvas
     if (Player1.y < 0 + Player1.width/2) 
     {
@@ -94,38 +186,33 @@ function animate()
     {
         Player1.x = canvas.width - Player1.width/2;
     }
-
-
-
-    
-    Player1.drawCircle();
-    bullet.drawCircle();
-    //showFriction();
-
 }
-/*
-function showFriction()
+
+function bulletWallCollision()
 {
-	if(d)
-	{	
-		Player1.vx += Player1.ax * Player1.force;
-	}
-	if(a)
-	{
-		Player1.vx += Player1.ax * -Player1.force;
-	}
-	if(w)
-	{	
-		Player1.vy += Player1.ay * -Player1.force;
-	}
-	if(s)
-	{
-		Player1.vy += Player1.ay * Player1.force;
-	}
-	
-	//--------------Apply friction to the Velocity X-----------------------------------------
-	//Player1.vx *= frictionX;
-	//---------------------------------------------------------------------------------------
-	//Player1.x += Player1.vx;
+    //bullet COLLISION      screen boundary
+    //top of the canvas
+    if (bullet.y < 0 + bullet.width/2) 
+    {
+        bullet.y = 0 + bullet.width/2;
+        bullet.vx = 0; bullet.vy = 0; //stop bullet
+    }
+    //bottom of canvas
+    if (bullet.y > canvas.height - bullet.width/2) 
+    {
+        bullet.y = canvas.height - bullet.width/2
+        bullet.vx = 0; bullet.vy = 0; //stop bullet
+    }
+    //left of canvas
+    if(bullet.x < 0 + bullet.width/2)
+    {
+        bullet.x = 0 + bullet.width/2;
+        bullet.vx = 0; bullet.vy = 0; //stop bullet
+    }
+    //right of canvas
+    if(bullet.x > canvas.width - bullet.width/2)
+    {
+        bullet.x = canvas.width - bullet.width/2;
+        bullet.vx = 0; bullet.vy = 0; //stop bullet
+    }
 }
-*/
