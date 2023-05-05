@@ -12,7 +12,8 @@ canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
 
 var Player1 = new GameObject(200, 200, 50, 50, "red");
-var bullet = new GameObject(200, 50, 10, 10, "#39FF14");
+var bullet = new GameObject(0, 0, 10, 10, "#39FF14");
+var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15)
 
 Player1.vx = 0;
 Player1.vy = 0;
@@ -93,7 +94,6 @@ function animate()
         
     }
 
-
    
 
     //SHOOTING
@@ -156,9 +156,17 @@ function animate()
     playerWallCollision();
     bulletWallCollision();
 
+
     
     Player1.drawCircle();
     PlayerDirection();
+
+    enemy1.drawCircle();
+
+    context.save();//wrap over circle for enemy 
+    context.drawImage(spider, enemy1.x-20, enemy1.y-20, enemy1.width*1.5, enemy1.height*1.5);
+    context.restore();
+
     
     bullet.drawCircle();
     //showFriction();
@@ -196,29 +204,33 @@ function bulletWallCollision()
     //top of the canvas
     if (bullet.y < 0 + bullet.width/2) 
     {
-        bullet.y = 0 + bullet.width/2;
-        bullet.vx = 0; bullet.vy = 0; //stop bullet
+        bullet.y = 0 + bullet.width/2;              //Hit the wall
+        bullet.vx = 0; bullet.vy = 0;               //stop bullet
+        bullet.x = -20; bullet.y = -20;             //send it back
     }
     //bottom of canvas
     if (bullet.y > canvas.height - bullet.width/2) 
     {
-        bullet.y = canvas.height - bullet.width/2
-        bullet.vx = 0; bullet.vy = 0; //stop bullet
+        bullet.y = canvas.height - bullet.width/2   //Hit the wall
+        bullet.vx = 0; bullet.vy = 0;               //stop bullet
+        bullet.x = -20; bullet.y = -20;             //send it back
     }
     //left of canvas
     if(bullet.x < 0 + bullet.width/2)
     {
-        bullet.x = 0 + bullet.width/2;
-        bullet.vx = 0; bullet.vy = 0; //stop bullet
+        bullet.x = 0 + bullet.width/2;              //Hit the wall
+        bullet.vx = 0; bullet.vy = 0;               //stop bullet
+        bullet.x = -20; bullet.y = -20;             //send it back
     }
     //right of canvas
     if(bullet.x > canvas.width - bullet.width/2)
     {
-        bullet.x = canvas.width - bullet.width/2;
-        bullet.vx = 0; bullet.vy = 0; //stop bullet
+        bullet.x = canvas.width - bullet.width/2;   //Hit the wall
+        bullet.vx = 0; bullet.vy = 0;               //stop bullet
+        bullet.x = -20; bullet.y = -20;             //send it back
     }
 }
-function PlayerDirection()
+function PlayerDirection()//PROBLEM LINE WONT ROTATE WITH MOVEMENT DIRECTION
 {
     context.save();
         context.strokeStyle = "white";
