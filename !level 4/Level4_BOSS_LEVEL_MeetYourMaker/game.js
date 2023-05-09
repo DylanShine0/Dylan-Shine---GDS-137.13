@@ -5,8 +5,8 @@ var interval = 1000/60;
 
 //var score1 = 0;
 var hit = false
-//var frictionX = 0.4;	
-//var frictionY = .97;
+var frictionX = .85;	
+var frictionY = .85;
 
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");	
@@ -19,15 +19,35 @@ var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
 
 var bits = [
 
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(canvas.width/2, canvas.height/4, 33, 15, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`)
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`)
+
+]
+
+var ammunition = [
+
+    new GameObject(0,0,10,10,"#39FF14"),
+    new GameObject(0,0,10,10,"#39FF14"),
+    new GameObject(0,0,10,10,"#39FF14"),
+    new GameObject(0,0,10,10,"#39FF14"),
+    new GameObject(0,0,10,10,"#39FF14")
+
+]
+
+var enemies = [
+
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black"),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black"),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black"),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black"),
+    new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
 
 ]
 
@@ -57,66 +77,20 @@ function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
 
-    
-    
-    
-    
-
-    
-
     Player1.move();
     bullet.move();
     enemy1.move();
     
-    
+    //Player1 MOVEMENT
+    if(w){Player1.vx = 0; Player1.vy = -5;}//up
+    if(s){Player1.vx = 0; Player1.vy = 5;}//down
+    if(d){Player1.vx = 5; Player1.vy = 0; console.log("RIGHT PRESSED")}//right
+    if(a){Player1.vx = -5; Player1.vy = 0; console.log("LEFT PRESSED")}//left
 
-
-    //Player1 movement 
-    if(w)//up
-    {
-        Player1.vx = 0; Player1.vy = -5;
-    }
-    if(s)//down
-    {
-        Player1.vx = 0; Player1.vy = 5;
-    }
-    if(d)//right
-    {
-        Player1.vx = 5; Player1.vy = 0;
-    }
-    if(a)//left
-    {
-        Player1.vx = -5; Player1.vy = 0;
-    }
-
-    //up  && right
-    if(w && d)
-    {
-        Player1.vx = 5;
-        Player1.vy = -5;
-        
-    }
-    //up && left
-    if(w && a)
-    {
-        Player1.vx = -5;
-        Player1.vy = -5;
-        
-    }
-    //down && left
-    if(s && a)
-    {
-        Player1.vx = -5;
-        Player1.vy = 5;
-        
-    }
-    //down && right
-    if(s && d)
-    {
-        Player1.vx = 5;
-        Player1.vy = 5;
-        
-    }
+    if(w && d){Player1.vx = 5; Player1.vy = -5;}//up  && right
+    if(w && a){Player1.vx = -5; Player1.vy = -5; }//up && left
+    if(s && a){Player1.vx = -5; Player1.vy = 5;}//down && left
+    if(s && d){Player1.vx = 5; Player1.vy = 5;} //down && right
 
    
 
@@ -148,7 +122,6 @@ function animate()
             space = false;
         }
 
-
         //DIAGONALS
         if(Player1.vx == 5 && Player1.vy == -5) //up right
         { 
@@ -172,52 +145,65 @@ function animate()
         }
     }
 
+    //BULLET HIT DETECTION
+    //vvvvvvvvvvvvvvvvvvvv
     if(bullet.hitTestObject(enemy1))
     {
-        
-        bullet.vx = 0; bullet.vy = 0;    // stop bullet
-        bullet.x = -20; bullet.y = -20;  //send it back
-        enemy1.color = "red";
         hit = true;
         console.log("enemy hit", hit)         //Alert the console
 
+        bullet.vx = 0; bullet.vy = 0;    // stop bullet
+        bullet.x = -20; bullet.y = -20;  //send it back
+        enemy1.color = "red";
+       
         for(var x = 0; x < bits.length; x++) //BITS dispersion
         {
             bits[x].vx = randomRange(-10, 10);
             bits[x].vy = randomRange(-10, 10);
         }
         
-    }
-    else
-    {
-        enemy1.color = "black"
-    }
+    }else{enemy1.color = "black"}
 
     for(var j = 0; i < bits.length; i++)//start INITIALIZATION
     {
-        bits[j].width = 3;
-        bits[j].height = 3;
-        bits[j].x = Player1.x + randomRange(5,20);
-        bits[j].y = Player1.y + randomRange(5,20);
-
-       
-    
-        bits[j].color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`;
+        console.log("drawing bits")
         bits[j].vx = 0;
         bits[j].vy = 0;
-
-        console.log("drawing bits")
+        bits[j].x = Player1.x + randomRange(5,20);
+        bits[j].y = Player1.y + randomRange(5,20);
+        bits[j].color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`;
     }
 
     for(var i = 0; i < bits.length; i++)//MOVE + DRAW
     {  
-        bits[i].move()
-        
-        bits[i].drawCircle();
+        //Friction
+        bits[i].vx *= frictionX;
+        bits[i].vy *= frictionY;
 
-        //console.log("for loop i running" , i)
+        bits[i].move()
+        bits[i].drawCircle();
     }    
-    
+
+    //DRAWING MORE ENEMIES
+    //vvvvvvvvvvvvvvvvvvvv
+    for(var e = 0; e < enemies.length; e++) //intialization
+    {
+        //console.log("Drawing Enemy: ", enemies[e])
+        enemies[e].vx = 0;
+        enemies[e].vy = 0;
+
+        enemies[e].x = 100;
+        enemies[e].y = 200
+
+        enemies[e].x = enemies[e].x + 100; //spreading them out
+    }
+
+    for(var a = 0; a < enemies.length; a++)//MOVE + DRAW
+    {
+
+        enemies[a].move()
+        enemies[a].drawCircle();
+    }    
    
         
     
