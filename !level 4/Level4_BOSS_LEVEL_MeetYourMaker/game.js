@@ -5,6 +5,7 @@ var interval = 1000/60;
 
 //var score1 = 0;
 var hit = false
+var angle = 0;
 var frictionX = .85;	
 var frictionY = .85;
 
@@ -186,28 +187,55 @@ function animate()
 
     //DRAWING MORE ENEMIES
     //vvvvvvvvvvvvvvvvvvvv
-    for(var e = 0; e < enemies.length; e++) //intialization
+    for(var x1= 0; x1 < enemies.length; x1++) //intialization
     {
         //console.log("Drawing Enemy: ", enemies[e])
-        enemies[e].vx = 0;
-        enemies[e].vy = 0;
+        enemies[x1].color = "black";
+        enemies[x1].x = 0;
+        enemies[x1].y = 280;
 
-        enemies[e].x = 100;
-        enemies[e].y = 200
+        enemies[x1].vx = 0;
+        enemies[x1].vy = 0;
+        
+        
 
-        enemies[e].x = enemies[e].x + 100; //spreading them out
-    }
+        enemies[0].x = 100; enemies[0].y = 100
+        enemies[1].x = 700; enemies[1].y = 100
+        enemies[2].x = 100; enemies[2].y = 500
+        enemies[3].x = 800; enemies[3].y = 500
+        enemies[4].x = 780; enemies[4].y = 800
+                            
+                            
+    
+        
+        
+        
+    }   
 
-    for(var a = 0; a < enemies.length; a++)//MOVE + DRAW
+    for(var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
     {
 
-        enemies[a].move()
-        enemies[a].drawCircle();
+        //sin wave
+
+        angle-=0.2;
+	    
+        var radians = angle * Math.PI/90;
+	    enemies[x2].x = enemies[x2].x + Math.sin(radians) * 40;
+        var radians = angle * Math.PI/180;
+	    enemies[x2].y = enemies[x2].y + Math.sin(radians) * 70;
+        enemies.y +=1
+
+
+        enemies[x2].move()
+        enemies[x2].drawCircle();
+        context.drawImage(spider, enemies[x2].x-23, enemies[x2].y-10, enemies[x2].width*1.4, enemies[x2].height*1.4);
+    
     }    
+
+    
    
         
-    
-    
+  
     
     
     
