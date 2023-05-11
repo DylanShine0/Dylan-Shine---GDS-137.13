@@ -5,11 +5,12 @@ body{
 }
 #container{
     height:87vh; 
-    width: 97vw;
+    width: 55vw;
     padding: 5px; 
     margin: 5px;
 }
 h1{
+    width: 30vw;
     padding: 5px;
     margin: 5px;
 }
