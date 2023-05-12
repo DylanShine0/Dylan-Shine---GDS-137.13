@@ -1,7 +1,7 @@
 var canvas;
 var context;
 var timer;
-var interval = 1000/60;
+var interval = 1000/40;
 
 //var score1 = 0;
 var hit = false
@@ -17,6 +17,23 @@ var img = document.getElementById("spider");
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
 var bullet = new GameObject(0, 0, 10, 10, "#39FF14");
 var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
+
+
+
+//CANVAS NUMBER 2 FOR SCORE
+
+var canvas1;
+var context1;
+//var timer1;
+//var interval1 = 1000/40;
+canvas1 = document.getElementById("canvas_score");
+context1 = canvas1.getContext("2d");
+
+
+
+//CANVAS 2
+
+
 
 var bits = [
 
@@ -77,6 +94,12 @@ function randomRange(high, low)
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
+
+    //SCOREBOARD DESIGN------------------------------------------------------------------
+
+    context1.rect(10,10,280,90,"red")
+
+    //-----------------------------------------------------------------------------------
 
     Player1.move();
     bullet.move();
