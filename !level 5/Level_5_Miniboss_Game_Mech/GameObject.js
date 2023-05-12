@@ -13,6 +13,8 @@ function GameObject(x,y,w,h,color)
 	this.vx = 0;
 	this.vy = 0;
 
+	this.spawnX = 0;
+	this.spawnY = 0;
 
 	this.drawRect = function()
 	{
