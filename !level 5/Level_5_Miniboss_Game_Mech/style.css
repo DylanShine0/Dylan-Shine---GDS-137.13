@@ -1,0 +1,31 @@
+html
+{
+    width: fit-content;
+    height: 97vh;
+    padding: 5px;
+    margin: 5px;
+}
+body
+{
+    width: 85vw;
+    
+    padding: 5px;
+    margin: 0px;
+}
+
+
+
+#canvas
+{
+  
+    position: relative;
+    left: calc(23%);
+    margin: 5px;
+    
+}
+
+
+html
+{
+    background-color: lightgray;
+}
