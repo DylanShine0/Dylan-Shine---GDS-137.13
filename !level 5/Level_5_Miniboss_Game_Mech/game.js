@@ -178,17 +178,19 @@ function animate()
 
     //BULLET HIT DETECTION
     //vvvvvvvvvvvvvvvvvvvv
-    for (var i = 0; enemies.length; i++)
-    {
+    /*
+    for (var i = 0; enemies.length; i++) {
         if (enemies[i].hitTestObject(bullet)) {
-            hit = true;
             score++
-            console.log("enemy hit", hit)         //Alert the console
-
-            bullet.vx = 0; bullet.vy = 0;    // stop bullet
+            hit = true;
+            console.log("enemy hit", hit)    //Alert the console
+            bullet.vx = 0; bullet.vy = 0;    //stop bullet
             bullet.x = -20; bullet.y = -20;  //send it back
-            enemies[i].color = "red";
 
+
+
+
+            enemies[i].color = "red";
             for (var x = 0; x < bits.length; x++) //BITS dispersion
             {
                 bits[x].vx = randomRange(-10, 10);
@@ -197,7 +199,26 @@ function animate()
 
         } else { enemies[i].color = "black" }
     }
+    */
+   
+    if (bullet.hitTestObject(enemy1)) {
+        score++
+        hit = true;
+        console.log("enemy hit", hit)    //Alert the console
+        bullet.vx = 0; bullet.vy = 0;    //stop bullet
+        bullet.x = -20; bullet.y = -20;  //send it back
+        enemy1.color = "red";
+
+        enemy1.y = -300;
+        for (var x = 0; x < bits.length; x++) //BITS dispersion
+        {
+            bits[x].vx = randomRange(-10, 10);
+            bits[x].vy = randomRange(-10, 10);
+        }
+
+    } else { enemy1.color = "black" }
     
+
 
     for(var j = 0; i < bits.length; i++)//start INITIALIZATION
     {
