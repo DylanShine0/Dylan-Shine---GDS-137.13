@@ -1,45 +1,53 @@
 html
 {
-    width: 100vw;
+    width: 96vw;
     height: 97vh;
     padding: 2px;
     margin: 2px;
 }
 body
 {
-    width: 75vw;
+    width: 96vw;
     
     padding: 5px;
-    margin: 0px;
+    margin: 1px;
 }
 
+.notice
+{
+    position: absolute;
+    width:14.8vw;
+    height:25px;
+    padding: 2px;
+    margin: 2px;
 
+}
 
 #canvas
 {
   
     position: relative;
-    left: calc(23%);
+    left: calc(16%);
+
     margin: 2px;
+    margin-right: -1px;
     padding: 2px;
-    
+        z-index: 1;
 }
-
-
 
 #canvas_score
 {
-    position: relative;
-    left: 20vw;
-    bottom: -0.8vw;
-    
+    position: absolute;
+    left: calc(66%);
+    bottom: calc(4%);
     padding: 2px;
     margin: 2px;
-    
 
-    width:310;
-    height:910;
+    margin-left: -1px;
+    width: 310;
+    height: 910;
     float: right;
+    
 }
 
 

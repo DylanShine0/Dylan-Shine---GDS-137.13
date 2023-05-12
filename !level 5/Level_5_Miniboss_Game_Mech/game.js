@@ -3,9 +3,11 @@ var context;
 var timer;
 var interval = 1000/40;
 
-//var score1 = 0;
 var hit = false
 var angle = 0;
+var score = 0;
+var health = 3;
+
 var frictionX = .85;	
 var frictionY = .85;
 
@@ -24,8 +26,6 @@ var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
 
 var canvas1;
 var context1;
-//var timer1;
-//var interval1 = 1000/40;
 canvas1 = document.getElementById("canvas_score");
 context1 = canvas1.getContext("2d");
 
@@ -37,15 +37,15 @@ context1 = canvas1.getContext("2d");
 
 var bits = [
 
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`),
-    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`)
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`),
+    new GameObject(enemy1.x, enemy1.y, 5, 5, `rgb(${randomRange(255, 200)}, 0, ${randomRange(255, 0)})`)
 
 ]
 
@@ -94,11 +94,18 @@ function randomRange(high, low)
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
-
+    context1.clearRect(0,0,canvas1.width,canvas1.height);
     //SCOREBOARD DESIGN------------------------------------------------------------------
 
-    context1.rect(10,10,280,90,"red")
+    
+    context1.fillStyle = "white"
+    context1.font = "30px calibri"
+    context1.fillText("Score: " + score,10,30)
 
+    context1.fillStyle = "white"
+    context1.font = "30px calibri"
+    context1.fillText("Health: " + health,10,60)
+    
     //-----------------------------------------------------------------------------------
 
     Player1.move();
@@ -171,22 +178,26 @@ function animate()
 
     //BULLET HIT DETECTION
     //vvvvvvvvvvvvvvvvvvvv
-    if(bullet.hitTestObject(enemy1))
+    for (var i = 0; enemies.length; i++)
     {
-        hit = true;
-        console.log("enemy hit", hit)         //Alert the console
+        if (enemies[i].hitTestObject(bullet)) {
+            hit = true;
+            score++
+            console.log("enemy hit", hit)         //Alert the console
 
-        bullet.vx = 0; bullet.vy = 0;    // stop bullet
-        bullet.x = -20; bullet.y = -20;  //send it back
-        enemy1.color = "red";
-       
-        for(var x = 0; x < bits.length; x++) //BITS dispersion
-        {
-            bits[x].vx = randomRange(-10, 10);
-            bits[x].vy = randomRange(-10, 10);
-        }
-        
-    }else{enemy1.color = "black"}
+            bullet.vx = 0; bullet.vy = 0;    // stop bullet
+            bullet.x = -20; bullet.y = -20;  //send it back
+            enemies[i].color = "red";
+
+            for (var x = 0; x < bits.length; x++) //BITS dispersion
+            {
+                bits[x].vx = randomRange(-10, 10);
+                bits[x].vy = randomRange(-10, 10);
+            }
+
+        } else { enemies[i].color = "black" }
+    }
+    
 
     for(var j = 0; i < bits.length; i++)//start INITIALIZATION
     {
@@ -206,7 +217,9 @@ function animate()
 
         bits[i].move()
         bits[i].drawCircle();
+
     }    
+    
 
     //DRAWING MORE ENEMIES
     //vvvvvvvvvvvvvvvvvvvv
@@ -220,19 +233,12 @@ function animate()
         enemies[x1].vx = 0;
         enemies[x1].vy = 0;
         
-        
-
         enemies[0].x = 100; enemies[0].y = 100
         enemies[1].x = 700; enemies[1].y = 100
         enemies[2].x = 100; enemies[2].y = 500
         enemies[3].x = 800; enemies[3].y = 500
         enemies[4].x = 780; enemies[4].y = 800
                             
-                            
-    
-        
-        
-        
     }   
 
     for(var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
@@ -255,6 +261,24 @@ function animate()
     
     }    
 
+    for(var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
+    {
+        if(enemies[i].hitTestObject(Player1))
+        {
+            health--;
+
+            Player1.x = canvas.width/2; Player1.y = canvas.height/2;
+        }
+    }
+    for(var i = 0; i < bits.length; i++)//bits hit detection to PLAYER
+    {
+        if(bits[i].hitTestObject(Player1))
+        {
+            health--;
+
+            Player1.x = canvas.width/2; Player1.y = canvas.height/2;
+        }
+    }
     
    
         
