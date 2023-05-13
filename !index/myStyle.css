@@ -3,9 +3,19 @@ body{
     margin: 5px;
     padding: 5px;
 }
-#container{
+#container{/*left*/
     height:87vh; 
-    width: 55vw;
+    width: 40vw;
+    padding: 5px; 
+    margin: 5px;
+}
+#container-right{
+    position: absolute;
+    float: right;
+    left: calc(33%);
+    top: calc(5%);
+    height:81vh; 
+    width: 40vw;
     padding: 5px; 
     margin: 5px;
 }
