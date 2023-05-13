@@ -10,67 +10,73 @@ var timer;
 var interval;
 var player;
 
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");	
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");
 
-	player = new GameObject();
-	player.force = 1;
-	
-	turret = new GameObject({x:200, y:200, width:25, color:"cyan"});
-	
-	bullet = new GameObject({x:200, y:200, width:25, color:"magenta"});
-	
-	canvasTrigger = new GameObject({width:canvas.width, height:canvas.height});
+player = new GameObject();
+player.force = 1;
 
-	
-	
-	//friction
-	var fX = .80;
-	var fY = .80;
-	
-	var angle = 0;
-	
-	//gravity gets added to the vy
-	var gravity = 0;
+turret = new GameObject({ x: 200, y: 200, width: 25, color: "cyan" });
 
-	interval = 1000/60;
-	timer = setInterval(animate, interval);
-	
+bullet = new GameObject({ x: 200, y: 200, width: 25, color: "magenta" });
 
-function animate()
-{
-	
-	context.clearRect(0,0,canvas.width, canvas.height);	
-	
+canvasTrigger = new GameObject({ width: canvas.width, height: canvas.height });
+
+
+
+//friction
+var fX = .80;
+var fY = .80;
+
+var angle = 0;
+
+//gravity gets added to the vy
+var gravity = 0;
+
+interval = 1000 / 60;
+timer = setInterval(animate, interval);
+
+
+function animate() {
+
+	context.clearRect(0, 0, canvas.width, canvas.height);
+
 	/*-----------This function move the player-----------*/
 	//w and s move forward and backward
 	//a and d rotate the triangle
 	angularMovement();
-	
+	turret.move();
 	//-------------------------------------------------------------------------------------------------------------------------
 	//------------------------------------------------------INSTRUCTIONS-------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------------------
 	//------------------------------------------Make the blue turret aim at the player-----------------------------------------
 	
+	console.log("pointing");
+	
+	if(player.x - turret.x < 1000)
+	{
+		if(player.y - turret.y < 1000)
+		{
+			point1();
+		}
+	}
 	
 	//--------------------------------------------------------------------------------------------------------------------------
 	//------------------------------------------------------END OF INSTRUCTIONS-------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------
-	
-	if(bullet.hitTestObject(canvasTrigger) == false)
-	{
-	 bullet.x = turret.x;
-	 bullet.y = turret.y;
+
+	if (bullet.hitTestObject(canvasTrigger) == false) {
+		bullet.x = turret.x;
+		bullet.y = turret.y;
 	}
-	if(bullet.x == turret.x && bullet.y == turret.y)
-	{
-		bullet.vx = Math.cos(turret.angle * Math.PI/180) * 5;
-		bullet.vy = Math.sin(turret.angle * Math.PI/180) * 5;
+	if (bullet.x == turret.x && bullet.y == turret.y) {
+		bullet.vx = Math.cos(turret.angle * Math.PI / 180) * 5;
+		bullet.vy = Math.sin(turret.angle * Math.PI / 180) * 5;
 	}
-	
-	
-	
-	
+
+
+
+
 	
 	bullet.move();
 	player.drawTriangle();
@@ -78,53 +84,61 @@ function animate()
 	bullet.drawCircle();
 }
 
-function angularMovement()
-{
-	if(w)
-	{	
+function angularMovement() {
+	if (w) {
 		//Convert Angle to Radians
-		var radians = player.angle * Math.PI/180;
-		
+		var radians = player.angle * Math.PI / 180;
+
 		//Calculate acceleration modifiers (lengtha and height of triangle)
 		player.ax = Math.cos(radians);
 		player.ay = Math.sin(radians);
-		
+
 		player.vx += player.ax * player.force;
 		player.vy += player.ay * player.force;
 	}
-	
-	if(s)
-	{
+
+	if (s) {
 		//Convert Angle to Radians
-		var radians = player.angle * Math.PI/180;
-		
+		var radians = player.angle * Math.PI / 180;
+
 		//Calculate acceleration modifiers (lengtha and height of triangle)
 		player.ax = Math.cos(radians);
 		player.ay = Math.sin(radians);
-		
+
 		player.vx += player.ax * -player.force;
 		player.vy += player.ay * -player.force;
 	}
-	
+
 	//Rotate Counter Clockwise
-	if(a)
-	{
-		player.angle-=2;
+	if (a) {
+		player.angle -= 2;
 	}
 	//Rotate Clockwise
-	if(d)
-	{
-		player.angle+=2;
+	if (d) {
+		player.angle += 2;
 	}
 
 	//apply physics to velocity
 	player.vx *= fX;
 	player.vy *= fY;
-	
+
 	//apply gravity to velocity
 	player.vy += gravity;
-	
+
 	//move player
 	player.move();
 }
 
+function point1()
+{
+	var dx = player.x - turret.x;
+	var dy = player.y - turret.y;
+	var radians = Math.atan2(dy, dx);	
+	turret.angle = radians * 180/Math.PI;	
+
+	//var dist = Math.sqrt(dx * dx + dy * dy);
+	
+	
+	
+	
+}
