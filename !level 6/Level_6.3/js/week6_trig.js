@@ -55,7 +55,7 @@ function animate() {
 	
 	if(player.x - turret.x < 1000)
 	{
-		if(player.y - turret.y < 1000)
+		if(player.y - turret.y < 1000) //distance control not really needed but I think its nice
 		{
 			point1();
 		}
