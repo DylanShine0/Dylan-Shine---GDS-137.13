@@ -2,6 +2,7 @@ var canvas;
 var context;
 var timer;
 var interval = 1000/60;
+timer = setInterval(animate, interval);
 
 var hit = false
 var angle = 0;
@@ -20,6 +21,8 @@ var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
 var bullet = new GameObject(0, 0, 10, 10, "#39FF14");
 //var enemy1 = new GameObject(canvas.width/2, canvas.height/4, 33, 15, "black")
 
+var currentState ="menu";
+var states = [];
 
 
 //CANVAS NUMBER 2 FOR SCORE
@@ -31,7 +34,11 @@ context1 = canvas1.getContext("2d");
 
 
 
-//CANVAS 2
+
+function changeStates(stateName)
+{
+	currentState = stateName;
+}
 
 
 
@@ -73,20 +80,11 @@ Player1.vx = 0;
 Player1.vy = 0;
 
 
-timer = setInterval(animate, interval);
 
-//misc
-function wait(ms) {
-    console.log("waiting...");
-    setTimeout(function() { console.log('End'); }, ms); 
-}
+
+
   
 
-function randomRange(high, low)
-{
-    return Math.random() * (high - low) + low;
-}
-//misc
 
 //DRAWING MORE ENEMIES
 //vvvvvvvvvvvvvvvvvvvv
