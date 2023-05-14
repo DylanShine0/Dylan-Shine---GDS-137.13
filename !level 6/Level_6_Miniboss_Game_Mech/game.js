@@ -240,24 +240,7 @@ function animate()
 
     }  
 
-    /*
-    for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
-    {
-        if (enemies[i].hitTestObject(Player1)) {
-            health--;
-            Player1.x = canvas.width / 2;
-            Player1.y = canvas.height / 2;
-        }
-    }
-    for (var w = 0; w < bits.length; w++)//bits hit detection to PLAYER
-    {
-        if (bits[w].hitTestObject(Player1)) {
-            health--;
-            Player1.x = canvas.width / 2;
-            Player1.y = canvas.height / 2;
-        }
-    }
-    */
+    
 
 
     for(var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
@@ -279,6 +262,25 @@ function animate()
         context.drawImage(spider, enemies[x2].x-23, enemies[x2].y-10, enemies[x2].width*1.4, enemies[x2].height*1.4);
     
     }    
+
+    //*
+    for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
+    {
+        if (Player1.hitTestObject(enemies[i])) {
+            health--;
+            Player1.x = canvas.width / 2;
+            Player1.y = canvas.height / 2;
+        }
+    }
+    for (var w = 0; w < bits.length; w++)//bits hit detection to PLAYER
+    {
+        if (Player1.hitTestObject(bits[w])) {
+            health--;
+            Player1.x = canvas.width / 2;
+            Player1.y = canvas.height / 2;
+        }
+    }
+    //*/
 
     
     
