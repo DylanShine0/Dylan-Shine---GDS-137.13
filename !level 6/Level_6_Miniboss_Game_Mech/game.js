@@ -18,7 +18,7 @@ context = canvas.getContext("2d");
 var img = document.getElementById("spider");
 
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
-var bullet = new GameObject(0, 0, 10, 10, "#39FF14");
+var bullet = new GameObject(0, 0, 15, 15, "#39FF14");
 
 var bits=[];
 
@@ -57,12 +57,9 @@ states["menu"] = function()
 
 function bitsInitialize()
 {
-    for(var i = 0; i < 9; i++)
+    for(var i = 0; i < 18; i++)
     {
-        console.log("drawing bits")//start INITIALIZATION
-        bits[i] = new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`);
-        bits[i].vx = 0;
-        bits[i].vy = 0;
+       
     }
 }
 
@@ -101,7 +98,6 @@ Player1.vy = 0;
 for (var x1 = 0; x1 < enemies.length; x1++) //intialization
 {
     //console.log("Drawing Enemy: ", enemies[e])
-    enemies[x1].color = "black";
     enemies[x1].spawnX = 0;
     enemies[x1].spawnY = 0;
 
@@ -214,81 +210,80 @@ function animate()
             console.log(enemies[i].y, "enemy hit", hit)    //Alert the console
             bullet.vx = 0; bullet.vy = 0;    //stop bullet
             bullet.x = -20; bullet.y = -20;  //send it back
-            enemies[i].spawnX = -100;
-            enemies[i].spawnY = -100;
-            enemies[i].color = "red";
-            
-            bitsInitialize();
-            
-            for (var c = 0; c < bits.length; c++)
+            enemies[i].color = "red";   
+
+            for (var x = 0; x < bits.length; x++) 
             {
-                bits[c].x = enemies[i].x + randomRange(5, 20);//setting hit location
-                bits[c].y = enemies[i].y + randomRange(5, 20);
-                bits[c].vx = randomRange(-10, 10);//BITS dispersion
-                bits[c].vy = randomRange(-10, 10);
+                console.log("drawing bits")
+                bits[i] = new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`);
+                bits[x].vx = 0;
+                bits[x].vy = 0;
+                bits[x].x = enemies[i].x + randomRange(5, 20);//setting hit location
+                bits[x].y = enemies[i].y + randomRange(5, 20);
+                bits[x].vx = randomRange(-10, 10);//BITS dispersion
+                bits[x].vy = randomRange(-10, 10);
+
+                //Friction
+                bits[x].vx *= frictionX;
+                bits[x].vy *= frictionY;
+
+                bits[x].move()
+
+                bits[x].drawCircle();
+                
+                    
             }
-        }
+            enemies[i].spawnX = -100
+            enemies[i].spawnY = -100
+            
+
+            
+        } else { enemies[i].color = "black" }
     }
-    for(var i = 0; i < bits.length; i++)//MOVE + DRAW
-    {  
-        //Friction
-        bits[i].vx *= frictionX;
-        bits[i].vy *= frictionY;
 
-        bits[i].move()
-        bits[i].drawCircle();
-
-    }  
-
-    
-
-
-    for(var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
+    for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
     {
 
         //sin wave
 
-        angle-=0.2;
-	    
-        var radians = angle * Math.PI/90;
-	    enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 40;
-        var radians = angle * Math.PI/180;
-	    enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 70;
-        enemies.y +=1
+        angle -= 0.2;
+
+        var radians = angle * Math.PI / 90;
+        enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 40;
+        var radians = angle * Math.PI / 180;
+        enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 70;
+        enemies.y += 1
 
 
         enemies[x2].move()
         enemies[x2].drawCircle();
-        context.drawImage(spider, enemies[x2].x-23, enemies[x2].y-10, enemies[x2].width*1.4, enemies[x2].height*1.4);
-    
-    }    
+        context.drawImage(spider, enemies[x2].x - 23, enemies[x2].y - 10, enemies[x2].width * 1.4, enemies[x2].height * 1.4);
+
+
+
+
+    }
 
     //*
     for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
     {
         if (Player1.hitTestObject(enemies[i])) {
+            console.log("enemy hit detection working")
             health--;
             Player1.x = canvas.width / 2;
             Player1.y = canvas.height / 2;
         }
     }
-    for (var w = 0; w < bits.length; w++)//bits hit detection to PLAYER
+    for (var i = 0; i < bits.length; i++)//bits hit detection to PLAYER
     {
-        if (Player1.hitTestObject(bits[w])) {
+        if (Player1.hitTestObject(bits[i])) {
             health--;
             Player1.x = canvas.width / 2;
             Player1.y = canvas.height / 2;
         }
     }
-    //*/
 
-    
-    
-   
-        
-  
-    
-    
+    //*/
     
     playerWallCollision();
     bulletWallCollision();
@@ -296,20 +291,11 @@ function animate()
     //drawing
     Player1.drawCircle();
     PlayerDirection();
-    
-    
 
-    
-    
     bullet.drawCircle();
     
 
 
-}
-
-function drawingBits()
-{
-    
 }
 
 function playerWallCollision()

@@ -208,19 +208,22 @@ function animate()
             bullet.x = -20; bullet.y = -20;  //send it back
             enemies[i].color = "red";
 
-
-
-            drawingBits();
-
-           
-            
             for (var x = 0; x < bits.length; x++) 
             {
+                console.log("drawing bits")
+                bits[x].vx = 0;
+                bits[x].vy = 0;
                 bits[x].x = enemies[i].x + randomRange(5, 20);//setting hit location
                 bits[x].y = enemies[i].y + randomRange(5, 20);
                 bits[x].vx = randomRange(-10, 10);//BITS dispersion
                 bits[x].vy = randomRange(-10, 10);
 
+                //Friction
+                bits[x].vx *= frictionX;
+                bits[x].vy *= frictionY;
+
+                bits[x].move()
+                bits[x].drawCircle();
                 
                     
             }
@@ -231,21 +234,7 @@ function animate()
             
         } else { enemies[i].color = "black" }
     }
-
-    for(var i = 0; i < bits.length; i++)//MOVE + DRAW
-    {  
-        //Friction
-        bits[i].vx *= frictionX;
-        bits[i].vy *= frictionY;
-
-        bits[i].move()
-        bits[i].drawCircle();
-
-    }    
     
-
-    
-
     for(var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
     {
 
@@ -285,12 +274,6 @@ function animate()
         }
     }
     
-   
-        
-  
-    
-    
-    
     playerWallCollision();
     bulletWallCollision();
 
@@ -298,26 +281,8 @@ function animate()
     Player1.drawCircle();
     PlayerDirection();
     
-    
-
-    
-    
     bullet.drawCircle();
-    
 
-
-}
-
-function drawingBits()
-{
-    for(var j = 0;  j < bits.length; j++)//start INITIALIZATION
-    {
-        console.log("drawing bits")
-        bits[j].vx = 0;
-        bits[j].vy = 0;
-
-        //bits[j].color = `rgb(${randomRange(255, 0)}, ${randomRange(255, 0)}, ${randomRange(255, 0)})`;
-    }
 }
 
 function playerWallCollision()
