@@ -20,7 +20,7 @@ function init() {
 
 	loader = new createjs.LoadQueue(false);
 	loader.addEventListener("complete", handleComplete);
-	loader.loadManifest(manifest, true, "EaselJS-1.0.0/_assets/art");
+	loader.loadManifest(manifest, true, "EASE_JS/_assets/art");
 }
 
 function handleComplete() {
