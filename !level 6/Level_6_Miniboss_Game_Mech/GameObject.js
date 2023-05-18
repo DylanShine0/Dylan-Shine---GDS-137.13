@@ -1,4 +1,4 @@
-function GameObject(x,y,w,h,color)
+function GameObject(x,y,w,h,color,angle)
 {
 	
 	//Default Values
@@ -6,8 +6,8 @@ function GameObject(x,y,w,h,color)
 	if(y == undefined){this.y = canvas.height/2;}else{this.y = y;}
 	if(w == undefined){this.width = 100;}else{this.width = w;}
 	if(h == undefined){this.height = 100;}else{this.height = h;}
-	
 	if(color == undefined){this.color = "#ff0000";}else{this.color = color;}
+	if(angle == undefined){this.angle = 0;}else{this.angle = angle;}
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;
@@ -16,11 +16,14 @@ function GameObject(x,y,w,h,color)
 	this.spawnX = 0;
 	this.spawnY = 0;
 
+	this.angle = 0;
+
 	this.drawRect = function()
 	{
 		context.save();
 			context.fillStyle = this.color;
 			context.translate(this.x, this.y);
+			
 			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
 		context.restore();
 		
@@ -34,8 +37,26 @@ function GameObject(x,y,w,h,color)
 			context.beginPath();
 			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);	
 			context.closePath();
+			context.rotate(this.angle);
 			context.fill();
 		context.restore();
+	}	
+
+	this.drawTriangle = function()
+	{
+			context.save();
+			context.fillStyle = this.color;
+			context.translate(this.x, this.y);
+			//To convert deg to rad multiply deg * Math.PI/180
+			context.rotate(this.angle * Math.PI/180);
+			context.beginPath();
+				context.moveTo(0+ this.width/2, 0);
+				context.lineTo(0 - this.width/2, 0 - this.height/4);
+				context.lineTo(0 - this.width/2, 0 + this.height/4);
+				context.closePath();
+			context.fill();
+		context.restore();
+		
 	}	
 	
 	

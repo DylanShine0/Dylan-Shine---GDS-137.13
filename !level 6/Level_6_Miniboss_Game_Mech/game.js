@@ -17,12 +17,12 @@ context = canvas.getContext("2d");
 
 var img = document.getElementById("spider");
 
-var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red");
-var bullet = new GameObject(0, 0, 15, 15, "#39FF14");
+var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red", 0);
+var bullet = new GameObject(0, 0, 15, 15, "#39FF14", 0);
 
 var bits=[];
 
-
+var playerBits = [];
 
 
 //CANVAS NUMBER 2 FOR SCORE
@@ -65,35 +65,41 @@ function bitsInitialize()
     }
 }
 
+var playerBits = [//9
+
+    
+        
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
+    new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0)
+
+]
+
 var ammunition = [
 
-    new GameObject(0,0,10,10,"#39FF14"),
-    new GameObject(0,0,10,10,"#39FF14"),
-    new GameObject(0,0,10,10,"#39FF14"),
-    new GameObject(0,0,10,10,"#39FF14"),
-    new GameObject(0,0,10,10,"#39FF14")
+    new GameObject(0,0,10,10,"#39FF14",0),
+    new GameObject(0,0,10,10,"#39FF14",0),
+    new GameObject(0,0,10,10,"#39FF14",0),
+    new GameObject(0,0,10,10,"#39FF14",0),
+    new GameObject(0,0,10,10,"#39FF14",0)
 
 ]
 
 var enemies = [
 
-    new GameObject(-20, -20, 33, 15, "black"),
-    new GameObject(-20, -20, 33, 15, "black"),
-    new GameObject(-20, -20, 33, 15, "black"),
-    new GameObject(-20, -20, 33, 15, "black"),
-    new GameObject(-20, -20, 33, 15, "black")
+    new GameObject(-20, -20, 33, 15, "black",0),
+    new GameObject(-20, -20, 33, 15, "black",0),
+    new GameObject(-20, -20, 33, 15, "black",0),
+    new GameObject(-20, -20, 33, 15, "black",0),
+    new GameObject(-20, -20, 33, 15, "black",0)
 
 ]
-
-Player1.vx = 0;
-Player1.vy = 0;
-
-
-
-
-
-  
-
 
 //DRAWING MORE ENEMIES
 //vvvvvvvvvvvvvvvvvvvv
@@ -138,11 +144,32 @@ function animate()
     bullet.move();
     
     
+    
     //Player1 MOVEMENT
-    if(w){Player1.vx = 0; Player1.vy = -5;}//up
-    if(s){Player1.vx = 0; Player1.vy = 5;}//down
-    if(d){Player1.vx = 5; Player1.vy = 0;}//right
-    if(a){Player1.vx = -5; Player1.vy = 0;}//left
+    if(w)
+    {
+        Player1.vx = 0; 
+        Player1.vy = -5; 
+        Player1.angle = 0
+    }//up
+    if(s)
+    {
+        Player1.vx = 0;
+        Player1.vy = 5; 
+        Player1.angle = 180
+    }//down
+    if(d)
+    {
+        Player1.vx = 5; 
+        Player1.vy = 0; 
+        Player1.angle = 90
+    }//right
+    if(a)
+    {
+        Player1.vx = -5; 
+        Player1.vy = 0; 
+        Player1.angle = 270
+    }//left
 
     if(w && d){Player1.vx = 5; Player1.vy = -5;}//up  && right
     if(w && a){Player1.vx = -5; Player1.vy = -5; }//up && left
@@ -218,7 +245,7 @@ function animate()
             enemies[i].spawnY = -100
 
             bitsInitialize();
-
+            
             for (var x = 0; x < bits.length; x++) 
             {
                 console.log("drawing bits")
@@ -227,6 +254,7 @@ function animate()
             }
             for(var x = 0; x < bits.length; x++)
             {
+                
                 console.log("Bits dispersing")
                 bits[x].vx = randomRange(-10, 10);//BITS dispersion
                 bits[x].vy = randomRange(-10, 10);
@@ -234,15 +262,17 @@ function animate()
             
         } else { enemies[i].color = "black" }
 
-        for (var x = 0; x < bits.length; x++) {//FRICTION AND MOVEMENT
-            console.log("Moving and Drawing")
+        
+    }
+    for (var x = 0; x < bits.length; x++) {//FRICTION AND MOVEMENT BITS
+        console.log("Moving and Drawing")
 
-            bits[x].vx *= frictionX;//Friction
-            bits[x].vy *= frictionY;
-            bits[x].drawCircle();
-            bits[x].move();
-            
-        }
+        bits[x].vx *= frictionX;//Friction
+        bits[x].vy *= frictionY;
+        bits[x].move();
+        bits[x].drawCircle();
+        
+        
     }
 
     for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
@@ -253,9 +283,9 @@ function animate()
         angle -= 0.2;
 
         var radians = angle * Math.PI / 90;
-        enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 40;
+        enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 30;
         var radians = angle * Math.PI / 180;
-        enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 70;
+        enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 50;
         enemies.y += 1
 
 
@@ -268,11 +298,14 @@ function animate()
 
     }
 
+    
+
     //*
     for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
     {
+        
         if (Player1.hitTestObject(enemies[i])) {
-            console.log("enemy hit detection working")
+            console.log("PLAYER HIT ENEMY")
             health--;
             Player1.x = canvas.width / 2;
             Player1.y = canvas.height / 2;
@@ -280,13 +313,18 @@ function animate()
     }
     for (var i = 0; i < bits.length; i++)//bits hit detection to PLAYER
     {
+        
         if (Player1.hitTestObject(bits[i])) {
+            console.log("PLAYER HIT BITS")
             health--;
             Player1.x = canvas.width / 2;
             Player1.y = canvas.height / 2;
         }
     }
 
+   
+    
+    
     //*/
     
     playerWallCollision();
