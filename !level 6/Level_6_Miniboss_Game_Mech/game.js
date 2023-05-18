@@ -148,27 +148,30 @@ function animate()
     //Player1 MOVEMENT
     if(w)
     {
+        Player1.angle = 0
         Player1.vx = 0; 
         Player1.vy = -5; 
-        Player1.angle = 0
+        
     }//up
     if(s)
     {
+        Player1.angle = 180
         Player1.vx = 0;
         Player1.vy = 5; 
-        Player1.angle = 180
+        
     }//down
     if(d)
     {
+        Player1.angle = 90
         Player1.vx = 5; 
         Player1.vy = 0; 
-        Player1.angle = 90
+        
     }//right
     if(a)
     {
+        Player1.angle = 270
         Player1.vx = -5; 
         Player1.vy = 0; 
-        Player1.angle = 270
     }//left
 
     if(w && d){Player1.vx = 5; Player1.vy = -5;}//up  && right

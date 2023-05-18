@@ -34,10 +34,11 @@ function GameObject(x,y,w,h,color,angle)
 		context.save();
 			context.fillStyle = this.color;
 			context.translate(this.x, this.y);
+			context.rotate(this.angle * Math.PI/180);
 			context.beginPath();
 			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);	
 			context.closePath();
-			context.rotate(this.angle);
+			
 			context.fill();
 		context.restore();
 	}	
