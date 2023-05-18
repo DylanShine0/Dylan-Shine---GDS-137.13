@@ -59,7 +59,9 @@ function bitsInitialize()
 {
     for(var i = 0; i < 18; i++)
     {
-       
+        console.log("bits spawning")
+        bits[i] = new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`);
+
     }
 }
 
@@ -210,38 +212,40 @@ function animate()
             console.log(enemies[i].y, "enemy hit", hit)    //Alert the console
             bullet.vx = 0; bullet.vy = 0;    //stop bullet
             bullet.x = -20; bullet.y = -20;  //send it back
+
             enemies[i].color = "red";   
+            enemies[i].spawnX = -100
+            enemies[i].spawnY = -100
+
+            bitsInitialize();
 
             for (var x = 0; x < bits.length; x++) 
             {
                 console.log("drawing bits")
-                bits[i] = new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`);
-                bits[x].vx = 0;
-                bits[x].vy = 0;
                 bits[x].x = enemies[i].x + randomRange(5, 20);//setting hit location
-                bits[x].y = enemies[i].y + randomRange(5, 20);
+                bits[x].y = enemies[i].y + randomRange(5, 20);  
+            }
+            for(var x = 0; x < bits.length; x++)
+            {
+                console.log("Bits dispersing")
                 bits[x].vx = randomRange(-10, 10);//BITS dispersion
                 bits[x].vy = randomRange(-10, 10);
-
-                //Friction
-                bits[x].vx *= frictionX;
-                bits[x].vy *= frictionY;
-
-                bits[x].move()
-
-                bits[x].drawCircle();
-                
-                    
             }
-            enemies[i].spawnX = -100
-            enemies[i].spawnY = -100
-            
-
             
         } else { enemies[i].color = "black" }
+
+        for (var x = 0; x < bits.length; x++) {//FRICTION AND MOVEMENT
+            console.log("Moving and Drawing")
+
+            bits[x].vx *= frictionX;//Friction
+            bits[x].vy *= frictionY;
+            bits[x].drawCircle();
+            bits[x].move();
+            
+        }
     }
 
-    for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW
+    for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
     {
 
         //sin wave
@@ -291,6 +295,9 @@ function animate()
     //drawing
     Player1.drawCircle();
     PlayerDirection();
+
+   
+
 
     bullet.drawCircle();
     

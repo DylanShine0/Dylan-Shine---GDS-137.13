@@ -165,7 +165,7 @@ function animate()
         
     }else{enemy1.color = "black"}
 
-    for(var j = 0; i < bits.length; i++)//start INITIALIZATION
+    for(var j = 0; i< bits.length; i++)//start INITIALIZATION
     {
         console.log("drawing bits")
         bits[j].vx = 0;
