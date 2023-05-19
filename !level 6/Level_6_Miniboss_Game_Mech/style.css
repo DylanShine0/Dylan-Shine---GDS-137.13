@@ -22,6 +22,15 @@ body
     margin: 2px;
 
 }
+.home
+{
+    position: absolute;
+    top: calc(8%);
+    width:14.8vw;
+    height:25px;
+    padding: 2px;
+    margin: 2px;
+}
 
 #canvas
 {
