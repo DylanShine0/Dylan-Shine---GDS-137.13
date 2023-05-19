@@ -8,6 +8,7 @@ var hit = false
 var angle = 0;
 var score = 0;
 var health = 3;
+var playerSpeed = 4;
 
 var frictionX = .85;	
 var frictionY = .85;
@@ -150,34 +151,34 @@ function animate()
     {
         Player1.angle = 0
         Player1.vx = 0; 
-        Player1.vy = -5; 
+        Player1.vy = -playerSpeed; 
         
     }//up
     if(s)
     {
         Player1.angle = 180
         Player1.vx = 0;
-        Player1.vy = 5; 
+        Player1.vy = playerSpeed; 
         
     }//down
     if(d)
     {
         Player1.angle = 90
-        Player1.vx = 5; 
+        Player1.vx = playerSpeed; 
         Player1.vy = 0; 
         
     }//right
     if(a)
     {
         Player1.angle = 270
-        Player1.vx = -5; 
+        Player1.vx = -playerSpeed; 
         Player1.vy = 0; 
     }//left
 
-    if(w && d){Player1.vx = 5; Player1.vy = -5;}//up  && right
-    if(w && a){Player1.vx = -5; Player1.vy = -5; }//up && left
-    if(s && a){Player1.vx = -5; Player1.vy = 5;}//down && left
-    if(s && d){Player1.vx = 5; Player1.vy = 5;} //down && right
+    if(w && d){Player1.vx = playerSpeed; Player1.vy = -playerSpeed;}//up  && right
+    if(w && a){Player1.vx = -playerSpeed; Player1.vy = -playerSpeed; }//up && left
+    if(s && a){Player1.vx = -playerSpeed; Player1.vy = playerSpeed;}//down && left
+    if(s && d){Player1.vx = playerSpeed; Player1.vy = playerSpeed;} //down && right
 
    
 
@@ -188,44 +189,44 @@ function animate()
         bullet.x = Player1.x; bullet.y = Player1.y;
 
         //Horizontal + Vertical Movement
-        if(Player1.vx == 0 && Player1.vy == -5)
+        if(Player1.vx == 0 && Player1.vy == -playerSpeed)
         {
             bullet.vx = 0; bullet.vy = -15;
             space = false;
         }
-        if(Player1.vx == 0 && Player1.vy == 5)
+        if(Player1.vx == 0 && Player1.vy == playerSpeed)
         {     
             bullet.vx = 0; bullet.vy = 15;
             space = false;
         }
-        if(Player1.vx == 5 && Player1.vy == 0)
+        if(Player1.vx == playerSpeed && Player1.vy == 0)
         {    
             bullet.vx = 15; bullet.vy = 0;
             space = false;
         }
-        if(Player1.vx == -5 && Player1.vy == 0)
+        if(Player1.vx == -playerSpeed && Player1.vy == 0)
         {  
             bullet.vx = -15; bullet.vy = 0;
             space = false;
         }
 
         //DIAGONALS
-        if(Player1.vx == 5 && Player1.vy == -5) //up right
+        if(Player1.vx == playerSpeed && Player1.vy == -playerSpeed) //up right
         { 
             bullet.vx = 15; bullet.vy = -15;
             space = false;
         }
-        if(Player1.vx == -5 && Player1.vy == -5) //up left
+        if(Player1.vx == -playerSpeed && Player1.vy == -playerSpeed) //up left
         {  
             bullet.vx = -15; bullet.vy = -15;
             space = false;
         }
-        if(Player1.vx == -5 && Player1.vy == 5) //down left
+        if(Player1.vx == -playerSpeed && Player1.vy == playerSpeed) //down left
         {
             bullet.vx = -15; bullet.vy = 15;
             space = false;
         }
-        if(Player1.vx == 5 && Player1.vy == 5) //down right
+        if(Player1.vx == playerSpeed && Player1.vy == playerSpeed) //down right
         {
             bullet.vx = 15; bullet.vy = 15;
             space = false;
@@ -334,9 +335,8 @@ function animate()
     bulletWallCollision();
 
     //drawing
-    Player1.drawCircle();
-    PlayerDirection();
-
+    //Player1.drawCircle();
+    Player1.drawCirclePlayer();
    
 
 
@@ -402,16 +402,5 @@ function bulletWallCollision()
         bullet.x = -20; bullet.y = -20;             //send it back
     }
 }
-function PlayerDirection()//PROBLEM LINE WONT ROTATE WITH MOVEMENT DIRECTION
-{
-    context.save();
-        context.strokeStyle = "white";
-        context.beginPath()
-	    context.moveTo(Player1.x, Player1.y + 24);
-        context.lineTo(Player1.x, Player1.y -24);
-	    context.lineWidth = 3;
-	    context.stroke();
-        context.closePath();
-    context.restore();
-}
+
 
