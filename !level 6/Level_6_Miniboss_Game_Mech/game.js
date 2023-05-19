@@ -25,6 +25,8 @@ var bits=[];
 
 var playerBits = [];
 
+player.force = 1;
+
 
 //CANVAS NUMBER 2 FOR SCORE
 var canvas1;
@@ -175,10 +177,10 @@ function animate()
         Player1.vy = 0; 
     }//left
 
-    if(w && d){Player1.vx = playerSpeed; Player1.vy = -playerSpeed;}//up  && right
-    if(w && a){Player1.vx = -playerSpeed; Player1.vy = -playerSpeed; }//up && left
-    if(s && a){Player1.vx = -playerSpeed; Player1.vy = playerSpeed;}//down && left
-    if(s && d){Player1.vx = playerSpeed; Player1.vy = playerSpeed;} //down && right
+    if(w && d){Player1.vx = playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 45}//up  && right
+    if(w && a){Player1.vx = -playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 315}//up && left
+    if(s && a){Player1.vx = -playerSpeed; Player1.vy = playerSpeed; Player1.angle = 225}//down && left
+    if(s && d){Player1.vx = playerSpeed; Player1.vy = playerSpeed; Player1.angle = 135} //down && right
 
    
 
@@ -186,26 +188,30 @@ function animate()
     if(space == true)
     {   
         console.log("SPACE PRESSED: ", "Enemy Hit: ", hit)
-        bullet.x = Player1.x; bullet.y = Player1.y;
+        
 
         //Horizontal + Vertical Movement
         if(Player1.vx == 0 && Player1.vy == -playerSpeed)
         {
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 0; bullet.vy = -15;
             space = false;
         }
         if(Player1.vx == 0 && Player1.vy == playerSpeed)
         {     
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 0; bullet.vy = 15;
             space = false;
         }
         if(Player1.vx == playerSpeed && Player1.vy == 0)
         {    
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = 0;
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == 0)
         {  
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = 0;
             space = false;
         }
@@ -213,21 +219,25 @@ function animate()
         //DIAGONALS
         if(Player1.vx == playerSpeed && Player1.vy == -playerSpeed) //up right
         { 
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = -15;
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == -playerSpeed) //up left
         {  
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = -15;
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == playerSpeed) //down left
         {
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = 15;
             space = false;
         }
         if(Player1.vx == playerSpeed && Player1.vy == playerSpeed) //down right
         {
+            bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = 15;
             space = false;
         }
@@ -278,7 +288,7 @@ function animate()
         
         
     }
-
+    var distance = 200;
     for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
     {
 
@@ -293,6 +303,30 @@ function animate()
         enemies.y += 1
 
 
+        //chase
+        var dx = Player1.x - enemies[x2].x;
+	    var dy = Player1.y - enemies[x2].y;
+
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var radians = Math.atan2(dy, dx);
+        if (dist < distance) {
+            console.log("follow")
+                
+            enemies[x2].vx = Math.cos(radians)*enemies.force;
+	        enemies[x2].vy = Math.sin(radians)*enemies.force;
+
+            enemies[x2].x += enemies[x2].vx * 2;
+	        enemies[x2].y += enemies[x2].vy * 2;
+
+	        
+
+        }else
+        {
+            enemies[x2].vx = 0;
+            enemies[x2].vy = 0;
+        }
+        
+
         enemies[x2].move()
         enemies[x2].drawCircle();
         context.drawImage(spider, enemies[x2].x - 23, enemies[x2].y - 10, enemies[x2].width * 1.4, enemies[x2].height * 1.4);
@@ -302,7 +336,7 @@ function animate()
 
     }
 
-    
+  
 
     //*
     for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
@@ -401,6 +435,10 @@ function bulletWallCollision()
         bullet.vx = 0; bullet.vy = 0;               //stop bullet
         bullet.x = -20; bullet.y = -20;             //send it back
     }
+}
+function follow()
+{
+    
 }
 
 

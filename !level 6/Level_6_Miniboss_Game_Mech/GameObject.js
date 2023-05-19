@@ -1,4 +1,4 @@
-function GameObject(x,y,w,h,color,angle)
+function GameObject(x,y,w,h,color,angle,force)
 {
 	
 	//Default Values
@@ -8,6 +8,7 @@ function GameObject(x,y,w,h,color,angle)
 	if(h == undefined){this.height = 100;}else{this.height = h;}
 	if(color == undefined){this.color = "#ff0000";}else{this.color = color;}
 	if(angle == undefined){this.angle = 0;}else{this.angle = angle;}
+	if(force == undefined){this.force = 1;}else{this.force = force;}
 	
 	//player's velocity or speed on each axis
 	this.vx = 0;
@@ -17,6 +18,8 @@ function GameObject(x,y,w,h,color,angle)
 	this.spawnY = 0;
 
 	this.angle = 0;
+
+	this.force = 1;
 
 	this.drawRect = function()
 	{
@@ -67,6 +70,14 @@ function GameObject(x,y,w,h,color,angle)
 			//context.translate(this.x,this.y)
 			context.moveTo(0, 0-24);
 			context.lineTo(0, 0+24);
+
+			context.moveTo(0, 0-24);
+			context.lineTo(-10, 0+10);
+
+			context.moveTo(0, 0-24);
+			context.lineTo(10, 0+10);
+
+
 			context.lineWidth = 3;
 			context.stroke();
 			context.closePath();
