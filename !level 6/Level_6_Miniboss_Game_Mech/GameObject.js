@@ -9,7 +9,7 @@ function GameObject(x,y,w,h,color,angle,force)
 	if(color == undefined){this.color = "#ff0000";}else{this.color = color;}
 	if(angle == undefined){this.angle = 0;}else{this.angle = angle;}
 	if(force == undefined){this.force = 1;}else{this.force = force;}
-	
+
 	//player's velocity or speed on each axis
 	this.vx = 0;
 	this.vy = 0;
@@ -17,9 +17,15 @@ function GameObject(x,y,w,h,color,angle,force)
 	this.spawnX = 0;
 	this.spawnY = 0;
 
+	this.destX = this.spawnX;
+	this.destY = this.spawnY;
+
 	this.angle = 0;
 
 	this.force = 1;
+
+	this.follow = 0.1;
+	
 
 	this.drawRect = function()
 	{

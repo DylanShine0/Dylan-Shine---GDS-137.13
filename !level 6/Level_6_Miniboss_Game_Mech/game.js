@@ -5,6 +5,7 @@ var interval = 1000/60;
 timer = setInterval(animate, interval);
 
 var hit = false
+var destination;
 var angle = 0;
 var score = 0;
 var health = 3;
@@ -25,7 +26,7 @@ var bits=[];
 
 var playerBits = [];
 
-player.force = 1;
+Player1.force = 1;
 
 
 //CANVAS NUMBER 2 FOR SCORE
@@ -96,32 +97,29 @@ var ammunition = [
 
 var enemies = [
 
-    new GameObject(-20, -20, 33, 15, "black",0),
-    new GameObject(-20, -20, 33, 15, "black",0),
-    new GameObject(-20, -20, 33, 15, "black",0),
-    new GameObject(-20, -20, 33, 15, "black",0),
-    new GameObject(-20, -20, 33, 15, "black",0)
+    new GameObject(-100, -100, 33, 15, "black",0),
+    new GameObject(-100, -100, 33, 15, "black",0),
+    new GameObject(-100, -100, 33, 15, "black",0),
+    new GameObject(-100, -100, 33, 15, "black",0),
+    new GameObject(-100, -100, 33, 15, "black",0)
 
 ]
 
 //DRAWING MORE ENEMIES
-//vvvvvvvvvvvvvvvvvvvv
-for (var x1 = 0; x1 < enemies.length; x1++) //intialization
-{
-    //console.log("Drawing Enemy: ", enemies[e])
-    enemies[x1].spawnX = 0;
-    enemies[x1].spawnY = 0;
-
-    enemies[x1].vx = 0;
-    enemies[x1].vy = 0;
+//vvvvvvvvvvvvvvvvvvvv 
 
     enemies[0].spawnX = 100; enemies[0].spawnY = 100
     enemies[1].spawnX = 700; enemies[1].spawnY = 100
     enemies[2].spawnX = 100; enemies[2].spawnY = 500
     enemies[3].spawnX = 800; enemies[3].spawnY = 500
     enemies[4].spawnX = 780; enemies[4].spawnY = 800
+for (var x1 = 0; x1 < enemies.length; x1++) //intialization
+{
+   
 
-    context.drawImage(spider, enemies[x1].x-23, enemies[x1].y-10, enemies[x1].width*1.4, enemies[x1].height*1.4);
+    enemies[x1].destX =  enemies[x1].spawnX;
+    enemies[x1].destY =  enemies[x1].spawnY;
+   
 
 }
 
@@ -257,6 +255,7 @@ function animate()
             enemies[i].color = "red";   
             enemies[i].spawnX = -100
             enemies[i].spawnY = -100
+            enemies[i].follow = 0;
 
             bitsInitialize();
             
@@ -288,55 +287,59 @@ function animate()
         
         
     }
-    var distance = 200;
+    var distance = 150;
     for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
     {
+       
+
+
+        
+        
+        ///*
+        //chase
+        
+        var dx = Player1.x - enemies[x2].spawnX;
+        var dy = Player1.y - enemies[x2].spawnY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        var rad2 =  Math.atan2(dy, dx);
+        
+
+        if (dist > distance) {
+            dx = enemies[x2].destX - enemies[x2].spawnX;
+            dy = enemies[x2].destY - enemies[x2].spawnY;
+            
+            enemies[x2].spawnX += dx * enemies[x2].follow;
+            enemies[x2].spawnY += dy * enemies[x2].follow;
+            
+        }
+        else{
+        
+            enemies[x2].spawnX += Math.cos(rad2) * 2
+            enemies[x2].spawnY += Math.sin(rad2) * 2
+        }
+        var radians1 = Math.atan2(dy, dx);
+
+        enemies[x2].vx = Math.cos(radians1) * enemies[x2].force;
+        enemies[x2].vy = Math.sin(radians1) * enemies[x2].force;
 
         //sin wave
-
-        angle -= 0.2;
+        angle -= 0.1;
 
         var radians = angle * Math.PI / 90;
-        enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 30;
+        enemies[x2].x = enemies[x2].spawnX + Math.sin(radians) * 30 /*+ enemies[x2].vx*/;
         var radians = angle * Math.PI / 180;
-        enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 50;
-        enemies.y += 1
+        enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 50 /*+ enemies[x2].vy*/;
+        enemies[x2].y += 1
 
-
-        //chase
-        var dx = Player1.x - enemies[x2].x;
-	    var dy = Player1.y - enemies[x2].y;
-
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        var radians = Math.atan2(dy, dx);
-        if (dist < distance) {
-            console.log("follow")
-                
-            enemies[x2].vx = Math.cos(radians)*enemies.force;
-	        enemies[x2].vy = Math.sin(radians)*enemies.force;
-
-            enemies[x2].x += enemies[x2].vx * 2;
-	        enemies[x2].y += enemies[x2].vy * 2;
-
-	        
-
-        }else
-        {
-            enemies[x2].vx = 0;
-            enemies[x2].vy = 0;
-        }
+       
+        
         
 
         enemies[x2].move()
         enemies[x2].drawCircle();
         context.drawImage(spider, enemies[x2].x - 23, enemies[x2].y - 10, enemies[x2].width * 1.4, enemies[x2].height * 1.4);
-
-
-
-
     }
-
-  
 
     //*
     for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
