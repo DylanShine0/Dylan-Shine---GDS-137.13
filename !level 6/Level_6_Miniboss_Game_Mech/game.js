@@ -287,7 +287,7 @@ function animate()
         
         
     }
-    var distance = 150;
+    var distance = 300;
     for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
     {
        
