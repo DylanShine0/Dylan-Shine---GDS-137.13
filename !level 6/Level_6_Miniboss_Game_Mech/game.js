@@ -15,7 +15,13 @@ var frictionX = .85;
 var frictionY = .85;
 
 canvas = document.getElementById("canvas");
-context = canvas.getContext("2d");	
+context = canvas.getContext("2d");
+
+var bitShotSound = document.getElementById("bit-Shot");
+var enemyDeath = document.getElementById("enemy-death");
+
+bitShotSound.currentTime = 0;
+enemyDeath.currentTime = 0;
 
 var img = document.getElementById("spider");
 
@@ -187,30 +193,39 @@ function animate()
     {   
         console.log("SPACE PRESSED: ", "Enemy Hit: ", hit)
         
+        
 
         //Horizontal + Vertical Movement
         if(Player1.vx == 0 && Player1.vy == -playerSpeed)
         {
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 0; bullet.vy = -15;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == 0 && Player1.vy == playerSpeed)
         {     
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 0; bullet.vy = 15;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == playerSpeed && Player1.vy == 0)
         {    
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = 0;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == 0)
         {  
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = 0;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
 
@@ -219,24 +234,32 @@ function animate()
         { 
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = -15;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == -playerSpeed) //up left
         {  
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = -15;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == -playerSpeed && Player1.vy == playerSpeed) //down left
         {
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = -15; bullet.vy = 15;
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
             space = false;
         }
         if(Player1.vx == playerSpeed && Player1.vy == playerSpeed) //down right
         {
             bullet.x = Player1.x; bullet.y = Player1.y;
             bullet.vx = 15; bullet.vy = 15;
+            bitShotSound.currentTime = 0;   
+            bitShotSound.play();
             space = false;
         }
     }
@@ -246,6 +269,10 @@ function animate()
     
     for (var i = 0; i < enemies.length; i++) {
         if (bullet.hitTestObject(enemies[i])) {
+
+            enemyDeath.currentTime = 0;
+            enemyDeath.play();
+
             score++
             hit = true;
             console.log(enemies[i].y, "enemy hit", hit)    //Alert the console
@@ -253,6 +280,9 @@ function animate()
             bullet.x = -20; bullet.y = -20;  //send it back
 
             enemies[i].color = "red";   
+
+            
+
             enemies[i].spawnX = -100
             enemies[i].spawnY = -100
             enemies[i].follow = 0;
