@@ -1,4 +1,4 @@
-function GameObject(x,y,w,h,color,angle,force)
+function GameObject(x,y,w,h,color,angle,force,world)
 {
 	
 	//Default Values
@@ -9,6 +9,9 @@ function GameObject(x,y,w,h,color,angle,force)
 	if(color == undefined){this.color = "#ff0000";}else{this.color = color;}
 	if(angle == undefined){this.angle = 0;}else{this.angle = angle;}
 	if(force == undefined){this.force = 1;}else{this.force = force;}
+	if(world == undefined){this.world = {x:0, y:0};}else{this.world = world;}
+	
+
 
 	//player's velocity or speed on each axis
 	this.vx = 0;

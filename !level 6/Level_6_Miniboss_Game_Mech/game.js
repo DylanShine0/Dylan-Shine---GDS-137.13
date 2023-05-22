@@ -91,15 +91,25 @@ var playerBits = [//9
 
 ]
 
-var ammunition = [
+                        //new GameObject(0,0,10,10,"#39FF14",0)
+var bullets = []
+                        //Used to select a bullet to fire
+var currentBullet = 0;
+                        //The timer for each bullet
+var fireCounter = 30;
+var fireRate = 5;
+var bulletAmount = 25;
 
-    new GameObject(0,0,10,10,"#39FF14",0),
-    new GameObject(0,0,10,10,"#39FF14",0),
-    new GameObject(0,0,10,10,"#39FF14",0),
-    new GameObject(0,0,10,10,"#39FF14",0),
-    new GameObject(0,0,10,10,"#39FF14",0)
+var dir = {x:1,y:0};
 
-]
+for(var b = 0; b < bulletAmount; b++)
+{
+	bullets[b] = new GameObject({force:10, width:5, height:5});
+	bullets[b].world = level;
+	bullets[b].x = player.x;
+	bullets[b].y = -1000;
+}	
+
 
 var enemies = [
 
@@ -186,8 +196,43 @@ function animate()
     if(s && a){Player1.vx = -playerSpeed; Player1.vy = playerSpeed; Player1.angle = 225}//down && left
     if(s && d){Player1.vx = playerSpeed; Player1.vy = playerSpeed; Player1.angle = 135} //down && right
 
-   
+    
 
+    /*
+
+    //----------------Firing Logic---------------------
+	//bullet timer
+	fireCounter--;
+	
+	if(space)
+	{
+		if(fireCounter <= 0)
+		{
+			//place the bullet at the player's position minus the bullet's world
+			bullets[currentBullet].x = player.x - bullets[currentBullet].world.x;
+			bullets[currentBullet].y = player.y - bullets[currentBullet].world.y;
+			//set the velocity using the dir modifier
+			bullets[currentBullet].vx = dir.x * bullets[currentBullet].force;
+			bullets[currentBullet].vy = dir.y * bullets[currentBullet].force;
+			//reset the fireCounter
+			fireCounter = fireRate;
+			//increment the currentBullet index so that you can use the next bullet
+			currentBullet++;
+			//reset the currentBullet index when you exceed the bulletAmount
+			if(currentBullet >= bulletAmount)
+			{
+				currentBullet = 0;
+			}
+		}
+	}
+	else
+	{
+		//Allow the player to fire when space is pressed.
+		fireCounter = 0;
+	}
+
+    */
+    fireCounter--;
     //SHOOTING
     if(space == true)
     {   
