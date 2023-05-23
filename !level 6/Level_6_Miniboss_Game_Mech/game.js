@@ -95,7 +95,7 @@ var bullets = []        //new GameObject(0,0,10,10,"#39FF14",0)
 var currentBullet = 0;
                         //The timer for each bullet
 var fireCounter = 30;
-var fireRate = 25;
+var fireRate =15;
 var bulletAmount = 25;
 
 var dir = {x:1,y:0};
