@@ -26,7 +26,6 @@ enemyDeath.currentTime = 0;
 var img = document.getElementById("spider");
 
 var Player1 = new GameObject(canvas.width/2, canvas.height/2, 50, 50, "red", 0);
-var bullet = new GameObject(0, 0, 15, 15, "#39FF14", 0);
 
 var bits=[];
 
@@ -77,8 +76,6 @@ function bitsInitialize()
 
 var playerBits = [//9
 
-    
-        
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`,0),
@@ -91,24 +88,31 @@ var playerBits = [//9
 
 ]
 
-                        //new GameObject(0,0,10,10,"#39FF14",0)
-var bullets = []
+//BULLET INSTAINTIATION----------------------------------------------
+
+var bullets = []        //new GameObject(0,0,10,10,"#39FF14",0)
                         //Used to select a bullet to fire
 var currentBullet = 0;
                         //The timer for each bullet
 var fireCounter = 30;
-var fireRate = 5;
+var fireRate = 25;
 var bulletAmount = 25;
 
 var dir = {x:1,y:0};
 
 for(var b = 0; b < bulletAmount; b++)
 {
-	bullets[b] = new GameObject({force:10, width:5, height:5});
-	bullets[b].world = level;
-	bullets[b].x = player.x;
+	bullets[b] = new GameObject(0,0,10,10,"#39FF14",0,10,{x:0,y:0});
+	bullets[b].x = Player1.x;
 	bullets[b].y = -1000;
+    bullets[b].force = 15;
+    bullets[b].vx = 0;
+    bullets[b].vy = 0;
 }	
+
+//-------------------------------------------------------------------
+
+
 
 
 var enemies = [
@@ -124,18 +128,18 @@ var enemies = [
 //DRAWING MORE ENEMIES
 //vvvvvvvvvvvvvvvvvvvv 
 
-    enemies[0].spawnX = 100; enemies[0].spawnY = 100
-    enemies[1].spawnX = 700; enemies[1].spawnY = 100
-    enemies[2].spawnX = 100; enemies[2].spawnY = 500
-    enemies[3].spawnX = 800; enemies[3].spawnY = 500
-    enemies[4].spawnX = 780; enemies[4].spawnY = 800
+enemies[0].spawnX = 100; enemies[0].spawnY = 100
+enemies[1].spawnX = 700; enemies[1].spawnY = 100
+enemies[2].spawnX = 100; enemies[2].spawnY = 500
+enemies[3].spawnX = 800; enemies[3].spawnY = 500
+enemies[4].spawnX = 780; enemies[4].spawnY = 800
 for (var x1 = 0; x1 < enemies.length; x1++) //intialization
 {
-   
 
-    enemies[x1].destX =  enemies[x1].spawnX;
-    enemies[x1].destY =  enemies[x1].spawnY;
-   
+
+    enemies[x1].destX = enemies[x1].spawnX;
+    enemies[x1].destY = enemies[x1].spawnY;
+
 
 }
 
@@ -158,59 +162,21 @@ function animate()
     //-----------------------------------------------------------------------------------
 
     Player1.move();
-    bullet.move();
     
-    
-    
-    //Player1 MOVEMENT
-    if(w)
-    {
-        Player1.angle = 0
-        Player1.vx = 0; 
-        Player1.vy = -playerSpeed; 
-        
-    }//up
-    if(s)
-    {
-        Player1.angle = 180
-        Player1.vx = 0;
-        Player1.vy = playerSpeed; 
-        
-    }//down
-    if(d)
-    {
-        Player1.angle = 90
-        Player1.vx = playerSpeed; 
-        Player1.vy = 0; 
-        
-    }//right
-    if(a)
-    {
-        Player1.angle = 270
-        Player1.vx = -playerSpeed; 
-        Player1.vy = 0; 
-    }//left
-
-    if(w && d){Player1.vx = playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 45}//up  && right
-    if(w && a){Player1.vx = -playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 315}//up && left
-    if(s && a){Player1.vx = -playerSpeed; Player1.vy = playerSpeed; Player1.angle = 225}//down && left
-    if(s && d){Player1.vx = playerSpeed; Player1.vy = playerSpeed; Player1.angle = 135} //down && right
-
-    
-
-    /*
 
     //----------------Firing Logic---------------------
-	//bullet timer
 	fireCounter--;
 	
-	if(space)
+	if(space == true)
 	{
 		if(fireCounter <= 0)
 		{
+            //sound effect
+            bitShotSound.currentTime = 0;
+            bitShotSound.play();
 			//place the bullet at the player's position minus the bullet's world
-			bullets[currentBullet].x = player.x - bullets[currentBullet].world.x;
-			bullets[currentBullet].y = player.y - bullets[currentBullet].world.y;
+			bullets[currentBullet].x = Player1.x - bullets[currentBullet].world.x;
+			bullets[currentBullet].y = Player1.y - bullets[currentBullet].world.y;
 			//set the velocity using the dir modifier
 			bullets[currentBullet].vx = dir.x * bullets[currentBullet].force;
 			bullets[currentBullet].vy = dir.y * bullets[currentBullet].force;
@@ -229,167 +195,161 @@ function animate()
 	{
 		//Allow the player to fire when space is pressed.
 		fireCounter = 0;
+        space = false;
 	}
 
-    */
-    fireCounter--;
-    //SHOOTING
-    if(space == true)
-    {   
-        console.log("SPACE PRESSED: ", "Enemy Hit: ", hit)
-        
-        
+    //PLAYER AND BULLETS MOVEMENT
+    for (var b = 0; b < bullets.length; b++) 
+    {
+        bullets[b].move();
+        bullets[b].drawCircle();
 
-        //Horizontal + Vertical Movement
-        if(Player1.vx == 0 && Player1.vy == -playerSpeed)
+        //up
+        if (w) 
         {
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = 0; bullet.vy = -15;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
+            Player1.vx = 0; Player1.vy = -playerSpeed;
+            Player1.angle = 0
+
+            dir.x = 0; dir.y = -1;
+            bullets.vx = 0; bullets.vy = -15
         }
-        if(Player1.vx == 0 && Player1.vy == playerSpeed)
-        {     
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = 0; bullet.vy = 15;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
+        //down
+        if (s) 
+        {
+            Player1.vx = 0; Player1.vy = playerSpeed;
+            Player1.angle = 180
+
+            dir.x = 0; dir.y = 1;
+            bullets.vx = 0; bullets.vy = 15
         }
-        if(Player1.vx == playerSpeed && Player1.vy == 0)
-        {    
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = 15; bullet.vy = 0;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
+        //right
+        if (d) 
+        {
+            Player1.vx = playerSpeed; Player1.vy = 0;
+            Player1.angle = 90
+
+            dir.x = 1; dir.y = 0;
+            bullets.vx = 15; bullets.vy = 0;
         }
-        if(Player1.vx == -playerSpeed && Player1.vy == 0)
-        {  
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = -15; bullet.vy = 0;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
+        //left
+        if (a) 
+        {
+            Player1.vx = -playerSpeed; Player1.vy = 0;
+            Player1.angle = 270
+
+            dir.x = -1; dir.y = 0;
+            bullets.vx = -15; bullets.vy = 0;
         }
 
-        //DIAGONALS
-        if(Player1.vx == playerSpeed && Player1.vy == -playerSpeed) //up right
-        { 
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = 15; bullet.vy = -15;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
-        }
-        if(Player1.vx == -playerSpeed && Player1.vy == -playerSpeed) //up left
-        {  
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = -15; bullet.vy = -15;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
-        }
-        if(Player1.vx == -playerSpeed && Player1.vy == playerSpeed) //down left
+        if(w && d)//up  && right
         {
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = -15; bullet.vy = 15;
-            bitShotSound.currentTime = 0;
-            bitShotSound.play();
-            space = false;
+            Player1.vx = playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 45; dir.x = 1; dir.y = -1; bullets.vx = 15; bullets.vy = -15;
         }
-        if(Player1.vx == playerSpeed && Player1.vy == playerSpeed) //down right
+        if(a && w)//up && left
         {
-            bullet.x = Player1.x; bullet.y = Player1.y;
-            bullet.vx = 15; bullet.vy = 15;
-            bitShotSound.currentTime = 0;   
-            bitShotSound.play();
-            space = false;
+            Player1.vx = -playerSpeed; Player1.vy = -playerSpeed; Player1.angle = 315; dir.x = -1; dir.y = -1; bullets.vx = -15; bullets.vy = -15;
         }
+        if(s && a)//down && left
+        {
+            Player1.vx = -playerSpeed; Player1.vy = playerSpeed; Player1.angle = 225; dir.x = -1; dir.y = 1; bullets.vx = -15; bullets.vy = 15;
+        }
+        if(d && s)//down && right
+        {
+            Player1.vx = playerSpeed; Player1.vy = playerSpeed; Player1.angle = 135; dir.x = 1; dir.y = 1; bullets.vx = 15; bullets.vy = 15;
+        } 
     }
 
     //BULLET HIT DETECTION
     //vvvvvvvvvvvvvvvvvvvv
+    //bullet COLLISION      screen boundary
     
-    for (var i = 0; i < enemies.length; i++) {
-        if (bullet.hitTestObject(enemies[i])) {
 
-            enemyDeath.currentTime = 0;
-            enemyDeath.play();
-
-            score++
-            hit = true;
-            console.log(enemies[i].y, "enemy hit", hit)    //Alert the console
-            bullet.vx = 0; bullet.vy = 0;    //stop bullet
-            bullet.x = -20; bullet.y = -20;  //send it back
-
-            enemies[i].color = "red";   
-
-            
-
-            enemies[i].spawnX = -100
-            enemies[i].spawnY = -100
-            enemies[i].follow = 0;
-
-            bitsInitialize();
-            
-            for (var x = 0; x < bits.length; x++) 
+    for (var b = 0; b < bullets.length; b++) 
+    {
+        //top of the canvas
+        if (bullets[b].y < 0 + bullets[b].height / 2) {
+            bullets[b].y = 0 + bullets[b].height / 2;              //Hit the wall
+            bullets[b].vx = 0; bullets[b].vy = 0;               //stop bullet
+            bullets[b].x = -20; bullets[b].y = -20;             //send it back
+        }
+        //bottom of canvas
+        if (bullets[b].y > canvas.height - bullets[b].height / 2) {
+            bullets[b].y = canvas.height - bullets[b].height / 2   //Hit the wall
+            bullets[b].vx = 0; bullets[b].vy = 0;               //stop bullet
+            bullets[b].x = -20; bullets[b].y = -20;             //send it back
+        }
+        //left of canvas
+        if (bullets[b].x < 0 + bullets[b].width / 2) {
+            bullets[b].x = 0 + bullets[b].width / 2;              //Hit the wall
+            bullets[b].vx = 0; bullets[b].vy = 0;               //stop bullet
+            bullets[b].x = -20; bullets[b].y = -20;             //send it back
+        }
+        //right of canvas
+        if (bullets[b].x > canvas.width - bullets[b].width / 2) {
+            bullets[b].x = canvas.width - bullets[b].width / 2;   //Hit the wall
+            bullets[b].vx = 0; bullets[b].vy = 0;               //stop bullet
+            bullets[b].x = -20; bullets[b].y = -20;             //send it back
+        }
+        for(var i = 0; i < enemies.length; i++)
+        {
+            if (enemies[i].hitTestObject(bullets[b])) 
             {
-                console.log("drawing bits")
-                bits[x].x = enemies[i].x + randomRange(5, 20);//setting hit location
-                bits[x].y = enemies[i].y + randomRange(5, 20);  
-            }
-            for(var x = 0; x < bits.length; x++)
-            {
+                enemyDeath.currentTime = 0;
+                enemyDeath.play();
+    
+                score++
+                hit = true;
+                console.log(enemies[i].y, "enemy hit", hit)    //Alert the console
+                bullets[b].vx = 0; bullets[b].vy = 0;    //stop bullet
+                bullets[b].x = -20; bullets[b].y = -20;  //send it back
+
+                enemies[i].color = "red";   
+                enemies[i].spawnX = -100
+                enemies[i].spawnY = -100
+                enemies[i].follow = 0;
+    
+                bitsInitialize();
                 
-                console.log("Bits dispersing")
-                bits[x].vx = randomRange(-10, 10);//BITS dispersion
-                bits[x].vy = randomRange(-10, 10);
-            }
-            
-        } else { enemies[i].color = "black" }
-
-        
+                for (var x = 0; x < bits.length; x++) 
+                {
+                    console.log("drawing bits")
+                    bits[x].x = enemies[i].x + randomRange(5, 20);//setting hit location
+                    bits[x].y = enemies[i].y + randomRange(5, 20);  
+                }
+                for(var x = 0; x < bits.length; x++)
+                {
+                    console.log("Bits dispersing")
+                    bits[x].vx = randomRange(-10, 10);//BITS dispersion
+                    bits[x].vy = randomRange(-10, 10);
+                }
+                
+            } else { enemies[i].color = "black" }
+        }    
     }
-    for (var x = 0; x < bits.length; x++) {//FRICTION AND MOVEMENT BITS
-        console.log("Moving and Drawing")
 
+    for (var x = 0; x < bits.length; x++) //FRICTION AND MOVEMENT BITS
+    {
         bits[x].vx *= frictionX;//Friction
         bits[x].vy *= frictionY;
         bits[x].move();
         bits[x].drawCircle();
-        
-        
     }
     var distance = 300;
     for (var x2 = 0; x2 < enemies.length; x2++)//MOVE + DRAW  enemy
     {
-       
-
-
-        
-        
-        ///*
-        //chase
-        
-        var dx = Player1.x - enemies[x2].spawnX;
+        var dx = Player1.x - enemies[x2].spawnX; //CHASING
         var dy = Player1.y - enemies[x2].spawnY;
         var dist = Math.sqrt(dx * dx + dy * dy);
-
         var rad2 =  Math.atan2(dy, dx);
         
-
         if (dist > distance) {
             dx = enemies[x2].destX - enemies[x2].spawnX;
             dy = enemies[x2].destY - enemies[x2].spawnY;
             
             enemies[x2].spawnX += dx * enemies[x2].follow;
             enemies[x2].spawnY += dy * enemies[x2].follow;
-            
-        }
-        else{
-        
+        }else
+        {
             enemies[x2].spawnX += Math.cos(rad2) * 2
             enemies[x2].spawnY += Math.sin(rad2) * 2
         }
@@ -407,16 +367,11 @@ function animate()
         enemies[x2].y = enemies[x2].spawnY + Math.sin(radians) * 50 /*+ enemies[x2].vy*/;
         enemies[x2].y += 1
 
-       
-        
-        
-
         enemies[x2].move()
         enemies[x2].drawCircle();
         context.drawImage(spider, enemies[x2].x - 23, enemies[x2].y - 10, enemies[x2].width * 1.4, enemies[x2].height * 1.4);
     }
 
-    //*
     for (var i = 0; i < enemies.length; i++)//Enemy hit detection to PLAYER
     {
         
@@ -438,24 +393,9 @@ function animate()
         }
     }
 
-   
-    
-    
-    //*/
-    
     playerWallCollision();
-    bulletWallCollision();
 
-    //drawing
-    //Player1.drawCircle();
     Player1.drawCirclePlayer();
-   
-
-
-    bullet.drawCircle();
-    
-
-
 }
 
 function playerWallCollision()
@@ -482,41 +422,3 @@ function playerWallCollision()
         Player1.x = canvas.width - Player1.width/2;
     }
 }
-function bulletWallCollision()
-{
-    //bullet COLLISION      screen boundary
-    //top of the canvas
-    if (bullet.y < 0 + bullet.width/2) 
-    {
-        bullet.y = 0 + bullet.width/2;              //Hit the wall
-        bullet.vx = 0; bullet.vy = 0;               //stop bullet
-        bullet.x = -20; bullet.y = -20;             //send it back
-    }
-    //bottom of canvas
-    if (bullet.y > canvas.height - bullet.width/2) 
-    {
-        bullet.y = canvas.height - bullet.width/2   //Hit the wall
-        bullet.vx = 0; bullet.vy = 0;               //stop bullet
-        bullet.x = -20; bullet.y = -20;             //send it back
-    }
-    //left of canvas
-    if(bullet.x < 0 + bullet.width/2)
-    {
-        bullet.x = 0 + bullet.width/2;              //Hit the wall
-        bullet.vx = 0; bullet.vy = 0;               //stop bullet
-        bullet.x = -20; bullet.y = -20;             //send it back
-    }
-    //right of canvas
-    if(bullet.x > canvas.width - bullet.width/2)
-    {
-        bullet.x = canvas.width - bullet.width/2;   //Hit the wall
-        bullet.vx = 0; bullet.vy = 0;               //stop bullet
-        bullet.x = -20; bullet.y = -20;             //send it back
-    }
-}
-function follow()
-{
-    
-}
-
-
