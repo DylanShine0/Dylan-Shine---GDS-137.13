@@ -43,13 +43,13 @@ function animate()
     if(d)
     {
         
-        paddle.vx = paddle.vx +0.3;
+        paddle.vx = paddle.vx + 0.3;
     }
 
     if(a)
     {
         
-        paddle.vx = paddle.vx -0.3;
+        paddle.vx = paddle.vx - 0.3;
     }
     
     
