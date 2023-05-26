@@ -9,7 +9,7 @@ var destination;
 var angle = 0;
 var score = 0;
 var health = 3;
-var playerSpeed = 0.5;
+var playerSpeed = 2.5;
 
 var frictionX = .85;	
 var frictionY = .85;
@@ -144,6 +144,8 @@ for (var x1 = 0; x1 < enemies.length; x1++) //intialization
 }
 
 
+
+
 function animate()
 {
     context.clearRect(0,0,canvas.width, canvas.height);	
@@ -163,6 +165,11 @@ function animate()
 
     Player1.move();
     
+    var accuracy1 = 0;
+    var accuracy2 = 0;
+    accuracy1 = randomRange(14,-14)
+    accuracy2 = randomRange(14,-14)
+
 
     //----------------Firing Logic---------------------
 	fireCounter--;
@@ -175,8 +182,8 @@ function animate()
             bitShotSound.currentTime = 0;
             bitShotSound.play();
 			//place the bullet at the player's position minus the bullet's world
-			bullets[currentBullet].x = Player1.x - bullets[currentBullet].world.x;
-			bullets[currentBullet].y = Player1.y - bullets[currentBullet].world.y;
+			bullets[currentBullet].x = Player1.x - bullets[currentBullet].world.x + accuracy1;
+			bullets[currentBullet].y = Player1.y - bullets[currentBullet].world.y + accuracy2;
 			//set the velocity using the dir modifier
 			bullets[currentBullet].vx = dir.x * bullets[currentBullet].force;
 			bullets[currentBullet].vy = dir.y * bullets[currentBullet].force;
@@ -319,8 +326,8 @@ function animate()
                 for(var x = 0; x < bits.length; x++)
                 {
                     console.log("Bits dispersing")
-                    bits[x].vx = randomRange(-10, 10);//BITS dispersion
-                    bits[x].vy = randomRange(-10, 10);
+                    bits[x].vx = randomRange(-9, 9);//BITS dispersion
+                    bits[x].vy = randomRange(-9, 9);
                 }
                 
             } else { enemies[i].color = "black" }

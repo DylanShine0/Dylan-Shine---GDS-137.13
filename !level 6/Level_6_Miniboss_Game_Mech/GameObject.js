@@ -48,7 +48,7 @@ function GameObject(x,y,w,h,color,angle,force,world)
 			context.beginPath();
 			context.translate(this.x, this.y);
 			context.rotate(this.angle * Math.PI / 180);
-			context.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
+			context.arc(0, 0, this.width/1.7, 0, 360 *Math.PI/180, true);
 			
 
 			context.closePath();
