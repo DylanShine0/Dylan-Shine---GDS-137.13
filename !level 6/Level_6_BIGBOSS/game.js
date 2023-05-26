@@ -46,16 +46,18 @@ function boxesInitialize()
 }
 boxesInitialize();
 
-function changeColor(newColor, duration) 
+function catcherRed()
 {
-    objectColor = newColor;
-    drawObject();
-  
-    setTimeout(function() {
-      objectColor = "blue";
-      drawObject();
-    }, duration);
-  }
+    catcher.color = "red"
+}
+function catcherGreen()
+{
+    catcher.color = "green"
+}
+function catcherReset()
+{
+    catcher.color ="white"
+}
 
 function animate()
 {
@@ -102,12 +104,18 @@ function animate()
 
         if(circleList[x].hitTestObject(catcher))
         {
-            catcher.color = "red"
+            
+
             circlesInitialize();
             boxesInitialize();
+
+            catcherRed()
+            setTimeout(catcherReset,500);
+           
+
             score = 0;
             console.log("Game Over");
-            catcher.color = "white"
+            //catcher.color = "white"
         }
 
         if(circleList[x].y > canvas.height) //off screen respawn
@@ -129,7 +137,8 @@ function animate()
 
         if(boxesList[x].hitTestObject(catcher))
         {
-            catcher.color = "green"
+            catcherGreen();
+            setTimeout(catcherReset, 500);
             boxesList[x].y = -500 + randomRange(200, 50); //send back up an randomize
             boxesList[x].x = randomRange(900, 20);
             score = score + 1;
