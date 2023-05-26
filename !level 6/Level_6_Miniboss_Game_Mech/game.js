@@ -9,7 +9,7 @@ var destination;
 var angle = 0;
 var score = 0;
 var health = 3;
-var playerSpeed = 4;
+var playerSpeed = 0.5;
 
 var frictionX = .85;	
 var frictionY = .85;
