@@ -86,8 +86,8 @@ states["play"] = function()
 	}
 	
 	//Moves the level and the player back the total number of pixels traveled over one animation loop.
-	player.x -= offset.x;
-	player.y -= offset.y;
+	//player.x -= offset.x;
+	//player.y -= offset.y;
 	level.x -= offset.x;
 	level.y -= offset.y;
 	
