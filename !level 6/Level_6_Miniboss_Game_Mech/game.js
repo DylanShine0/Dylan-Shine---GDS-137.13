@@ -1,4 +1,4 @@
-var canvas;
+/*var canvas;
 var context;
 var timer;
 var interval = 1000 / 60;
@@ -19,6 +19,35 @@ context = canvas.getContext("2d");
 
 var bitShotSound = document.getElementById("bit-Shot");
 var enemyDeath = document.getElementById("enemy-death");
+*/
+
+$(document).ready(function() {
+    var canvas;
+    var context;
+    var timer;
+    var interval = 1000 / 60;
+    timer = setInterval(animate, interval);
+  
+    var hit = false;
+    var destination;
+    var angle = 0;
+    var score = 0;
+    var health = 3;
+    var playerSpeed = 2.5;
+  
+    var frictionX = 0.85;
+    var frictionY = 0.85;
+  
+    canvas = $("#canvas")[0];
+    context = canvas.getContext("2d");
+  
+    var bitShotSound = $("#bit-Shot")[0];
+    var enemyDeath = $("#enemy-death")[0];
+  
+    // Rest of your code...
+});
+
+//rest of code 
 
 bitShotSound.currentTime = 0;
 enemyDeath.currentTime = 0;
