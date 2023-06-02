@@ -72,7 +72,7 @@ function bitsInitialize() {
 
     }
 }
-
+/*
 var playerBits = [//9
 
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`, 0),
@@ -85,7 +85,7 @@ var playerBits = [//9
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`, 0),
     new GameObject(-100, -100, 5, 5, `rgb(${randomRange(255, 200)}, ${randomRange(40, 0)}, ${randomRange(255, 200)})`, 0)
 
-]
+]*/
 
 //BULLET INSTAINTIATION----------------------------------------------
 
@@ -133,12 +133,8 @@ enemies[3].spawnX = 800; enemies[3].spawnY = 500
 enemies[4].spawnX = 780; enemies[4].spawnY = 800
 for (var x1 = 0; x1 < enemies.length; x1++) //intialization
 {
-
-
     enemies[x1].destX = enemies[x1].spawnX;
     enemies[x1].destY = enemies[x1].spawnY;
-
-
 }
 
 
