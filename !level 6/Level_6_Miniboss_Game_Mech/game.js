@@ -95,7 +95,7 @@ var currentBullet = 0;
 //The timer for each bullet
 var fireCounter = 30;
 var fireRate = 15;
-var bulletAmount = 25;
+var bulletAmount = 10;
 
 var dir = { x: 1, y: 0 };
 
